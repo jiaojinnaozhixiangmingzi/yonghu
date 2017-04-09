@@ -6935,3 +6935,40 @@ Processing by CategoriesController#index as HTML
 Completed 200 OK in 83ms (Views: 73.6ms | ActiveRecord: 4.6ms)
 
 
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-09 11:14:24 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  
+SyntaxError (/Users/Kafukaaa/IdeaProjects/yonghu/app/controllers/users_controller.rb:69: syntax error, unexpected '}', expecting =>
+        format.json { render :json => {'-1'}.to_json}
+                                            ^):
+  
+app/controllers/users_controller.rb:69: syntax error, unexpected '}', expecting =>
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.1ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.3ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (16.3ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (116.6ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-09 11:14:43 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE (mobile = '186' and encrypted_password = '111111')[0m
+Completed 200 OK in 17ms (Views: 13.5ms | ActiveRecord: 2.3ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-09 11:14:50 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE (mobile = '186' and encrypted_password = '1111111')[0m
+Completed 200 OK in 4ms (Views: 1.3ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-09 11:14:54 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE (mobile = '186' and encrypted_password = '111111')[0m
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.6ms)
+
+

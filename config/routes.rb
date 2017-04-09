@@ -2,6 +2,12 @@ Rails.application.routes.draw do
 
   devise_for :users
   
+  resources :users do 
+    member do 
+      post :login
+    end
+  end
+
   resources :categories do 
     resources :products
   end
