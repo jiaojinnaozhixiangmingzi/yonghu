@@ -65,10 +65,10 @@ class UsersController < ApplicationController
     @user = User.where(["mobile = ? and encrypted_password = ?", params[:mobile], params[:encrypted_password]])
 
     respond_to do |format|
-      if @user == nil || @user == ''
-        format.json { render :json => '-1'}
+      if @user.empty?
+        format.json { render :json => {:data => "Login failed"}.to_json}
       else
-        format.json { render :json => @user}
+        format.json { render :json => {:data => "Login succ!"}.to_json}
       end
     end
   end
