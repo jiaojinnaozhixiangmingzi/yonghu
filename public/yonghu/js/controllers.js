@@ -8,19 +8,33 @@ angular.module('starter.controllers', [])
 
 //用户登录控制
 .controller('LoginCtrl', function($scope,$http) {
-    $scope.username = 'wangaxing';
+    $scope.info = {username:"",password:""};
     $scope.jump = function(url) {
             window.location = url;
      };
     $scope.submit = function(){
-        alert("zheshi");
-//        alert($scope.username);
+//        $scope.formData = {};
+        var info = $scope.info;
         $http({
-		method: 'GET',
-		url: 'http://127.0.0.1:3001/workers.json'
+		method: 'POST',
+		url: '/users/8/login.json',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        data: {"mobile":info.username,"encrypted_password":info.password},
+            
+        transformRequest: function(obj) {    
+                var str = [];    
+                for (var p in obj) {    
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));    
+                }    
+                return str.join("&");    
+            }
 	}).then(function successCallback(response) {
-//			$scope.names = response.data.sites;
-            var ret = response;
+      //	$scope.names = response.data.sites;
+            var ret = response.data.data;
+            if (ret == "Login succ!") {
+                alert("登录成功，跳转到主页面");
+                window.location = "#/tab/dash";
+            }
 		}, function errorCallback(response) {
 			// 请求失败执行代码
             alert("请求失败了");

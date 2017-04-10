@@ -166,6 +166,7 @@ GEM
     public_suffix (2.0.5)
     puma (3.7.0)
     rack (2.0.1)
+    rack-cors (0.3.1)
     rack-livereload (0.3.16)
       rack
     rack-test (0.6.3)
@@ -290,6 +291,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   mysql2
   puma (~> 3.0)
+  rack-cors (~> 0.3.1)
   rack-livereload
   rails (~> 5.0.1)
   rest-client
@@ -308,4 +310,4 @@ DEPENDENCIES
   will_paginate-bootstrap
 
 BUNDLED WITH
-   1.12.5
+   1.14.6
