@@ -90,6 +90,6 @@ class UsersController < ApplicationController
   end
 
   def user_login_params
-    params.require(:user).permit(:mobile, :encrypted_password, :email, :name)
+    params.require(:user).permit(:mobile, :encrypted_password)
   end
 end
