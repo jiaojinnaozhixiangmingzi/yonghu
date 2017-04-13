@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :orders
+  resources :products
 
   get '/home/user', to: 'home#user', as: 'user_home'
 

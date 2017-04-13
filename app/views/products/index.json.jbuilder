@@ -1,1 +1,1 @@
-json.array! @users, partial: 'users/user', as: :user
+json.array! @products, partial: 'products/product', as: :product
