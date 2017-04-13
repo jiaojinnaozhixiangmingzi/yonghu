@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_login_params)
+    @user = User.new(create_params)
 
     respond_to do |format|
       if @user.save
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
       if @user.empty?
         format.json { render :json => {:data => "Login failed"}.to_json }
       else
-        format.json { render :json => {:data => "Login succ!"}.to_json }
+        format.json { render :json => {:data => @user}.to_json }
       end
     end
   end
@@ -89,7 +89,11 @@ class UsersController < ApplicationController
     params.fetch(:user, {})
   end
 
-  def user_login_params
+  def create_params
     params.require(:user).permit(:mobile, :encrypted_password)
+  end
+
+  def reset_params
+    params.require(:user).permit(:mobile, :oldencrypted_password, :newencrypted_password)
   end
 end
