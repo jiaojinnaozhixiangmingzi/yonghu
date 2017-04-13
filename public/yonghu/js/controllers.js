@@ -25,7 +25,7 @@ angular.module('starter.controllers', [])
             $scope.showerror = true;
             return;
         }
-        var serviceRet = httpServicePost.posthttp(info,'/users/8/login.json').then(function (resp) {
+        var serviceRet = httpServicePost.posthttp(info, '/users/8/login.json').then(function (resp) {
             if (resp.data.data == "Login succ!") {
                 alert("登录成功");
                 window.location = "#/tab/dash";
@@ -46,22 +46,26 @@ angular.module('starter.controllers', [])
         encrypted_password: "",
         reencrypted_password: ""
     };
+
     $scope.showerror = false;
     $scope.submit = function () {
         var info = $scope.info;
+        var userinfo = {
+            "user[mobile]": info.mobile,
+            "user[encrypted_password]": info.encrypted_password,
+        };
         var checkRet = Signin.checkFiled(info);
-        if (checkRet != null) {//==null验证通过
+        if (checkRet != null) { //==null验证通过
             var tipsDom = document.getElementById("showerror");
             tipsDom.innerHTML = checkRet;
             $scope.showerror = true;
             return;
         }
-        var serviceRet = httpServicePost.posthttp(info,'/users.json').then(function (resp) {
-            if (resp.data.data == "Login succ!") {
+        var serviceRet = httpServicePost.posthttp(userinfo, '/users.json').then(function (resp) {
+            if (resp.data.data == "succ") {
                 alert("注册成功，为您跳转至登录页面！");
                 window.location = "#/login";
             }
-            //响应成功时调用，resp是一个响应对象
         });
 
 
@@ -81,16 +85,39 @@ angular.module('starter.controllers', [])
     //  };
 })
 
-.controller('ResetPasswdCtrl', function ($scope, $http, $stateParams) {
+.controller('ResetPasswdCtrl', function ($scope, $http, $stateParams, ResetPassword, httpServicePost) {
+    $scope.info = {
+        oldencrypted_password: "",
+        newencrypted_password: "",
+        renewencrypted_password: ""
+    };
+
+    $scope.showerror = false;
+    $scope.submit = function () {
+        var info = $scope.info;
+        var userinfo = {
+            "user[mobile]": info.mobile,
+            "user[encrypted_password]": info.encrypted_password,
+        };
+        var checkRet = ResetPassword.checkFiled(info);
+        if (checkRet != null) { //==null验证通过
+            var tipsDom = document.getElementById("showerror");
+            tipsDom.innerHTML = checkRet;
+            $scope.showerror = true;
+            return;
+        }
+        var serviceRet = httpServicePost.posthttp(userinfo, '/users.json').then(function (resp) {
+            if (resp.data.data == "succ") {
+                alert("注册成功，为您跳转至登录页面！");
+                window.location = "#/login";
+            }
+        });
+
+
+    }
     $scope.jump = function (url) {
         window.location = url;
     };
-    var url = $stateParams.from;
-    //    alert(url);
-    //    $scope.username = 'wangaxing';
-    //  $scope.settings = {
-    //    enableFriends: true
-    //  };
 })
 
 
