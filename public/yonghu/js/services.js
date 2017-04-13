@@ -113,14 +113,14 @@ angular.module('starter.services', [])
         };
     })
 
-.factory('httpService', function ($http) {
+.factory('httpServicePost', function ($http) {
     // Might use a resource here that returns a JSON array
     return {
-        posthttp: function (info) {
+        posthttp: function (info, url) {
             var info = info;
             var promise = $http({
                 method: 'POST',
-                url: '/users/8/login.json',
+                url: url,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
