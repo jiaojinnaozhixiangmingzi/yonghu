@@ -73,14 +73,16 @@ class UsersController < ApplicationController
       if @user.empty?
         format.json { render :json => {:data => "Login failed"}.to_json }
       else
-        # session['user'] = @user.id
+        first = @user[0]
+         session['mobile'] = first.mobile
         format.json { render :json => {:data => "Login succ"}.to_json }
       end
     end
   end
 
   def reset
-    @user = User.where(["mobile = ? and encrypted_password = ?", params[:mobile], params[:old_encrypted_password]])
+    mobile = session['mobile']
+    @user = User.where(["mobile = ? and encrypted_password = ?",mobile, params[:old_encrypted_password]])
     respond_to do |format|
       if @user.empty?
         format.json { render :json => {:data => "Reset failed"}.to_json }
