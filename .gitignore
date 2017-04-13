@@ -26,4 +26,4 @@ logs/
 
 out/
 /tmp/
-/log/
+log/*

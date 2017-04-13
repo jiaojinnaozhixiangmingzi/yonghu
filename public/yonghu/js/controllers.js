@@ -7,7 +7,7 @@ angular.module('starter.controllers', [])
 })
 
 //用户登录控制
-.controller('LoginCtrl', function ($scope, $http, Login, httpServicePost) {
+.controller('LoginCtrl', function ($scope, $http, Login, httpServicePost, $rootScope) {
     $scope.info = {
         mobile: "",
         encrypted_password: ""
@@ -17,6 +17,7 @@ angular.module('starter.controllers', [])
     };
     $scope.showerror = false;
     $scope.submit = function () {
+        $rootScope.userid = '186';
         var info = $scope.info;
         var checkRet = Login.checkFiled(info);
         if (checkRet != null) {
@@ -28,6 +29,7 @@ angular.module('starter.controllers', [])
         var serviceRet = httpServicePost.posthttp(info, '/users/8/login.json').then(function (resp) {
             if (resp.data.data == "Login succ!") {
                 alert("登录成功");
+                userid = '186';
                 window.location = "#/tab/dash";
             }
             //响应成功时调用，resp是一个响应对象
@@ -85,7 +87,7 @@ angular.module('starter.controllers', [])
     //  };
 })
 
-.controller('ResetPasswdCtrl', function ($scope, $http, $stateParams, ResetPassword, httpServicePost) {
+.controller('ResetPasswdCtrl', function ($scope, $http, $stateParams, ResetPassword, httpServicePost, $rootScope) {
     $scope.info = {
         oldencrypted_password: "",
         newencrypted_password: "",
@@ -94,6 +96,7 @@ angular.module('starter.controllers', [])
 
     $scope.showerror = false;
     $scope.submit = function () {
+        var id = $rootScope.userid;
         var info = $scope.info;
         var userinfo = {
             "user[mobile]": info.mobile,
