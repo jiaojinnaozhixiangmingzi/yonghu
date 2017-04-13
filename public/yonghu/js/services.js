@@ -80,24 +80,51 @@ angular.module('starter.services', [])
             //    }
         };
     })
+    .factory('Signin', function () {
+        // Might use a resource here that returns a JSON array
+        return {
+            all: function () {
+                return chats;
+            },
+            checkFiled: function (userInfo) {
+                if (userInfo.mobile == null || userInfo.mobile == undefined || userInfo.mobile == "") {
+                    return "用户名格式错误，请重新输入！";
+                }
+                if (userInfo.encrypted_password == null || userInfo.encrypted_password == undefined || userInfo.encrypted_password == "") {
+                    return "密码格式错误，请重新输入！";
+                }
+                if (userInfo.reencrypted_password == null || userInfo.reencrypted_password == undefined || userInfo.reencrypted_password == "") {
+                    return "确认密码格式错误，请重新输入！";
+                }
+                if (userInfo.reencrypted_password != userInfo.encrypted_password) {
+                    return "您输入的两次密码不一致，请重新输入！";
+                }
+                return;
+                //      chats.splice(chats.indexOf(chat), 1);
+            },
+            //    get: function(chatId) {
+            //      for (var i = 0; i < chats.length; i++) {
+            //        if (chats[i].id === parseInt(chatId)) {
+            //          return chats[i];
+            //        }
+            //      }
+            //      return null;
+            //    }
+        };
+    })
 
 .factory('httpService', function ($http) {
     // Might use a resource here that returns a JSON array
     return {
         posthttp: function (info) {
             var info = info;
-            $http({
+            var promise = $http({
                 method: 'POST',
                 url: '/users/8/login.json',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 data: info,
-                //                    {
-                //                        "mobile": info.username,
-                //                        "encrypted_password": info.password
-                //                    },
-
                 transformRequest: function (obj) {
                     var str = [];
                     for (var p in obj) {
@@ -105,22 +132,8 @@ angular.module('starter.services', [])
                     }
                     return str.join("&");
                 }
-            }).then(function successCallback(response) {
-                //	$scope.names = response.data.sites;
-                var ret = response.data.data;
-                if (ret == "Login succ!") {
-                    alert("登录成功，跳转到主页面");
-                    window.location = "#/tab/dash";
-                } else {
-                    alert("用户名和密码不匹配，请重新输入");
-                }
-
-            }, function errorCallback(response) {
-                // 请求失败执行代码
-                alert("请求失败了");
             });
-            var info ="info";
-//            return ret;
+            return promise;
         }
 
     };

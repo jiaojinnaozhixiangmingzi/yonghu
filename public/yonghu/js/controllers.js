@@ -15,17 +15,28 @@ angular.module('starter.controllers', [])
     $scope.jump = function (url) {
         window.location = url;
     };
+    $scope.showerror = false;
     $scope.submit = function () {
         //        $scope.formData = {};
         var info = $scope.info;
         var checkRet = Login.checkFiled(info);
         //        var checkRet = inputFieldCheck(info);
         if (checkRet != null) {
-            alert(checkRet);
+            var tipsDom = document.getElementById("showerror");
+            tipsDom.innerHTML = checkRet;
+            $scope.showerror = true;
+            //            alert(checkRet);
             return;
         }
-        httpService.posthttp(info);
-        
+        var serviceRet = httpService.posthttp(info).then(function (resp) {
+            var info = 'info';
+            if (resp.data.data == "Login succ!") {
+                alert("登录成功");
+                window.location = "#/tab/dash";
+            }
+            //响应成功时调用，resp是一个响应对象
+        });
+
 
     }
 
@@ -43,7 +54,35 @@ angular.module('starter.controllers', [])
 //    }
 //    return;
 //};
-.controller('SigninCtrl', function ($scope) {
+.controller('SigninCtrl', function ($scope, Signin, httpService) {
+    $scope.info = {
+        mobile: "",
+        encrypted_password: "",
+        reencrypted_password: ""
+    };
+    $scope.showerror = false;
+    $scope.submit = function () {
+        //        $scope.formData = {};
+        var info = $scope.info;
+        var checkRet = Signin.checkFiled(info);
+        //        var checkRet = inputFieldCheck(info);
+        if (checkRet != null) {//==null验证通过
+            var tipsDom = document.getElementById("showerror");
+            tipsDom.innerHTML = checkRet;
+            $scope.showerror = true;
+            return;
+        }
+        var serviceRet = httpService.posthttp(info).then(function (resp) {
+            var info = 'info';
+            if (resp.data.data == "Login succ!") {
+                alert("注册成功，为您跳转至登录页面！");
+                window.location = "#/login";
+            }
+            //响应成功时调用，resp是一个响应对象
+        });
+
+
+    }
     $scope.jump = function (url) {
         window.location = url;
     };
