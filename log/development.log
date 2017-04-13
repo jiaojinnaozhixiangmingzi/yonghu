@@ -7395,3 +7395,1398 @@ Processing by UsersController#login as JSON
 Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.5ms)
 
 
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:33:52 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (14.7ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 137.9ms
+Sent mail to 452369538@qq.com (11.5ms)
+Date: Tue, 11 Apr 2017 20:33:53 +0800
+From: 16126218@bjtu.edu.cn
+To: 452369538@qq.com
+Message-ID: <58eccd3165b56_119903fd77453351470769@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+DEPRECATION WARNING: `render :text` is deprecated because it does not actually render a `text/plain` response. Switch to `render plain: 'plain text'` to render as `text/plain`, `render html: '<strong>HTML</strong>'` to render as `text/html`, or `render body: 'raw'` to match the deprecated behavior and render with the default Content-Type, which is `text/html`. (called from login at /Users/Kafukaaa/IdeaProjects/yonghu/app/controllers/users_controller.rb:71)
+  Rendering text template
+  Rendered text template (0.0ms)
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE (mobile = '186' and encrypted_password = '111111')[0m
+Completed 500 Internal Server Error in 293ms (Views: 1.2ms | ActiveRecord: 8.9ms)
+
+
+  
+AbstractController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
+  
+app/controllers/users_controller.rb:76:in `block (2 levels) in login'
+app/controllers/users_controller.rb:72:in `login'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.9ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (73.2ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:34:27 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.3ms
+Sent mail to 452369538@qq.com (2.8ms)
+Date: Tue, 11 Apr 2017 20:34:27 +0800
+From: 16126218@bjtu.edu.cn
+To: 452369538@qq.com
+Message-ID: <58eccd53bac85_119903fd77453348870866@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE (mobile = '186' and encrypted_password = '111111')[0m
+Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:36:05 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.6ms
+Sent mail to 12301050@bjtu.edu.cn (4.5ms)
+Date: Tue, 11 Apr 2017 20:36:05 +0800
+From: 16126218@bjtu.edu.cn
+To: 12301050@bjtu.edu.cn
+Message-ID: <58eccdb577309_119903fd7745333fc70918@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE (mobile = '186' and encrypted_password = '111111')[0m
+Completed 200 OK in 15ms (Views: 0.1ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:37:15 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.4ms
+Sent mail to 12301050@bjtu.edu.cn (3.1ms)
+Date: Tue, 11 Apr 2017 20:37:15 +0800
+From: 16126218@bjtu.edu.cn
+To: 12301050@bjtu.edu.cn
+Message-ID: <58eccdfbdeec9_119903fd7745335a071042@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+DEPRECATION WARNING: `render :text` is deprecated because it does not actually render a `text/plain` response. Switch to `render plain: 'plain text'` to render as `text/plain`, `render html: '<strong>HTML</strong>'` to render as `text/html`, or `render body: 'raw'` to match the deprecated behavior and render with the default Content-Type, which is `text/html`. (called from login at /Users/Kafukaaa/IdeaProjects/yonghu/app/controllers/users_controller.rb:70)
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 11ms (Views: 0.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:37:53 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.5ms
+Sent mail to 12301050@bjtu.edu.cn (3.0ms)
+Date: Tue, 11 Apr 2017 20:37:53 +0800
+From: 16126218@bjtu.edu.cn
+To: 12301050@bjtu.edu.cn
+Message-ID: <58ecce21d5694_119903fd77453351471166@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:40:57 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 2.9ms
+Sent mail to 452369538@qq.com (4.4ms)
+Date: Tue, 11 Apr 2017 20:40:58 +0800
+From: 1152352921@qq.com
+To: 452369538@qq.com
+Message-ID: <58ecceda14648_119903fd77453348871263@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 15ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:41:38 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.7ms
+Sent mail to 16126218@bjtu.edu.cn (3.7ms)
+Date: Tue, 11 Apr 2017 20:41:38 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58eccf02613b7_119903fd7745333fc71364@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:43:42 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.8ms
+Sent mail to 16126218@bjtu.edu.cn (3.1ms)
+Date: Tue, 11 Apr 2017 20:43:42 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58eccf7ebd1db_119903fd77453337071437@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:50:29 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (10.6ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 129.3ms
+Sent mail to 16126218@bjtu.edu.cn (11.6ms)
+Date: Tue, 11 Apr 2017 20:50:29 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd115d3bad_1237f3fd845d49204914d8@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 286ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:54:04 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 139.5ms
+Sent mail to 16126218@bjtu.edu.cn (14.2ms)
+Date: Tue, 11 Apr 2017 20:54:04 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd1ec708f7_1259c3fe078faa8648076c@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 276ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:56:11 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.1ms)
+Emailer#contact: processed outbound mail in 3.3ms
+Sent mail to 16126218@bjtu.edu.cn (3.8ms)
+Date: Tue, 11 Apr 2017 20:56:11 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd26b5825d_1259c3fe078faa79c8082f@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 20:57:47 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 128.8ms
+Sent mail to 16126218@bjtu.edu.cn (13.6ms)
+Date: Tue, 11 Apr 2017 20:57:48 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd2cc23de_127e63ffcc95b080049784@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 264ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:00:15 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 3.2ms
+Sent mail to 16126218@bjtu.edu.cn (4.8ms)
+Date: Tue, 11 Apr 2017 21:00:15 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd35ff2f50_127e63ffcc95b074c4988e@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+DEPRECATION WARNING: `render :text` is deprecated because it does not actually render a `text/plain` response. Switch to `render plain: 'plain text'` to render as `text/plain`, `render html: '<strong>HTML</strong>'` to render as `text/html`, or `render body: 'raw'` to match the deprecated behavior and render with the default Content-Type, which is `text/html`. (called from login at /Users/Kafukaaa/IdeaProjects/yonghu/app/controllers/users_controller.rb:70)
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 17ms (Views: 1.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:00:41 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 2.0ms
+Sent mail to 16126218@bjtu.edu.cn (6.4ms)
+Date: Tue, 11 Apr 2017 21:00:41 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd379a5dfe_127e63ffcc95b064849930@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+DEPRECATION WARNING: `render :text` is deprecated because it does not actually render a `text/plain` response. Switch to `render plain: 'plain text'` to render as `text/plain`, `render html: '<strong>HTML</strong>'` to render as `text/html`, or `render body: 'raw'` to match the deprecated behavior and render with the default Content-Type, which is `text/html`. (called from login at /Users/Kafukaaa/IdeaProjects/yonghu/app/controllers/users_controller.rb:70)
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 11ms (Views: 0.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:01:11 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.4ms
+Sent mail to 16126218@bjtu.edu.cn (2.9ms)
+Date: Tue, 11 Apr 2017 21:01:11 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd397c5afb_127e63ffcc95b056c50087@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:02:54 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.6ms
+Sent mail to 16126218@bjtu.edu.cn (6.6ms)
+Date: Tue, 11 Apr 2017 21:02:54 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd3fed4238_127e63ffcc95b04a450131@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:06:24 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 2.0ms
+Sent mail to 16126218@bjtu.edu.cn (4.7ms)
+Date: Tue, 11 Apr 2017 21:06:24 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd4d0974ee_127e63ffcc95b08005025e@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:07:51 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 3.5ms
+Sent mail to 16126218@bjtu.edu.cn (3.5ms)
+Date: Tue, 11 Apr 2017 21:07:51 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd527212db_127e63ffcc95b074c5039f@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:08:39 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 2.5ms
+Sent mail to 16126218@bjtu.edu.cn (8.4ms)
+Date: Tue, 11 Apr 2017 21:08:39 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd557b74b3_127e63ffcc95b0648504ea@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:12:34 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+Emailer#contact: processed outbound mail in 7.1ms
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template emailer/contact with {:locale=>[:en], :formats=>[:json], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :coffee, :jbuilder]}. Searched in:
+  * "/Users/Kafukaaa/IdeaProjects/yonghu/app/views"
+  * "/Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/devise-4.2.0/app/views"
+):
+  
+app/mailers/emailer.rb:7:in `block (2 levels) in contact'
+app/mailers/emailer.rb:7:in `block in contact'
+app/mailers/emailer.rb:5:in `contact'
+app/controllers/users_controller.rb:69:in `login'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.9ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (74.3ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:13:13 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+Emailer#contact: processed outbound mail in 3.3ms
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template emailer/contact with {:locale=>[:en], :formats=>[:json], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :coffee, :jbuilder]}. Searched in:
+  * "/Users/Kafukaaa/IdeaProjects/yonghu/app/views"
+  * "/Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/devise-4.2.0/app/views"
+):
+  
+app/mailers/emailer.rb:7:in `block (2 levels) in contact'
+app/mailers/emailer.rb:7:in `block in contact'
+app/mailers/emailer.rb:5:in `contact'
+app/controllers/users_controller.rb:69:in `login'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.5ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (65.1ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:13:31 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 3.9ms
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template emailer/contact with {:locale=>[:en], :formats=>[:json], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :coffee, :jbuilder]}. Searched in:
+  * "/Users/Kafukaaa/IdeaProjects/yonghu/app/views"
+  * "/Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/devise-4.2.0/app/views"
+):
+  
+app/mailers/emailer.rb:7:in `block (2 levels) in contact'
+app/mailers/emailer.rb:7:in `block in contact'
+app/mailers/emailer.rb:5:in `contact'
+app/controllers/users_controller.rb:69:in `login'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.5ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.7ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (65.1ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:15:10 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.4ms
+Sent mail to 16126218@bjtu.edu.cn (3.4ms)
+Date: Tue, 11 Apr 2017 21:15:10 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd6decf55f_127e63ffcc95b074c50513@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+DEPRECATION WARNING: `render :text` is deprecated because it does not actually render a `text/plain` response. Switch to `render plain: 'plain text'` to render as `text/plain`, `render html: '<strong>HTML</strong>'` to render as `text/html`, or `render body: 'raw'` to match the deprecated behavior and render with the default Content-Type, which is `text/html`. (called from login at /Users/Kafukaaa/IdeaProjects/yonghu/app/controllers/users_controller.rb:70)
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 11ms (Views: 0.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:15:36 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 3.1ms
+Sent mail to 16126218@bjtu.edu.cn (4.0ms)
+Date: Tue, 11 Apr 2017 21:15:36 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd6f8ca778_127e63ffcc95b0648506e8@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+  [1m[36mUser Load (4.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE (mobile = '186' and encrypted_password = '111111')[0m
+Completed 500 Internal Server Error in 86ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `plain' for #<UsersController:0x007ff98ddccad8>):
+  
+app/controllers/users_controller.rb:70:in `login'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.5ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (147.9ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:16:15 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.3ms
+Sent mail to 16126218@bjtu.edu.cn (2.7ms)
+Date: Tue, 11 Apr 2017 21:16:15 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd71fd4df7_127e63ffcc95b056c50722@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `to_text' for "OK":String):
+  
+app/controllers/users_controller.rb:70:in `login'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.8ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (61.4ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:16:29 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.3ms
+Sent mail to 16126218@bjtu.edu.cn (2.7ms)
+Date: Tue, 11 Apr 2017 21:16:29 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd72da8ef7_127e63ffcc95b04a450815@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+DEPRECATION WARNING: `render :text` is deprecated because it does not actually render a `text/plain` response. Switch to `render plain: 'plain text'` to render as `text/plain`, `render html: '<strong>HTML</strong>'` to render as `text/html`, or `render body: 'raw'` to match the deprecated behavior and render with the default Content-Type, which is `text/html`. (called from login at /Users/Kafukaaa/IdeaProjects/yonghu/app/controllers/users_controller.rb:70)
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 11ms (Views: 0.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:16:59 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.2ms
+Sent mail to 16126218@bjtu.edu.cn (2.7ms)
+Date: Tue, 11 Apr 2017 21:16:59 +0800
+From: 1152352921@qq.com
+To: 16126218@bjtu.edu.cn
+Message-ID: <58ecd74b8ffe8_127e63ffcc95b08005093@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE (mobile = '186' and encrypted_password = '111111')[0m
+Completed 500 Internal Server Error in 78ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `html' for #<UsersController:0x007ff9913715f8>):
+  
+app/controllers/users_controller.rb:70:in `login'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.0ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (101.2ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:20:22 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+Emailer#send_mail: processed outbound mail in 22.5ms
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template emailer/send_mail with "mailer". Searched in:
+  * "emailer"
+):
+  
+app/mailers/emailer.rb:7:in `send_mail'
+app/controllers/users_controller.rb:66:in `login'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.7ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.5ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (65.1ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:26:59 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 3.9ms
+Sent mail to 452369538@qq.com (6.5ms)
+Date: Tue, 11 Apr 2017 21:26:59 +0800
+From: 1152352921@qq.com
+To: 452369538@qq.com
+Message-ID: <58ecd9a3f06ff_127e63ffcc95b064851055@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+DEPRECATION WARNING: `render :text` is deprecated because it does not actually render a `text/plain` response. Switch to `render plain: 'plain text'` to render as `text/plain`, `render html: '<strong>HTML</strong>'` to render as `text/html`, or `render body: 'raw'` to match the deprecated behavior and render with the default Content-Type, which is `text/html`. (called from login at /Users/Kafukaaa/IdeaProjects/yonghu/app/controllers/users_controller.rb:70)
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 21ms (Views: 1.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:27:47 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.9ms
+Sent mail to 452369538@qq.com (3.5ms)
+Date: Tue, 11 Apr 2017 21:27:47 +0800
+From: 1152352921@qq.com
+To: 452369538@qq.com
+Message-ID: <58ecd9d36f197_127e63ffcc95b056c51150@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:30:52 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+Emailer#contact: processed outbound mail in 22.3ms
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template emailer/contact with "mailer". Searched in:
+  * "emailer"
+):
+  
+app/mailers/emailer.rb:7:in `contact'
+app/controllers/users_controller.rb:69:in `login'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (9.3ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.9ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (91.0ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:31:02 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+Emailer#contact: processed outbound mail in 25.1ms
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template emailer/contact with "mailer". Searched in:
+  * "emailer"
+):
+  
+app/mailers/emailer.rb:7:in `contact'
+app/controllers/users_controller.rb:69:in `login'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.5ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (64.3ms)
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:33:41 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.1ms
+Sent mail to 452369538@qq.com (2.9ms)
+Date: Tue, 11 Apr 2017 21:33:41 +0800
+From: 1152352921@qq.com
+To: 452369538@qq.com
+Message-ID: <58ecdb35daa0c_127e63ffcc95b074c512e0@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+No template found for UsersController#login, rendering head :no_content
+Completed 204 No Content in 120ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 21:35:55 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.2ms
+Sent mail to 452369538@qq.com (2.9ms)
+Date: Tue, 11 Apr 2017 21:35:55 +0800
+From: 18811442527@163.com
+To: 452369538@qq.com
+Message-ID: <58ecdbbb5aa70_127e63ffcc95b0648513e3@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+No template found for UsersController#login, rendering head :no_content
+Completed 204 No Content in 103ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 22:03:33 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 6.7ms
+Sent mail to 18600547596@qq.com (6.6ms)
+Date: Tue, 11 Apr 2017 22:03:33 +0800
+From: 18811442527@163.com
+To: 18600547596@qq.com
+Message-ID: <58ece23591fc9_127e63ffcc95b056c51429@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+No template found for UsersController#login, rendering head :no_content
+Completed 204 No Content in 127ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 22:04:29 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 2.2ms
+Sent mail to 18600547596@163.com (4.7ms)
+Date: Tue, 11 Apr 2017 22:04:29 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ece26d25e8c_127e63ffcc95b04a4515dd@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+No template found for UsersController#login, rendering head :no_content
+Completed 204 No Content in 117ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 22:05:07 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.7ms
+Sent mail to 18600547596@163.com (3.3ms)
+Date: Tue, 11 Apr 2017 22:05:08 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ece2946973_127e63ffcc95b08005164c@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+No template found for UsersController#login, rendering head :no_content
+Completed 204 No Content in 112ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 22:05:41 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"id"=>"8"}
+  Rendering text template
+  Rendered text template (0.1ms)
+Emailer#contact: processed outbound mail in 1.4ms
+Sent mail to 18600547596@163.com (4.0ms)
+Date: Tue, 11 Apr 2017 22:05:41 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ece2b52f8e0_127e63ffcc95b074c517e2@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 13ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 22:06:59 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 1.9ms
+Sent mail to 18600547596@163.com (4.7ms)
+Date: Tue, 11 Apr 2017 22:06:59 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ece3039e4f3_127e63ffcc95b064851861@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 22:12:37 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 4.7ms
+Sent mail to 18600547596@163.com (8.7ms)
+Date: Tue, 11 Apr 2017 22:12:37 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ece4557843a_127e63ffcc95b056c5195@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 22ms (Views: 0.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 22:17:04 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#login as JSON
+  Parameters: {"id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 123.3ms
+Sent mail to 18600547596@163.com (10.0ms)
+Date: Tue, 11 Apr 2017 22:17:04 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ece560b13ac_14c613ff9bd196f1c3673a@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 254ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-11 23:09:23 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#login as JSON
+  Parameters: {"id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 130.9ms
+Sent mail to 18600547596@163.com (9.0ms)
+Date: Tue, 11 Apr 2017 23:09:23 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ecf1a3cf119_15a9d3fd8e5c0965056568@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 271ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-12 00:02:33 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#login as JSON
+  Parameters: {"id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 159.3ms
+Sent mail to 18600547596@163.com (139.2ms)
+Date: Wed, 12 Apr 2017 00:02:34 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ecfe1a1f62b_164273fcb72d3e3ac354a9@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 442ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-12 00:08:47 +0800
+Processing by UsersController#login as JSON
+  Parameters: {"id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 12.3ms
+Sent mail to 18600547596@163.com (28510.5ms)
+Date: Wed, 12 Apr 2017 00:08:47 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ecff8fe0e44_164273fcb72d3e2a8355a3@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 28530ms (Views: 1.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-12 00:10:42 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#login as JSON
+  Parameters: {"id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 125.4ms
+Sent mail to 18600547596@163.com (1308.0ms)
+Date: Wed, 12 Apr 2017 00:10:42 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ed0002ef76c_168c43fe790fd17d8124e@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 1554ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-04-12 00:13:36 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#login as JSON
+  Parameters: {"id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 143.8ms
+Sent mail to 18600547596@163.com (112.4ms)
+Date: Wed, 12 Apr 2017 00:13:36 +0800
+From: 18811442527@163.com
+To: 18600547596@163.com
+Message-ID: <58ed00b09c31f_16ab03fdf107b97046465@wangyudeMacBook-Pro.local.mail>
+Subject: =?UTF-8?Q?=E6=B5=8B=E8=AF=95?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PHA+aHRtbOmCruS7tua1i+ivlTwvcD4=
+
+Completed 200 OK in 395ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/categories" for 127.0.0.1 at 2017-04-13 22:53:08 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by CategoriesController#index as HTML
+  Rendering categories/index.html.slim within layouts/application
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  Rendered categories/_category_block.html.slim (5.9ms)
+  Rendered categories/_category_block.html.slim (0.2ms)
+  Rendered categories/_category_block.html.slim (0.2ms)
+  Rendered categories/_category_block.html.slim (0.2ms)
+  Rendered categories/index.html.slim within layouts/application (27.9ms)
+  Rendered layouts/_menu.html.slim (4.4ms)
+Completed 200 OK in 462ms (Views: 445.8ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/categories/1" for 127.0.0.1 at 2017-04-13 22:53:34 +0800
+Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  Rendering categories/show.html.slim within layouts/application
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`category_id` = 1 ORDER BY `products`.`updated_at` DESC LIMIT 10 OFFSET 0[0m
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 1 LIMIT 1[0m
+  Rendered products/_product.html.slim (18.4ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 2 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.7ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 3 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.6ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 4 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.3ms)
+  Rendered categories/show.html.slim within layouts/application (41.7ms)
+  Rendered layouts/_menu.html.slim (3.8ms)
+Completed 200 OK in 126ms (Views: 84.9ms | ActiveRecord: 7.7ms)
+
+
+Started GET "/categories/1/products" for 127.0.0.1 at 2017-04-13 22:53:59 +0800
+Processing by ProductsController#index as HTML
+  Parameters: {"category_id"=>"1"}
+  [1m[36mCategory Load (1.8ms)[0m  [1m[34mSELECT  `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  Rendering products/index.html.slim within layouts/application
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  Rendered products/index.html.slim within layouts/application (159.1ms)
+Completed 500 Internal Server Error in 177ms (ActiveRecord: 2.1ms)
+
+
+  
+ActionView::Template::Error (undefined method `product_path' for #<#<Class:0x007fdd8a0a1490>:0x007fdd8570f4a8>):
+    10:   tbody
+    11:     - @products.each do |product|
+    12:       tr
+    13:         td = link_to 'Show', product
+    14:         td = link_to 'Edit', edit_product_path(product)
+    15:         td = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete
+    16: 
+  
+app/views/products/index.html.slim:13:in `block in _app_views_products_index_html_slim___3109519622129367473_70294758858960'
+app/views/products/index.html.slim:11:in `_app_views_products_index_html_slim___3109519622129367473_70294758858960'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (10.6ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.0ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.7ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (83.2ms)
+Started GET "/categories/1/products" for 127.0.0.1 at 2017-04-13 22:54:18 +0800
+Processing by ProductsController#index as HTML
+  Parameters: {"category_id"=>"1"}
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  Rendering products/index.html.slim within layouts/application
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  Rendered products/index.html.slim within layouts/application (89.5ms)
+Completed 500 Internal Server Error in 102ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (undefined method `product_path' for #<#<Class:0x007fdd8a0a1490>:0x007fdd8c0bc130>):
+    10:   tbody
+    11:     - @products.each do |product|
+    12:       tr
+    13:         td = link_to 'Show', product
+    14:         td = link_to 'Edit', edit_product_path(product)
+    15:         td = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete
+    16: 
+  
+app/views/products/index.html.slim:13:in `block in _app_views_products_index_html_slim___3109519622129367473_70294757041780'
+app/views/products/index.html.slim:11:in `_app_views_products_index_html_slim___3109519622129367473_70294757041780'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.6ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (66.7ms)
+Started GET "/orders" for 127.0.0.1 at 2017-04-13 22:54:43 +0800
+Processing by OrdersController#index as HTML
+  Rendering orders/index.html.slim within layouts/application
+  [1m[36mOrder Load (1.7ms)[0m  [1m[34mSELECT  `orders`.* FROM `orders` ORDER BY `orders`.`updated_at` DESC LIMIT 10 OFFSET 0[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  [1m[36mAddress Load (0.2ms)[0m  [1m[34mSELECT  `addresses`.* FROM `addresses` WHERE `addresses`.`id` = 1 LIMIT 1[0m
+  Rendered orders/index.html.slim within layouts/application (34.1ms)
+  Rendered layouts/_menu.html.slim (4.4ms)
+Completed 200 OK in 96ms (Views: 79.4ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/categories" for 127.0.0.1 at 2017-04-13 22:54:44 +0800
+Processing by CategoriesController#index as HTML
+  Rendering categories/index.html.slim within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  Rendered categories/_category_block.html.slim (6.8ms)
+  Rendered categories/_category_block.html.slim (0.2ms)
+  Rendered categories/_category_block.html.slim (0.3ms)
+  Rendered categories/_category_block.html.slim (2.1ms)
+  Rendered categories/index.html.slim within layouts/application (23.9ms)
+  Rendered layouts/_menu.html.slim (4.5ms)
+Completed 200 OK in 84ms (Views: 79.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/categories/1" for 127.0.0.1 at 2017-04-13 22:54:46 +0800
+Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  Rendering categories/show.html.slim within layouts/application
+  [1m[36mProduct Load (1.1ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`category_id` = 1 ORDER BY `products`.`updated_at` DESC LIMIT 10 OFFSET 0[0m
+  [1m[36mPrice Load (0.5ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 1 LIMIT 1[0m
+  Rendered products/_product.html.slim (6.6ms)
+  [1m[36mPrice Load (0.7ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 2 LIMIT 1[0m
+  Rendered products/_product.html.slim (4.6ms)
+  [1m[36mPrice Load (0.4ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 3 LIMIT 1[0m
+  Rendered products/_product.html.slim (2.2ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 4 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.5ms)
+  Rendered categories/show.html.slim within layouts/application (37.4ms)
+  Rendered layouts/_menu.html.slim (6.7ms)
+Completed 200 OK in 91ms (Views: 79.9ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/categories/1" for 127.0.0.1 at 2017-04-13 22:55:45 +0800
+Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  Rendering categories/show.html.slim within layouts/application
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`category_id` = 1 ORDER BY `products`.`updated_at` DESC LIMIT 10 OFFSET 0[0m
+  [1m[36mPrice Load (0.6ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 1 LIMIT 1[0m
+  Rendered products/_product.html.slim (6.9ms)
+  [1m[36mPrice Load (0.4ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 2 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.7ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 3 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.4ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 4 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.5ms)
+  Rendered categories/show.html.slim within layouts/application (21.4ms)
+  Rendered layouts/_menu.html.slim (4.2ms)
+Completed 200 OK in 70ms (Views: 64.7ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/categories" for 127.0.0.1 at 2017-04-13 22:55:49 +0800
+Processing by CategoriesController#index as HTML
+  Rendering categories/index.html.slim within layouts/application
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  Rendered categories/_category_block.html.slim (4.1ms)
+  Rendered categories/_category_block.html.slim (0.2ms)
+  Rendered categories/_category_block.html.slim (0.3ms)
+  Rendered categories/_category_block.html.slim (0.2ms)
+  Rendered categories/index.html.slim within layouts/application (17.7ms)
+  Rendered layouts/_menu.html.slim (4.7ms)
+Completed 200 OK in 68ms (Views: 64.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/categories" for 127.0.0.1 at 2017-04-13 22:55:50 +0800
+Processing by CategoriesController#index as HTML
+  Rendering categories/index.html.slim within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  Rendered categories/_category_block.html.slim (3.0ms)
+  Rendered categories/_category_block.html.slim (0.5ms)
+  Rendered categories/_category_block.html.slim (1.3ms)
+  Rendered categories/_category_block.html.slim (0.4ms)
+  Rendered categories/index.html.slim within layouts/application (15.4ms)
+  Rendered layouts/_menu.html.slim (6.9ms)
+Completed 200 OK in 80ms (Views: 78.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/categories/2" for 127.0.0.1 at 2017-04-13 22:55:51 +0800
+Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT  `categories`.* FROM `categories` WHERE `categories`.`id` = 2 LIMIT 1[0m
+  Rendering categories/show.html.slim within layouts/application
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`category_id` = 2 ORDER BY `products`.`updated_at` DESC LIMIT 10 OFFSET 0[0m
+  [1m[36mPrice Load (0.4ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 5 LIMIT 1[0m
+  Rendered products/_product.html.slim (6.0ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 6 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.3ms)
+  [1m[36mPrice Load (0.4ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 7 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.7ms)
+  [1m[36mPrice Load (0.4ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 8 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.7ms)
+  Rendered categories/show.html.slim within layouts/application (23.7ms)
+  Rendered layouts/_menu.html.slim (10.9ms)
+Completed 200 OK in 94ms (Views: 86.3ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/categories/2" for 127.0.0.1 at 2017-04-13 22:56:49 +0800
+Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  `categories`.* FROM `categories` WHERE `categories`.`id` = 2 LIMIT 1[0m
+  Rendering categories/show.html.slim within layouts/application
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`category_id` = 2 ORDER BY `products`.`updated_at` DESC LIMIT 10 OFFSET 0[0m
+  [1m[36mPrice Load (0.4ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 5 LIMIT 1[0m
+  Rendered products/_product.html.slim (4.6ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 6 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.3ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 7 LIMIT 1[0m
+  Rendered products/_product.html.slim (2.4ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 8 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.6ms)
+  Rendered categories/show.html.slim within layouts/application (22.8ms)
+  Rendered layouts/_menu.html.slim (4.7ms)
+Completed 200 OK in 73ms (Views: 67.5ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/categories" for 127.0.0.1 at 2017-04-13 22:56:52 +0800
+Processing by CategoriesController#index as HTML
+  Rendering categories/index.html.slim within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  Rendered categories/_category_block.html.slim (4.0ms)
+  Rendered categories/_category_block.html.slim (0.2ms)
+  Rendered categories/_category_block.html.slim (0.6ms)
+  Rendered categories/_category_block.html.slim (0.3ms)
+  Rendered categories/index.html.slim within layouts/application (18.7ms)
+  Rendered layouts/_menu.html.slim (5.0ms)
+Completed 200 OK in 73ms (Views: 70.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/categories/4" for 127.0.0.1 at 2017-04-13 22:56:56 +0800
+Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  `categories`.* FROM `categories` WHERE `categories`.`id` = 4 LIMIT 1[0m
+  Rendering categories/show.html.slim within layouts/application
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`category_id` = 4 ORDER BY `products`.`updated_at` DESC LIMIT 10 OFFSET 0[0m
+  [1m[36mPrice Load (0.4ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 13 LIMIT 1[0m
+  Rendered products/_product.html.slim (5.4ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 14 LIMIT 1[0m
+  Rendered products/_product.html.slim (2.3ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 15 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.3ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 16 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.5ms)
+  Rendered categories/show.html.slim within layouts/application (25.6ms)
+  Rendered layouts/_menu.html.slim (6.1ms)
+Completed 200 OK in 78ms (Views: 71.3ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/categories/4" for 127.0.0.1 at 2017-04-13 22:57:34 +0800
+Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  `categories`.* FROM `categories` WHERE `categories`.`id` = 4 LIMIT 1[0m
+  Rendering categories/show.html.slim within layouts/application
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`category_id` = 4 ORDER BY `products`.`updated_at` DESC LIMIT 10 OFFSET 0[0m
+  [1m[36mPrice Load (0.5ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 13 LIMIT 1[0m
+  Rendered products/_product.html.slim (9.0ms)
+  [1m[36mPrice Load (0.4ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 14 LIMIT 1[0m
+  Rendered products/_product.html.slim (4.0ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 15 LIMIT 1[0m
+  Rendered products/_product.html.slim (2.1ms)
+  [1m[36mPrice Load (0.3ms)[0m  [1m[34mSELECT  `prices`.* FROM `prices` WHERE `prices`.`product_id` = 16 LIMIT 1[0m
+  Rendered products/_product.html.slim (1.4ms)
+  Rendered categories/show.html.slim within layouts/application (29.2ms)
+  Rendered layouts/_menu.html.slim (3.6ms)
+Completed 200 OK in 87ms (Views: 77.5ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/categories" for 127.0.0.1 at 2017-04-13 22:57:45 +0800
+Processing by CategoriesController#index as HTML
+  Rendering categories/index.html.slim within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  Rendered categories/_category_block.html.slim (3.5ms)
+  Rendered categories/_category_block.html.slim (0.2ms)
+  Rendered categories/_category_block.html.slim (0.2ms)
+  Rendered categories/_category_block.html.slim (0.1ms)
+  Rendered categories/index.html.slim within layouts/application (13.1ms)
+  Rendered layouts/_menu.html.slim (3.7ms)
+Completed 200 OK in 49ms (Views: 46.4ms | ActiveRecord: 0.4ms)
+
+

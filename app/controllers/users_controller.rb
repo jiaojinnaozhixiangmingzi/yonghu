@@ -29,10 +29,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        render :json => {:data => "succ"}.to_json
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render :json => {:data => "fail"}.to_json
       end
     end
   end
@@ -62,15 +62,20 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.where(["mobile = ? and encrypted_password = ?", params[:mobile], params[:encrypted_password]])
-
-    respond_to do |format|
-      if @user.empty?
-        format.json { render :json => {:data => "Login failed"}.to_json}
-      else
-        format.json { render :json => {:data => "Login succ!"}.to_json}
-      end
-    end
+    #//@user = User.where(["mobile = ? and encrypted_password = ?", params[:mobile], params[:encrypted_password]])
+    recipient = '18600547596@163.com'
+    subject ="测试"
+    message = "<p>html邮件测试</p>"
+    Emailer.contact(recipient, subject, message).deliver
+    render :json => {:data => "Send succ!"}.to_json
+    # render :text=>'OK'
+    # respond_to do |format|
+    #   if @user.empty?
+    #     format.json { render :json => {:data => "Login failed"}.to_json}
+    #   else
+    #     format.json { render :json => {:data => "Login succ!"}.to_json}
+    #   end
+    # end
   end
 
   private
