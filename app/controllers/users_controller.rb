@@ -62,34 +62,34 @@ class UsersController < ApplicationController
   end
 
   def login
-    #//@user = User.where(["mobile = ? and encrypted_password = ?", params[:mobile], params[:encrypted_password]])
+    @user = User.where(["mobile = ? and encrypted_password = ?", params[:mobile], params[:encrypted_password]])
     recipient = '18600547596@163.com'
     subject ="测试"
     message = "<p>html邮件测试</p>"
-    Emailer.contact(recipient, subject, message).deliver
-    render :json => {:data => "Send succ!"}.to_json
-    # render :text=>'OK'
-    # respond_to do |format|
-    #   if @user.empty?
-    #     format.json { render :json => {:data => "Login failed"}.to_json}
-    #   else
-    #     format.json { render :json => {:data => "Login succ!"}.to_json}
-    #   end
-    # end
+    # Emailer.contact(recipient, subject, message).deliver
+    # render :json => {:data => "Send succ!"}.to_json
+    #  render :text=>'OK'
+    respond_to do |format|
+      if @user.empty?
+        format.json { render :json => {:data => "Login failed"}.to_json }
+      else
+        format.json { render :json => {:data => "Login succ!"}.to_json }
+      end
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.fetch(:user, {})
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.fetch(:user, {})
+  end
 
-    def user_login_params
-      params.require(:user).permit(:mobile, :encrypted_password, :email, :name)
-    end
+  def user_login_params
+    params.require(:user).permit(:mobile, :encrypted_password, :email, :name)
+  end
 end
