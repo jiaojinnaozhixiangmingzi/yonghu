@@ -7,7 +7,7 @@ angular.module('starter.controllers', [])
 })
 
 //用户登录控制
-.controller('LoginCtrl', function ($scope, $http, Login, httpService) {
+.controller('LoginCtrl', function ($scope, $http, Login, httpServicePost) {
     $scope.info = {
         mobile: "",
         encrypted_password: ""
@@ -17,26 +17,21 @@ angular.module('starter.controllers', [])
     };
     $scope.showerror = false;
     $scope.submit = function () {
-        //        $scope.formData = {};
         var info = $scope.info;
         var checkRet = Login.checkFiled(info);
-        //        var checkRet = inputFieldCheck(info);
         if (checkRet != null) {
             var tipsDom = document.getElementById("showerror");
             tipsDom.innerHTML = checkRet;
             $scope.showerror = true;
-            //            alert(checkRet);
             return;
         }
-        var serviceRet = httpService.posthttp(info).then(function (resp) {
-            var info = 'info';
+        var serviceRet = httpServicePost.posthttp(info,'/users/8/login.json').then(function (resp) {
             if (resp.data.data == "Login succ!") {
                 alert("登录成功");
                 window.location = "#/tab/dash";
             }
             //响应成功时调用，resp是一个响应对象
         });
-
 
     }
 
@@ -45,16 +40,7 @@ angular.module('starter.controllers', [])
     };
 })
 
-//function inputFieldCheck(userInfo) {
-//    if (userInfo.username == null || userInfo.username == undefined || userInfo.username == ""){
-//        return "validUsername";
-//    }
-//    if (userInfo.password == null || userInfo.password == undefined || userInfo.password == ""){
-//        return "validPassword";     
-//    }
-//    return;
-//};
-.controller('SigninCtrl', function ($scope, Signin, httpService) {
+.controller('SigninCtrl', function ($scope, Signin, httpServicePost) {
     $scope.info = {
         mobile: "",
         encrypted_password: "",
@@ -62,18 +48,15 @@ angular.module('starter.controllers', [])
     };
     $scope.showerror = false;
     $scope.submit = function () {
-        //        $scope.formData = {};
         var info = $scope.info;
         var checkRet = Signin.checkFiled(info);
-        //        var checkRet = inputFieldCheck(info);
         if (checkRet != null) {//==null验证通过
             var tipsDom = document.getElementById("showerror");
             tipsDom.innerHTML = checkRet;
             $scope.showerror = true;
             return;
         }
-        var serviceRet = httpService.posthttp(info).then(function (resp) {
-            var info = 'info';
+        var serviceRet = httpServicePost.posthttp(info,'/users.json').then(function (resp) {
             if (resp.data.data == "Login succ!") {
                 alert("注册成功，为您跳转至登录页面！");
                 window.location = "#/login";

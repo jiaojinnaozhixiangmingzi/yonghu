@@ -25,17 +25,21 @@
             </div>
 -->
             <div>
+<!--
                 <button class="button button-clear button-calm" style="float: left;">
                     
                 </button>
+-->
                 <button class="button button-clear button-calm" style="float: right;" ng-click="jump('#/login')">
                     已有账号，去登录
                 </button>
             </div>
-            <h5 class="" style='margin-top: 20%;color:red;' ng-show="showerror" id="showerror">
+            
+            <h5 class="" style='margin-top: 15%;color:red;' ng-show="showerror" id="showerror">
                 您输入的用户名格式不合法，请重新输入
             </h5>
-            <input type="button" style='margin-top: 30%;width: 20%;' class=" button button-outline button-calm" value="提交">
+            
+            <input type="button" style='margin-top: 30%;width: 30%;display: block;margin-left: 35%;' class=" button button-outline button-calm" ng-click="submit()" value="提交">
         </div>
       
   </ion-content>
