@@ -1,126 +1,161 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
-    $scope.jump = function(url) {
-            window.location = url;
+.controller('DashCtrl', function ($scope) {
+    $scope.jump = function (url) {
+        window.location = url;
     };
 })
 
 //用户登录控制
-.controller('LoginCtrl', function($scope,$http) {
-    $scope.info = {username:"",password:""};
-    $scope.jump = function(url) {
-            window.location = url;
-     };
-    $scope.submit = function(){
-//        $scope.formData = {};
+.controller('LoginCtrl', function ($scope, $http, Login, httpService) {
+    $scope.info = {
+        mobile: "",
+        encrypted_password: ""
+    };
+    $scope.jump = function (url) {
+        window.location = url;
+    };
+    $scope.showerror = false;
+    $scope.submit = function () {
+        //        $scope.formData = {};
         var info = $scope.info;
-        $http({
-		method: 'POST',
-		url: '/users/8/login.json',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        data: {"mobile":info.username,"encrypted_password":info.password},
-            
-        transformRequest: function(obj) {    
-                var str = [];    
-                for (var p in obj) {    
-                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));    
-                }    
-                return str.join("&");    
-            }
-	}).then(function successCallback(response) {
-      //	$scope.names = response.data.sites;
-            var ret = response.data.data;
-            if (ret == "Login succ!") {
-                alert("登录成功，跳转到主页面");
+        var checkRet = Login.checkFiled(info);
+        //        var checkRet = inputFieldCheck(info);
+        if (checkRet != null) {
+            var tipsDom = document.getElementById("showerror");
+            tipsDom.innerHTML = checkRet;
+            $scope.showerror = true;
+            //            alert(checkRet);
+            return;
+        }
+        var serviceRet = httpService.posthttp(info).then(function (resp) {
+            var info = 'info';
+            if (resp.data.data == "Login succ!") {
+                alert("登录成功");
                 window.location = "#/tab/dash";
             }
-		}, function errorCallback(response) {
-			// 请求失败执行代码
-            alert("请求失败了");
-	});
+            //响应成功时调用，resp是一个响应对象
+        });
+
+
     }
-    
+
     $scope.settings = {
-    enableFriends: true
-  };
-})
-
-.controller('SigninCtrl', function($scope) {
-    $scope.jump = function(url) {
-            window.location = url;
+        enableFriends: true
     };
 })
 
-.controller('FindPasswdCtrl', function($scope) {
-    $scope.jump = function(url) {
-            window.location = url;
+//function inputFieldCheck(userInfo) {
+//    if (userInfo.username == null || userInfo.username == undefined || userInfo.username == ""){
+//        return "validUsername";
+//    }
+//    if (userInfo.password == null || userInfo.password == undefined || userInfo.password == ""){
+//        return "validPassword";     
+//    }
+//    return;
+//};
+.controller('SigninCtrl', function ($scope, Signin, httpService) {
+    $scope.info = {
+        mobile: "",
+        encrypted_password: "",
+        reencrypted_password: ""
     };
-//    $scope.username = 'wangaxing';
-//  $scope.settings = {
-//    enableFriends: true
-//  };
-})
+    $scope.showerror = false;
+    $scope.submit = function () {
+        //        $scope.formData = {};
+        var info = $scope.info;
+        var checkRet = Signin.checkFiled(info);
+        //        var checkRet = inputFieldCheck(info);
+        if (checkRet != null) {//==null验证通过
+            var tipsDom = document.getElementById("showerror");
+            tipsDom.innerHTML = checkRet;
+            $scope.showerror = true;
+            return;
+        }
+        var serviceRet = httpService.posthttp(info).then(function (resp) {
+            var info = 'info';
+            if (resp.data.data == "Login succ!") {
+                alert("注册成功，为您跳转至登录页面！");
+                window.location = "#/login";
+            }
+            //响应成功时调用，resp是一个响应对象
+        });
 
-.controller('ResetPasswdCtrl', function($scope, $http, $stateParams) {
-    $scope.jump = function(url) {
-            window.location = url;
+
+    }
+    $scope.jump = function (url) {
+        window.location = url;
     };
-    var url = $stateParams.from; 
-//    alert(url);
-//    $scope.username = 'wangaxing';
-//  $scope.settings = {
-//    enableFriends: true
-//  };
 })
 
-
-
-.controller('ShowProductCtrl', function($scope) {
-    $scope.jump = function(url) {
-            window.location = url;
+.controller('FindPasswdCtrl', function ($scope) {
+    $scope.jump = function (url) {
+        window.location = url;
     };
-//    alert('www');
-//    $scope.username = 'wangaxing';
-//  $scope.settings = {
-//    enableFriends: true
-//  };
-})
-.controller('ZhuCtrl', function($scope) {
-    var sss = $scope.myVar;
-    $scope.myVar = true;
-//    alert('www');
-//    $scope.username = 'wangaxing';
-//  $scope.settings = {
-//    enableFriends: true
-//  };
+    //    $scope.username = 'wangaxing';
+    //  $scope.settings = {
+    //    enableFriends: true
+    //  };
 })
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chatss = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+.controller('ResetPasswdCtrl', function ($scope, $http, $stateParams) {
+    $scope.jump = function (url) {
+        window.location = url;
+    };
+    var url = $stateParams.from;
+    //    alert(url);
+    //    $scope.username = 'wangaxing';
+    //  $scope.settings = {
+    //    enableFriends: true
+    //  };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+
+
+.controller('ShowProductCtrl', function ($scope) {
+        $scope.jump = function (url) {
+            window.location = url;
+        };
+        //    alert('www');
+        //    $scope.username = 'wangaxing';
+        //  $scope.settings = {
+        //    enableFriends: true
+        //  };
+    })
+    .controller('ZhuCtrl', function ($scope) {
+        var sss = $scope.myVar;
+        $scope.myVar = true;
+        //    alert('www');
+        //    $scope.username = 'wangaxing';
+        //  $scope.settings = {
+        //    enableFriends: true
+        //  };
+    })
+
+.controller('ChatsCtrl', function ($scope, Chats) {
+    // With the new view caching in Ionic, Controllers are only called
+    // when they are recreated or on app start, instead of every page change.
+    // To listen for when this page is active (for example, to refresh data),
+    // listen for the $ionicView.enter event:
+    //
+    //$scope.$on('$ionicView.enter', function(e) {
+    //});
+
+    $scope.chatss = Chats.all();
+    $scope.remove = function (chat) {
+        Chats.remove(chat);
+    };
 })
 
-.controller('AccountCtrl', function($scope) {
-//    $scope.jump = function(url) {
-//            window.location = url;
-//    };
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
+    $scope.chat = Chats.get($stateParams.chatId);
+})
+
+.controller('AccountCtrl', function ($scope) {
+    //    $scope.jump = function(url) {
+    //            window.location = url;
+    //    };
+    $scope.settings = {
+        enableFriends: true
+    };
 });
-
