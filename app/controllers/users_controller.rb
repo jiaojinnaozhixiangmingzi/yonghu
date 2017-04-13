@@ -29,10 +29,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
-        render :json => {:data => "succ"}.to_json
+        format.json { render :json => {:data => "succ"}.to_json}
       else
         format.html { render :new }
-        render :json => {:data => "fail"}.to_json
+        format.json { render :json => {:data => "fail"}.to_json }
       end
     end
   end
