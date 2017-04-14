@@ -1,9 +1,18 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function ($scope) {
+.controller('DashCtrl', function ($scope, httpServicePost) {
     $scope.jump = function (url) {
         window.location = url;
     };
+    var serviceRet = httpServicePost.gethttp('/products.json').then(function (resp) {
+        if (resp.data.data == "Login succ") {
+            alert("登录成功");
+            //                $rootScope.userid = resp.data.data[0].id;
+            window.location = "#/tab/dash";
+        }
+        //响应成功时调用，resp是一个响应对象
+    });
+
 })
 
 //用户登录控制
@@ -113,6 +122,8 @@ angular.module('starter.controllers', [])
             if (resp.data.data == "Retset succ") {
                 alert("修改密码成功！");
                 window.location = "#/tab/account";
+            } else {
+                alert("修改密码失败，您输入的旧密码有误！");
             }
         });
 
@@ -125,10 +136,26 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('ShowProductCtrl', function ($scope) {
+.controller('ShowProductCtrl', function ($scope, httpServicePost) {
         $scope.jump = function (url) {
             window.location = url;
         };
+    var serviceRet = httpServicePost.gethttp('/categories.json').then(function (resp) {
+        if (resp.data != null) {
+            $scope.data = resp.data;
+            //                $rootScope.userid = resp.data.data[0].id;
+            window.location = "#/tab/dash";
+        }
+        //响应成功时调用，resp是一个响应对象
+    });
+    
+    $scope.changeCate = function (obj) {
+        var info = "info";
+    }
+    $scope.isCurrent = function(index){
+        $scope.bg = [];
+        $scope.bg[index] = 'current';
+    }
         //    alert('www');
         //    $scope.username = 'wangaxing';
         //  $scope.settings = {
