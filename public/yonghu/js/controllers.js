@@ -59,6 +59,29 @@ angular.module('starter.controllers', [])
     };
 
     $scope.showerror = false;
+
+    $scope.sendMa = function () {
+
+        var info = $scope.info;
+        var userinfo = {
+            "mobile": info.mobile,
+        };
+        var checkRet = Signin.checkFiled(info);
+        if (userinfo.mobile == null) { //==null验证不通过
+            var tipsDom = document.getElementById("showerror");
+            tipsDom.innerHTML = "您还未输入邮箱账号！";
+            $scope.showerror = true;
+            return;
+        }
+        var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/registeEmail.json').then(function (resp) {
+            if (resp.data.data == "Send succ") {
+                alert("验证码发送成功，请在有效期内激活，否则验证码失效！");
+                //                window.location = "#/login";
+            } else {
+                alert("您输入的邮箱账号已被使用，请使用其他账号注册！");
+            }
+        });
+    }
     $scope.submit = function () {
         var info = $scope.info;
         var userinfo = {
@@ -140,43 +163,59 @@ angular.module('starter.controllers', [])
         $scope.jump = function (url) {
             window.location = url;
         };
-    var serviceRet = httpServicePost.gethttp('/categories.json').then(function (resp) {
-        if (resp.data != null) {
-            $scope.data = resp.data;
-            //                $rootScope.userid = resp.data.data[0].id;
-//            window.location = "#/tab/dash";
+        var datainfo = {
+            "category_id": "1"
+        };
+        var serviceRet1 = httpServicePost.posthttp(datainfo, '/products/8/getByCategory.json').then(function (response) {
+            if (response.data != null) {
+
+
+                var productdata = response.data.data;
+                console.log(productdata);
+                var mock = [{
+                    name: "衬衫",
+                    price: "19"
+                        }, {
+                    name: "棉衣",
+                    price: "20"
+                        }, {
+                    name: "羽绒服",
+                    price: "80"
+                        }];
+                console.log(mock);
+                $scope.products = productdata;
+            }
+            //响应成功时调用，resp是一个响应对象
+        });
+        var serviceRet = httpServicePost.gethttp('/categories.json').then(function (resp) {
+            if (resp.data != null) {
+
+                $scope.data = resp.data;
+                //                $rootScope.userid = resp.data.data[0].id;
+                //            window.location = "#/tab/dash";
+            }
+            //响应成功时调用，resp是一个响应对象
+        });
+        $scope.changeCate = function (obj) {
+            var info = "info";
         }
-        //响应成功时调用，resp是一个响应对象
-    });
-    $scope.changeCate = function (obj) {
-        var info = "info";
-    }
-    var serviceRet = httpServicePost.gethttp('/products/1/getByCategory.json').then(function (resp) {
-        if (resp.data != null) {
-            $scope.products = [{name: "衬衫",price: "19"},{name: "棉衣",price: "20"},{name: "羽绒服",price: "80"}];
-            //                $rootScope.userid = resp.data.data[0].id;
-//            window.location = "#/tab/dash";
+
+
+        $scope.isCurrent = function (index) {
+            $scope.bg = [];
+            $scope.bg[index] = 'current';
+            index += 1;
+            var data = {
+                "category_id": index
+            };
+            var serviceRet = httpServicePost.posthttp(data, '/products/8/getByCategory.json').then(function (resp) {
+                if (resp.data != null) {
+                    $scope.products = resp.data.data;
+                    //                $rootScope.userid = resp.data.data[0].id;
+                }
+                //响应成功时调用，resp是一个响应对象
+            });
         }
-        //响应成功时调用，resp是一个响应对象
-    });
-    $scope.isCurrent = function(index){
-        $scope.bg = [];
-        $scope.bg[index] = 'current';
-        index += 1;
-        var serviceRet = httpServicePost.gethttp('/products/'+index+'/getByCategory.json').then(function (resp) {
-        if (resp.data != null) {
-            $scope.products = [{name: "衬衫",price: "19"},{name: "棉衣",price: "20"},{name: "羽绒服",price: "80"}];
-            //                $rootScope.userid = resp.data.data[0].id;
-//            window.location = "#/tab/dash";
-        }
-        //响应成功时调用，resp是一个响应对象
-    });
-    }
-        //    alert('www');
-        //    $scope.username = 'wangaxing';
-        //  $scope.settings = {
-        //    enableFriends: true
-        //  };
     })
     .controller('ZhuCtrl', function ($scope) {
         var sss = $scope.myVar;

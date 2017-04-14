@@ -169,7 +169,7 @@ angular.module('starter.services', [])
             return promise;
         },
         gethttp: function (url) {
-            var info = info;
+//            var info = info;
             var promise = $http({
                 method: 'GET',
                 url: url,
