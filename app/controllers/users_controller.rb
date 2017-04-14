@@ -69,6 +69,7 @@ class UsersController < ApplicationController
         format.json { render :json => {:data => "Set failed"}.to_json }
       else
         first = @user[0]
+        session['mobile'] = first.mobile
         first.update_attributes(:encrypted_password => params[:encrypted_password])
         format.json { render :json => {:data => "Set succ "}.to_json }
       end
