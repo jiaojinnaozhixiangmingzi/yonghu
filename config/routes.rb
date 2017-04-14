@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     member do 
       post :login
       post :reset
-      post :email
+      post :loginEmail
     end
   end
 

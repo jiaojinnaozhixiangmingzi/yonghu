@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :json => {:data => "succ"}.to_json}
+        format.json { render :json => {:data => "succ"}.to_json }
       else
         format.html { render :new }
         format.json { render :json => {:data => "fail"}.to_json }
@@ -69,7 +69,7 @@ class UsersController < ApplicationController
         format.json { render :json => {:data => "Login failed"}.to_json }
       else
         first = @user[0]
-         session['mobile'] = first.mobile
+        session['mobile'] = first.mobile
         format.json { render :json => {:data => "Login succ"}.to_json }
       end
     end
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
   def reset
     mobile = session['mobile']
-    @user = User.where(["mobile = ? and encrypted_password = ?",mobile, params[:old_encrypted_password]])
+    @user = User.where(["mobile = ? and encrypted_password = ?", mobile, params[:old_encrypted_password]])
     respond_to do |format|
       if @user.empty?
         format.json { render :json => {:data => "Reset failed"}.to_json }
@@ -89,13 +89,44 @@ class UsersController < ApplicationController
     end
   end
 
-  def email
-    recipient = '16126218@bjtu.edu.cn'
-    subject ="测试1"
-    message = "<p>htmlqwe邮件测试</p>"
+  def loginEmail
+    recipient = params[:mobile]
+    subject = "验证码"
+    message = rand(999999).to_s
     Emailer.contact(recipient, subject, message).deliver_now!
-    render :json => {:data => "Send succ!"}.to_json
-    # render :text=>'OK'
+
+    @user = User.new(:mobile => recipient)
+    @user.reset_password_token = message
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render :json => {:data => "Send succ"}.to_json }
+      else
+        format.html { render :new }
+        format.json { render :json => {:data => "Send fail"}.to_json }
+      end
+    end
+  end
+
+  def resetEmail
+    recipient = params[:mobile]
+    subject = "验证码"
+    message = rand(999999).to_s
+    Emailer.contact(recipient, subject, message).deliver_now!
+
+    @user = User.where(["mobile = ?",recipient])
+
+    respond_to do |format|
+      if @user.empty?
+        format.json { render :json => {:data => "Send failed"}.to_json }
+      else
+        first = @user[0]
+        first.update_attributes(:reset_password_token => message)
+        first.update_attributes(:reset_password_sent_at => Time.new)
+        format.json { render :json => {:data => "Send succ"}.to_json }
+      end
+    end
   end
 
   private
