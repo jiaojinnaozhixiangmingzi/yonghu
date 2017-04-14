@@ -155,6 +155,15 @@ angular.module('starter.controllers', [])
     $scope.isCurrent = function(index){
         $scope.bg = [];
         $scope.bg[index] = 'current';
+        
+        var serviceRet = httpServicePost.gethttp('/categories/'+index+'.json').then(function (resp) {
+        if (resp.data != null) {
+            $scope.data = resp.data;
+            //                $rootScope.userid = resp.data.data[0].id;
+            window.location = "#/tab/dash";
+        }
+        //响应成功时调用，resp是一个响应对象
+    });
     }
         //    alert('www');
         //    $scope.username = 'wangaxing';

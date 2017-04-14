@@ -54,48 +54,11 @@
 
             </div>
 -->
-            <div class="item button-bar" style="padding-left: 3px;padding-right: 3px;border-color: transparent;padding: 0px 5px 0px 5px;">
-                <a class="button" style="font-size: smaller;background: transparent;padding-left: 3%;padding-right: 3%;height: 150px;border-color: darkgray;border-width: 1px;" ng-click="jump('#/showProduct')"><img src="../img/ben.png" style="margin-top: 10%;width: 50%;height: 36%;max-height: 36%;">
-                    <p style="height: 20%;">单衬衫</p>
-                    <p>0张</p>
-                </a>
-                <a class="button" style="font-size: smaller;background: transparent;padding-left: 3%;padding-right: 3%;height: 150px;border-color: darkgray;border-width: 1px;" ng-click="jump('#/showProduct')"><img src="../img/ben.png" style="margin-top: 10%;width: 50%;height: 36%;max-height: 36%;">
-                    <p style="height: 20%;">单衬衫</p>
-                    <p>0张</p>
-                </a>
-                <a class="button" style="font-size: smaller;background: transparent;padding-left: 3%;padding-right: 3%;height: 150px;border-color: darkgray;border-width: 1px;" ng-click="jump('#/showProduct')"><img src="../img/ben.png" style="margin-top: 10%;width: 50%;height: 36%;max-height: 36%;">
-                    <p style="height: 20%;">单衬衫</p>
-                    <p>0张</p>
-                </a>
-            </div>
-            <div class="item button-bar" style="padding-left: 3px;padding-right: 3px;border-color: transparent;padding: 0px 5px 0px 5px;">
-                <a class="button" style="font-size: smaller;background: transparent;padding-left: 3%;padding-right: 3%;height: 150px;border-color: darkgray;border-width: 1px;" ng-click="jump('#/showProduct')"><img src="../img/ben.png" style="margin-top: 10%;width: 50%;height: 36%;max-height: 36%;">
-                    <p style="height: 20%;">单衬衫</p>
-                    <p>0张</p>
-                </a>
-                <a class="button" style="font-size: smaller;background: transparent;padding-left: 3%;padding-right: 3%;height: 150px;border-color: darkgray;border-width: 1px;" ng-click="jump('#/showProduct')"><img src="../img/ben.png" style="margin-top: 10%;width: 50%;height: 36%;max-height: 36%;">
-                    <p style="height: 20%;">单衬衫</p>
-                    <p>0张</p>
-                </a>
-                <a class="button" style="font-size: smaller;background: transparent;padding-left: 3%;padding-right: 3%;height: 150px;border-color: darkgray;border-width: 1px;" ng-click="jump('#/showProduct')"><img src="../img/ben.png" style="margin-top: 10%;width: 50%;height: 36%;max-height: 36%;">
-                    <p style="height: 20%;">单衬衫</p>
-                    <p>0张</p>
-                </a>
-            </div>
-            <div class="item button-bar" style="padding-left: 3px;padding-right: 3px;border-color: transparent;padding: 0px 5px 0px 5px;">
-                <a class="button" style="font-size: smaller;background: transparent;padding-left: 3%;padding-right: 3%;height: 150px;border-color: darkgray;border-width: 1px;" ng-click="jump('#/showProduct')"><img src="../img/ben.png" style="margin-top: 10%;width: 50%;height: 36%;max-height: 36%;">
-                    <p style="height: 20%;">单衬衫</p>
-                    <p>0张</p>
-                </a>
-                <a class="button" style="font-size: smaller;background: transparent;padding-left: 3%;padding-right: 3%;height: 150px;border-color: darkgray;border-width: 1px;" ng-click="jump('#/showProduct')"><img src="../img/ben.png" style="margin-top: 10%;width: 50%;height: 36%;max-height: 36%;">
-                    <p style="height: 20%;">单衬衫</p>
-                    <p>0张</p>
-                </a>
-                <a class="button" style="font-size: smaller;background: transparent;padding-left: 3%;padding-right: 3%;height: 150px;border-color: darkgray;border-width: 1px;" ng-click="jump('#/showProduct')"><img src="../img/ben.png" style="margin-top: 10%;width: 50%;height: 36%;max-height: 36%;">
-                    <p style="height: 20%;">单衬衫</p>
-                    <p>0张</p>
-                </a>
-            </div>
+            <a class="button" ng-repeat="product in products" style="font-size: smaller;background: transparent;width: 33%;padding-left: 3%;padding-right: 3%;height: 150px;border-color: darkgray;border-width: 1px;" ng-click="jump('#/showProduct')"><img src="../img/ben.png" style="margin-top: 10%;width: 50%;height: 36%;max-height: 36%;">
+                <p style="height: 20%;">{{product.name}}</p>
+                <p>{{product.price}}</p>
+            </a>
+
             <div class="item" style="height: 134px;background: transparent;color: black;text-align: -webkit-center;padding-left: 5px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;margin-bottom: 13%;margin-left: 10%;margin-right: 10%;margin-top: 3%;">
                 <div class="item" style="height: 124px;background: #fafafa;color: black;text-align: -webkit-center;min-height: 124px;">
                     青岛用户 136***6666
