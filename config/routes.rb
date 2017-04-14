@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post :reset
       post :loginEmail
       post :resetEmail
+      post :setPassword
     end
   end
 

@@ -61,6 +61,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def setPassword
+    @user = User.where(["mobile = ? and reset_password_token = ? and reset_password_sent_at >= ?", params[:mobile],
+                        params[:password_token], Time.new-1800])
+    respond_to do |format|
+      if @user.empty?
+        format.json { render :json => {:data => "Reset failed"}.to_json }
+      else
+        first = @user[0]
+        first.update_attributes(:encrypted_password => params[:encrypted_password])
+        format.json { render :json => {:data => "Retset succ "}.to_json }
+      end
+    end
+  end
+
   def login
     @user = User.where(["mobile = ? and encrypted_password = ?", params[:mobile], params[:encrypted_password]])
 
