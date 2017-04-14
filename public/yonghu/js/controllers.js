@@ -144,23 +144,30 @@ angular.module('starter.controllers', [])
         if (resp.data != null) {
             $scope.data = resp.data;
             //                $rootScope.userid = resp.data.data[0].id;
-            window.location = "#/tab/dash";
+//            window.location = "#/tab/dash";
         }
         //响应成功时调用，resp是一个响应对象
     });
-    
     $scope.changeCate = function (obj) {
         var info = "info";
     }
+    var serviceRet = httpServicePost.gethttp('/products/1/getByCategory.json').then(function (resp) {
+        if (resp.data != null) {
+            $scope.products = [{name: "衬衫",price: "19"},{name: "棉衣",price: "20"},{name: "羽绒服",price: "80"}];
+            //                $rootScope.userid = resp.data.data[0].id;
+//            window.location = "#/tab/dash";
+        }
+        //响应成功时调用，resp是一个响应对象
+    });
     $scope.isCurrent = function(index){
         $scope.bg = [];
         $scope.bg[index] = 'current';
-        
-        var serviceRet = httpServicePost.gethttp('/categories/'+index+'.json').then(function (resp) {
+        index += 1;
+        var serviceRet = httpServicePost.gethttp('/products/'+index+'/getByCategory.json').then(function (resp) {
         if (resp.data != null) {
-            $scope.data = resp.data;
+            $scope.products = [{name: "衬衫",price: "19"},{name: "棉衣",price: "20"},{name: "羽绒服",price: "80"}];
             //                $rootScope.userid = resp.data.data[0].id;
-            window.location = "#/tab/dash";
+//            window.location = "#/tab/dash";
         }
         //响应成功时调用，resp是一个响应对象
     });
