@@ -12275,3 +12275,73 @@ Processing by UsersController#setPassword as JSON
 Completed 200 OK in 36ms (Views: 0.1ms | ActiveRecord: 7.4ms)
 
 
+Started POST "/users/8/registerEmail.json" for 127.0.0.1 at 2017-04-14 23:55:05 +0800
+Processing by UsersController#registerEmail as JSON
+  Parameters: {"mobile"=>"16126218@bjtu.edu.cn", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 133.9ms
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.1ms)[0m  [1m[32mINSERT INTO `users` (`mobile`, `reset_password_token`, `reset_password_sent_at`, `created_at`, `updated_at`) VALUES ('16126218@bjtu.edu.cn', '626408', '2017-04-14 15:55:06', '2017-04-14 15:55:06', '2017-04-14 15:55:06')[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 516ms (ActiveRecord: 6.2ms)
+
+
+  
+ActiveRecord::RecordNotUnique (Mysql2::Error: Duplicate entry '16126218@bjtu.edu.cn' for key 'index_users_on_mobile': INSERT INTO `users` (`mobile`, `reset_password_token`, `reset_password_sent_at`, `created_at`, `updated_at`) VALUES ('16126218@bjtu.edu.cn', '626408', '2017-04-14 15:55:06', '2017-04-14 15:55:06', '2017-04-14 15:55:06')):
+  
+app/controllers/users_controller.rb:117:in `block in registerEmail'
+app/controllers/users_controller.rb:116:in `registerEmail'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.2ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (69.8ms)
+Started POST "/users/8/registerEmail.json" for 127.0.0.1 at 2017-04-14 23:55:58 +0800
+Processing by UsersController#registerEmail as JSON
+  Parameters: {"mobile"=>"16126218@bjtu.edu.cn", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 2.2ms
+Completed 500 Internal Server Error in 30013ms (ActiveRecord: 0.0ms)
+
+
+  
+Net::OpenTimeout (execution expired):
+  
+app/controllers/users_controller.rb:110:in `registerEmail'
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (24.6ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendering /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/Kafukaaa/.rvm/gems/ruby-2.2.2/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (92.5ms)
+Started POST "/users/8/registerEmail.json" for 127.0.0.1 at 2017-04-14 23:58:10 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#registerEmail as JSON
+  Parameters: {"mobile"=>"16126218@bjtu.edu.cn", "id"=>"8"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Emailer#contact: processed outbound mail in 149.9ms
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.4ms)[0m  [1m[32mINSERT INTO `users` (`mobile`, `reset_password_token`, `reset_password_sent_at`, `created_at`, `updated_at`) VALUES ('16126218@bjtu.edu.cn', '924750', '2017-04-14 15:58:11', '2017-04-14 15:58:11', '2017-04-14 15:58:11')[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 475ms (Views: 0.1ms | ActiveRecord: 5.9ms)
+
+
+Started POST "/users/8/setPassword.json" for 127.0.0.1 at 2017-04-14 23:59:14 +0800
+Processing by UsersController#setPassword as JSON
+  Parameters: {"mobile"=>"16126218@bjtu.edu.cn", "password_token"=>"[FILTERED]", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE (mobile = '16126218@bjtu.edu.cn' and reset_password_token = '924750' and reset_password_sent_at >= '2017-04-14 15:29:14.963883')[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE (mobile = '16126218@bjtu.edu.cn' and reset_password_token = '924750' and reset_password_sent_at >= '2017-04-14 15:29:14.963883')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.6ms)[0m  [1m[33mUPDATE `users` SET `encrypted_password` = '123456', `updated_at` = '2017-04-14 15:59:14' WHERE `users`.`id` = 18[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 17ms (Views: 0.3ms | ActiveRecord: 4.3ms)
+
+

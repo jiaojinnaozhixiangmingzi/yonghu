@@ -66,11 +66,11 @@ class UsersController < ApplicationController
                         params[:password_token], Time.new-1800])
     respond_to do |format|
       if @user.empty?
-        format.json { render :json => {:data => "Reset failed"}.to_json }
+        format.json { render :json => {:data => "Set failed"}.to_json }
       else
         first = @user[0]
         first.update_attributes(:encrypted_password => params[:encrypted_password])
-        format.json { render :json => {:data => "Retset succ "}.to_json }
+        format.json { render :json => {:data => "Set succ "}.to_json }
       end
     end
   end
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def loginEmail
+  def registerEmail
     recipient = params[:mobile]
     subject = "验证码"
     message = rand(999999).to_s
