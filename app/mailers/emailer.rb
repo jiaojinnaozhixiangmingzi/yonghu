@@ -1,6 +1,6 @@
 class Emailer < ActionMailer::Base
 
-  default from: '18811442527@163.com'
+  default from: '18600547596@163.com'
 
   def contact(recipient, subject, message)
     mail(:to=>recipient, :subject=>subject) do |format|

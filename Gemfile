@@ -41,6 +41,7 @@ gem 'will_paginate', github: 'jonatack/will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'rack-cors', '~> 0.3.1'
 gem 'devise'
+gem 'email'
 
 gem "select2-rails"
 gem 'rest-client'

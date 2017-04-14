@@ -63,12 +63,7 @@ class UsersController < ApplicationController
 
   def login
     @user = User.where(["mobile = ? and encrypted_password = ?", params[:mobile], params[:encrypted_password]])
-    recipient = '18600547596@163.com'
-    subject ="测试"
-    message = "<p>html邮件测试</p>"
-    # Emailer.contact(recipient, subject, message).deliver
-    # render :json => {:data => "Send succ!"}.to_json
-    #  render :text=>'OK'
+
     respond_to do |format|
       if @user.empty?
         format.json { render :json => {:data => "Login failed"}.to_json }
@@ -92,6 +87,15 @@ class UsersController < ApplicationController
         format.json { render :json => {:data => "Retset succ"}.to_json }
       end
     end
+  end
+
+  def email
+    recipient = '16126218@bjtu.edu.cn'
+    subject ="测试1"
+    message = "<p>htmlqwe邮件测试</p>"
+    Emailer.contact(recipient, subject, message).deliver_now!
+    render :json => {:data => "Send succ!"}.to_json
+    # render :text=>'OK'
   end
 
   private
