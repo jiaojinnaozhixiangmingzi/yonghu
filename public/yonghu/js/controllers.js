@@ -27,9 +27,9 @@ angular.module('starter.controllers', [])
             return;
         }
         var serviceRet = httpServicePost.posthttp(info, '/users/8/login.json').then(function (resp) {
-            if (resp.data.data == "Login succ!") {
+            if (resp.data.data == "Login succ") {
                 alert("登录成功");
-                userid = '186';
+                $rootScope.userid = resp.data.data[0].id;
                 window.location = "#/tab/dash";
             }
             //响应成功时调用，resp是一个响应对象
@@ -99,8 +99,8 @@ angular.module('starter.controllers', [])
         var id = $rootScope.userid;
         var info = $scope.info;
         var userinfo = {
-            "user[mobile]": info.mobile,
-            "user[encrypted_password]": info.encrypted_password,
+            "old_encrypted_password": info.oldencrypted_password,
+            "new_encrypted_password": info.newencrypted_password,
         };
         var checkRet = ResetPassword.checkFiled(info);
         if (checkRet != null) { //==null验证通过
@@ -109,10 +109,10 @@ angular.module('starter.controllers', [])
             $scope.showerror = true;
             return;
         }
-        var serviceRet = httpServicePost.posthttp(userinfo, '/users.json').then(function (resp) {
-            if (resp.data.data == "succ") {
-                alert("注册成功，为您跳转至登录页面！");
-                window.location = "#/login";
+        var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/reset.json').then(function (resp) {
+            if (resp.data.data == "Retset succ") {
+                alert("修改密码成功！");
+                window.location = "#/tab/account";
             }
         });
 
