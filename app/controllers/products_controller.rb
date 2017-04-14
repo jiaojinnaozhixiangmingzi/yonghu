@@ -62,6 +62,17 @@ class ProductsController < ApplicationController
     end
   end
 
+  def getByCategory
+    @product = Product.where(["category_id = ?", params[:category_id]])
+    respond_to do |format|
+      if @product.empty?
+        format.json { render :json => {:data => "Get failed"}.to_json }
+      else
+        format.json { render :json => {:data => @product}.to_json }
+      end
+    end
+  end
+
   private
     def set_category
       @category = Category.find(params[:category_id])

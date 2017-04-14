@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post :login
       post :reset
       post :loginEmail
+      post :resetEmail
     end
   end
 
@@ -21,7 +22,11 @@ Rails.application.routes.draw do
   end
 
   resources :orders
-  resources :products
+  resources :products do
+    member do
+      post :getByCategory
+    end
+  end
 
   get '/home/user', to: 'home#user', as: 'user_home'
 

@@ -97,6 +97,7 @@ class UsersController < ApplicationController
 
     @user = User.new(:mobile => recipient)
     @user.reset_password_token = message
+    @user.reset_password_sent_at = Time.new
 
     respond_to do |format|
       if @user.save
