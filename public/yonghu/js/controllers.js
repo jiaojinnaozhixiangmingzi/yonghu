@@ -113,10 +113,66 @@ angular.module('starter.controllers', [])
     };
 })
 
-.controller('FindPasswdCtrl', function ($scope) {
+.controller('FindPasswdCtrl', function ($scope, FindpwdCtrl, httpServicePost) {
+    $scope.info = {
+        mobile: "",
+        encrypted_password: "",
+        reencrypted_password: "",
+        password_token: "",
+    };
     $scope.jump = function (url) {
         window.location = url;
     };
+    $scope.showerror = false;
+    $scope.showInput = false;
+    $scope.sendMa = function () {
+
+        var info = $scope.info;
+        var userinfo = {
+            "mobile": info.mobile,
+        };
+        var checkRet = FindpwdCtrl.checkFiled(info);
+        if (userinfo.mobile == null) { //==null验证不通过
+            var tipsDom = document.getElementById("showerror");
+            tipsDom.innerHTML = "您还未输入邮箱账号！";
+            $scope.showerror = true;
+            return;
+        }
+        var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/resetEmail.json').then(function (resp) {
+            if (resp.data.data == "Send succ") {
+                alert("验证码发送成功，请在有效期内激活，否则验证码失效！");
+                //                window.location = "#/login";
+                $scope.showInput = true;
+            } else {
+                alert("您输入的邮箱账号已被使用，请使用其他账号注册！");
+            }
+        });
+    }
+    $scope.submit = function () {
+        var info = $scope.info;
+        var userinfo = {
+            "mobile": info.mobile,
+            "encrypted_password": info.encrypted_password,
+            "password_token": info.password_token
+        };
+        var checkRet = FindpwdCtrl.checkFiled(info);
+        if (checkRet != null) { //==null验证通过
+            var tipsDom = document.getElementById("showerror");
+            tipsDom.innerHTML = checkRet;
+            $scope.showerror = true;
+            return;
+        }
+        var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/setPassword.json').then(function (resp) {
+            if (resp.data.data == "Set succ ") {
+                alert("修改密码成功，为您跳转至登录页面！");
+                window.location = "#/login";
+            }else{
+                alert("注册失败，检查您的token是否在有效期内！");
+            }
+        });
+
+
+    }
     //    $scope.username = 'wangaxing';
     //  $scope.settings = {
     //    enableFriends: true

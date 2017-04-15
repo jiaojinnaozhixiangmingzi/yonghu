@@ -4,31 +4,39 @@
             <h2 class="calm" ng-show="!hide">
                 最懂你的洗衣平台
             </h2>
-            <label class="item item-input" style="margin-top: 20%;text-align: center;" >
+            <label class="item item-input" style="margin-top: 20%;text-align: center;">
                 <input type="text" ng-model='info.mobile' placeholder="邮箱号">
             </label>
-            
+
             <div class="item item-input-inset">
                 <label class="item item-input" style="padding-top: 0px;padding-bottom: 0px;">
-                  <input type="text" ng-model='info.password_token' placeholder="输入验证码">
+                    <input type="text" ng-model='info.password_token' placeholder="输入验证码">
                 </label>
-                <input type="button" style="float: right;margin-left: auto;" class="button button-small" value="发送验证码"/>
+                <input type="button" ng-click="sendMa()" style="float: right;margin-left: auto;" class="button button-small" value="发送验证码" />
+            </div>
+            <div ng-show="showInput">
+                <label class="item item-input" style="margin-top: 20%;text-align: center;">
+                    <input type="password" ng-model='info.encrypted_password' placeholder="密码">
+                </label>
+                <label class="item item-input" style="margin-top: 3%;text-align: center;">
+                    <input type="password" ng-model='info.reencrypted_password' placeholder="确认密码">
+                </label>
             </div>
             <div>
                 <button class="button button-clear button-calm" style="float: left;">
-                    
+
                 </button>
-<!--
+                <!--
                 <button class="button button-clear button-calm" style="float: right;" ng-click="jump('#/login')">
                     返回登录页面
                 </button>
 -->
             </div>
-            <h5 class="" style='margin-top: 20%;color:red;' ng-show="!hide">
+            <h5 class="" style='margin-top: 20%;color:red;' ng-show="showerror">
                 您输入的账号不存在，请重新输入
             </h5>
-            <input type="button" style='margin-top: 30%;width: 30%;' class=" button button-outline button-calm" value="提交" ng-click="jump('#/resetPasswd?from=find')">
+            <input type="button" style='margin-top: 30%;width: 30%;margin-left: -15%;' class=" button button-outline button-calm" value="提交" ng-click="submit()">
         </div>
-      
-  </ion-content>
+
+    </ion-content>
 </ion-view>
