@@ -55,7 +55,8 @@ angular.module('starter.controllers', [])
     $scope.info = {
         mobile: "",
         encrypted_password: "",
-        reencrypted_password: ""
+        reencrypted_password: "",
+        password_token: "",
     };
 
     $scope.showerror = false;
@@ -73,7 +74,7 @@ angular.module('starter.controllers', [])
             $scope.showerror = true;
             return;
         }
-        var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/registeEmail.json').then(function (resp) {
+        var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/registerEmail.json').then(function (resp) {
             if (resp.data.data == "Send succ") {
                 alert("验证码发送成功，请在有效期内激活，否则验证码失效！");
                 //                window.location = "#/login";
@@ -85,8 +86,9 @@ angular.module('starter.controllers', [])
     $scope.submit = function () {
         var info = $scope.info;
         var userinfo = {
-            "user[mobile]": info.mobile,
-            "user[encrypted_password]": info.encrypted_password,
+            "mobile": info.mobile,
+            "encrypted_password": info.encrypted_password,
+            "password_token": info.password_token
         };
         var checkRet = Signin.checkFiled(info);
         if (checkRet != null) { //==null验证通过
@@ -95,10 +97,12 @@ angular.module('starter.controllers', [])
             $scope.showerror = true;
             return;
         }
-        var serviceRet = httpServicePost.posthttp(userinfo, '/users.json').then(function (resp) {
-            if (resp.data.data == "succ") {
+        var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/setPassword.json').then(function (resp) {
+            if (resp.data.data == "Set succ ") {
                 alert("注册成功，为您跳转至登录页面！");
                 window.location = "#/login";
+            }else{
+                alert("注册失败，检查您的token是否在有效期内！");
             }
         });
 

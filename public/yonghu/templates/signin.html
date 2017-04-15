@@ -17,8 +17,8 @@
                 <input type="password" ng-model='info.reencrypted_password' placeholder="确认密码">
             </label>
             <div class="item item-input-inset">
-                <label class="item item-input" style="padding-top: 0px;padding-bottom: 0px;">
-                  <input type="text" placeholder="输入验证码">
+                <label class="item item-input"  style="padding-top: 0px;padding-bottom: 0px;">
+                  <input type="text" placeholder="输入验证码" ng-model='info.password_token'>
                 </label>
                 <input type="button" style="float: right;margin-left: auto;" ng-click="sendMa()" class="button button-small" value="发送验证码"/>
             </div>
