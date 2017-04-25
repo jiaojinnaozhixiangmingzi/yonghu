@@ -112,6 +112,38 @@ angular.module('starter.services', [])
             //    }
         };
     })
+    .factory('FindpwdCtrl', function () {
+        // Might use a resource here that returns a JSON array
+        return {
+            all: function () {
+                return chats;
+            },
+            checkFiled: function (userInfo) {
+                if (userInfo.mobile == null || userInfo.mobile == undefined || userInfo.mobile == "") {
+                    return "用户名格式错误，请重新输入！";
+                }
+                if (userInfo.encrypted_password == null || userInfo.encrypted_password == undefined || userInfo.encrypted_password == "") {
+                    return "密码格式错误，请重新输入！";
+                }
+                if (userInfo.reencrypted_password == null || userInfo.reencrypted_password == undefined || userInfo.reencrypted_password == "") {
+                    return "确认密码格式错误，请重新输入！";
+                }
+                if (userInfo.reencrypted_password != userInfo.encrypted_password) {
+                    return "您输入的两次密码不一致，请重新输入！";
+                }
+                return;
+                //      chats.splice(chats.indexOf(chat), 1);
+            },
+            //    get: function(chatId) {
+            //      for (var i = 0; i < chats.length; i++) {
+            //        if (chats[i].id === parseInt(chatId)) {
+            //          return chats[i];
+            //        }
+            //      }
+            //      return null;
+            //    }
+        };
+    })
     .factory('ResetPassword', function () {
         // Might use a resource here that returns a JSON array
         return {
@@ -169,7 +201,7 @@ angular.module('starter.services', [])
             return promise;
         },
         gethttp: function (url) {
-            var info = info;
+//            var info = info;
             var promise = $http({
                 method: 'GET',
                 url: url,
