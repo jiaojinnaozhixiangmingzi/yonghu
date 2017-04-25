@@ -62,6 +62,18 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def getByCity
+    @category = Category.where(["id in (SELECT categories_cities.category_id from categories_cities
+WHERE categories_cities.city_id = ?)", params[:cityId]])
+    respond_to do |format|
+      if @category.empty?
+        format.json { render :json => {:data => "Query failed"}.to_json }
+      else
+        format.json { render :json => {:data => @category}.to_json }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category

@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   resources :categories do 
     resources :products
+    collection do
+      get :getByCity
+    end
   end
 
   resources :addresses do 
