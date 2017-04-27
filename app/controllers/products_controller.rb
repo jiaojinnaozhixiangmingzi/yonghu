@@ -71,6 +71,19 @@ class ProductsController < ApplicationController
         format.json { render :json => {:data => @product}.to_json }
       end
     end
+    end
+
+  def getByCityAndCategory
+    @products = Product.select("products.id, products.name, products.logo, products.is_del, products.category_id,
+prices.price1, prices.price2, prices.price3, prices.price4, prices.price5, prices.price6").joins("left join prices on
+ prices.product_id = products.id").where(["category_id =?", params[:categoryId]])
+       respond_to do |format|
+      if @products.empty?
+        format.json { render :json => {:data => "Get failed"}.to_json }
+      else
+        format.json { render :json => {:data => @products}.to_json }
+      end
+    end
   end
 
   private

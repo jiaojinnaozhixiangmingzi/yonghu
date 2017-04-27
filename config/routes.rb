@@ -30,6 +30,9 @@ Rails.application.routes.draw do
     member do
       post :getByCategory
     end
+    collection do
+      get :getByCityAndCategory
+    end
   end
 
   get '/home/user', to: 'home#user', as: 'user_home'
