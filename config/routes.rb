@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :categories do 
     resources :products
     collection do
-      get :getByCity
+      post :getByCity
     end
   end
 
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
       post :getByCategory
     end
     collection do
-      get :getByCityAndCategory
+      post :getByCityAndCategory
     end
   end
 
