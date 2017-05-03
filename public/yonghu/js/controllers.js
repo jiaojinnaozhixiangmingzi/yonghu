@@ -251,10 +251,13 @@ angular.module('starter.controllers', [])
             }
             //响应成功时调用，resp是一个响应对象
         });
-        var serviceRet = httpServicePost.posthttp('/categories/getByCity?cityId=2').then(function (resp) {
+        var cityinfo = {
+            "cityId": "2"
+        };
+        var serviceRet = httpServicePost.posthttp(cityinfo, '/categories/getByCity.json').then(function (resp) {
             if (resp.data != null) {
 
-                $scope.data = resp.data;
+                $scope.data = resp.data.data;
                 //                $rootScope.userid = resp.data.data[0].id;
                 //            window.location = "#/tab/dash";
             }
