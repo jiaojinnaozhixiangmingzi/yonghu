@@ -251,7 +251,7 @@ angular.module('starter.controllers', [])
             }
             //响应成功时调用，resp是一个响应对象
         });
-        var serviceRet = httpServicePost.gethttp('/categories.json').then(function (resp) {
+        var serviceRet = httpServicePost.posthttp('/categories/getByCity?cityId=2').then(function (resp) {
             if (resp.data != null) {
 
                 $scope.data = resp.data;
