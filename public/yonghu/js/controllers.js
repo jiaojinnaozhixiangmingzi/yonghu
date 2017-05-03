@@ -244,6 +244,7 @@ angular.module('starter.controllers', [])
         var datainfo = {
             "category_id": "1"
         };
+        //这是刚进入此页面时的展示信息
         var serviceRet1 = httpServicePost.posthttp(datainfo, '/products/8/getByCategory.json').then(function (response) {
             if (response.data != null) {
                 var productdata = response.data.data;
