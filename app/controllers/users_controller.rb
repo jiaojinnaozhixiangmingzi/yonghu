@@ -85,7 +85,7 @@ class UsersController < ApplicationController
       else
         first = @user[0]
         session['mobile'] = first.mobile
-        format.json { render :json => {:data => "Login succ"}.to_json }
+        format.json { render :json => {:data => "Login succ",:msg =>first }.to_json }
       end
     end
   end
