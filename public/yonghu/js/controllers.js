@@ -7,7 +7,7 @@ angular.module('starter.controllers', [])
     var serviceRet = httpServicePost.gethttp('/products.json').then(function (resp) {
         if (resp.data.data == "Login succ") {
             alert("登录成功");
-//        $rootScope.userid = resp.data.data[0].id;
+            //        $rootScope.userid = resp.data.data[0].id;
             window.location = "#/tab/dash";
         }
         //响应成功时调用，resp是一个响应对象
@@ -223,14 +223,18 @@ angular.module('starter.controllers', [])
 
 
 .controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope, CartData) {
-        $scope.totalprice = CartData.cartData.totalPrice;
-    
-        var serviceRet = httpServicePost.posthttp(CartData.cartData, '/products/getByCityAndCategory.json').then(function (resp) {
-                        if (resp.data != null) {
-                            alert("下单成功！");
-                        }
-                    });
+        $scope.totalprice = CartData.cartData.total_price;
+
+
+        $scope.submitForm = function () {
+            var serviceRet = httpServicePost.posthttp(CartData.cartData, 'http://localhost:3001/orders/createOrder').then(function (resp) {
+                if (resp.data != null) {
+                    alert("下单成功！");
+                }
+            });
+        }
     })
+
 .controller('ShowProductCtrl', function ($scope, httpServicePost, $rootScope, CartData) {
         $scope.jump = function (url) {
             window.location = url;
@@ -376,10 +380,14 @@ angular.module('starter.controllers', [])
             }
             var tmpinfo = CartData.cartData;
             CartData.cartData = {
-                "userid": $rootScope.userid,
-                "categoryid,": categoryId,
-                "addressid": 1,
-                "totalPrice": $rootScope.totalPrice
+                "user_id": $rootScope.userid,
+                "category_id": categoryId,
+                "address_id": 1,
+                "total_price": $rootScope.totalPrice,
+                "status": 0,
+                "courier_status": 0,
+                "voucher_status": 0,
+                "cleanning_status": 0
             }
             $scope.showtotalPrice = $rootScope.totalPrice;
             $scope.changeClass = 'yuyue1';
