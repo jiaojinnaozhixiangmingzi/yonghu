@@ -13059,3 +13059,12 @@ WHERE categories_cities.city_id = '2'))[0m
 Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 1.6ms)
 
 
+Started POST "/users/8/login.json" for 127.0.0.1 at 2017-05-03 22:06:21 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#login as JSON
+  Parameters: {"mobile"=>"186", "encrypted_password"=>"[FILTERED]", "id"=>"8"}
+  [1m[35m (4.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE (mobile = '186' and encrypted_password = '111111')[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE (mobile = '186' and encrypted_password = '111111')[0m
+Completed 200 OK in 32ms (Views: 0.1ms | ActiveRecord: 5.7ms)
+
+
