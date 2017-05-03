@@ -7,7 +7,7 @@ angular.module('starter.controllers', [])
     var serviceRet = httpServicePost.gethttp('/products.json').then(function (resp) {
         if (resp.data.data == "Login succ") {
             alert("登录成功");
-            //                $rootScope.userid = resp.data.data[0].id;
+//        $rootScope.userid = resp.data.data[0].id;
             window.location = "#/tab/dash";
         }
         //响应成功时调用，resp是一个响应对象
@@ -38,7 +38,7 @@ angular.module('starter.controllers', [])
         var serviceRet = httpServicePost.posthttp(info, '/users/8/login.json').then(function (resp) {
             if (resp.data.data == "Login succ") {
                 alert("登录成功");
-                $rootScope.userid = resp.data.data[0].id;
+                $rootScope.userid = $scope.info.mobile;
                 window.location = "#/tab/dash";
             } else {
                 alert("账号密码不匹配！");
@@ -222,33 +222,67 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope) {
-        $scope.totalprice = $rootScope.totalPrice;
+.controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope, CartData) {
+        $scope.totalprice = CartData.cartData.totalPrice;
+    
+        var serviceRet = httpServicePost.posthttp(CartData.cartData, '/products/getByCityAndCategory.json').then(function (resp) {
+                        if (resp.data != null) {
+                            alert("下单成功！");
+                        }
+                    });
     })
-    .controller('ShowProductCtrl', function ($scope, httpServicePost, $rootScope) {
+.controller('ShowProductCtrl', function ($scope, httpServicePost, $rootScope, CartData) {
         $scope.jump = function (url) {
             window.location = url;
         };
         $scope.showtotalPrice = 0;
         $scope.maimaimai = true;
         $scope.changeClass = 'yuyue0';
-        //        alert($rootScope.totalPrice);
-        //        if ($rootScope.totalPrice > 0) {
-        //            $scope.maimaimai = false;
-        //            $scope.showtotalPrice = '共计' + $rootScope.totalPrice + '元';
-        //
-        //        } else {
-        //            $scope.maimaimai = true;
-        //
-        //        }
-        var datainfo = {
-            "category_id": "1"
+        var data = {
+            "categoryId": 1
         };
-        //这是刚进入此页面时的展示信息
-        var serviceRet1 = httpServicePost.posthttp(datainfo, '/products/8/getByCategory.json').then(function (response) {
-            if (response.data != null) {
-                var productdata = response.data.data;
-                $scope.products = productdata;
+        var jsonpData = {
+            "categoryId": 1,
+            "cityId": "1"
+        }
+        var priceLevel;
+        var serviceRet = httpServicePost.posthttp(jsonpData, 'http://localhost:3001/price_rules/getPriceRules.json').then(function (resp) {
+            if (resp.data != null) {
+                priceLevel = resp.data.data[0].grade;
+
+                var serviceRet = httpServicePost.posthttp(data, '/products/getByCityAndCategory.json').then(function (resp) {
+                    if (resp.data != null) {
+                        var products = resp.data.data;
+                        for (var i = 0; i < products.length; i++) {
+                            var priceruleVar = '';
+                            switch (priceLevel) {
+                            case 1:
+                                products[i].price1 = products[i].price1;
+                                break;
+                            case 2:
+                                products[i].price1 = products[i].price2;
+                                break;
+                            case 3:
+                                products[i].price1 = products[i].price3;
+                                break;
+                            case 4:
+                                products[i].price1 = products[i].price4;
+                                break;
+                            case 5:
+                                products[i].price1 = products[i].price5;
+                                break;
+                            case 6:
+                                products[i].price1 = products[i].price6;
+                                break;
+                            };
+                        }
+                        $scope.products = products;
+                        //                $rootScope.userid = resp.data.data[0].id;
+                    }
+                    //响应成功时调用，resp是一个响应对象
+                });
+                //                    $scope.products = resp.data.data;
+                //                $rootScope.userid = resp.data.data[0].id;
             }
             //响应成功时调用，resp是一个响应对象
         });
@@ -259,6 +293,7 @@ angular.module('starter.controllers', [])
             if (resp.data != null) {
 
                 $scope.data = resp.data.data;
+
                 //                $rootScope.userid = resp.data.data[0].id;
                 //            window.location = "#/tab/dash";
             }
@@ -272,15 +307,54 @@ angular.module('starter.controllers', [])
             $scope.bg[index] = 'current';
             index += 1;
             var data = {
-                "category_id": index
+                "categoryId": index
             };
-            var serviceRet = httpServicePost.posthttp(data, '/products/8/getByCategory.json').then(function (resp) {
+            var jsonpData = {
+                "categoryId": index,
+                "cityId": "1"
+            }
+            var priceLevel;
+            var serviceRet = httpServicePost.posthttp(jsonpData, 'http://localhost:3001/price_rules/getPriceRules.json').then(function (resp) {
                 if (resp.data != null) {
-                    $scope.products = resp.data.data;
+                    priceLevel = resp.data.data[0].grade;
+
+                    var serviceRet = httpServicePost.posthttp(data, '/products/getByCityAndCategory.json').then(function (resp) {
+                        if (resp.data != null) {
+                            var products = resp.data.data;
+                            for (var i = 0; i < products.length; i++) {
+                                var priceruleVar = '';
+                                switch (priceLevel) {
+                                case 1:
+                                    products[i].price1 = products[i].price1;
+                                    break;
+                                case 2:
+                                    products[i].price1 = products[i].price2;
+                                    break;
+                                case 3:
+                                    products[i].price1 = products[i].price3;
+                                    break;
+                                case 4:
+                                    products[i].price1 = products[i].price4;
+                                    break;
+                                case 5:
+                                    products[i].price1 = products[i].price5;
+                                    break;
+                                case 6:
+                                    products[i].price1 = products[i].price6;
+                                    break;
+                                };
+                            }
+                            $scope.products = products;
+                            //                $rootScope.userid = resp.data.data[0].id;
+                        }
+                        //响应成功时调用，resp是一个响应对象
+                    });
+                    //                    $scope.products = resp.data.data;
                     //                $rootScope.userid = resp.data.data[0].id;
                 }
                 //响应成功时调用，resp是一个响应对象
             });
+
         }
 
         $scope.goyuyue = function () {
@@ -293,41 +367,27 @@ angular.module('starter.controllers', [])
             var productInfo = 'd';
             var categoryId = obj.product.category_id;
             var productId = obj.product.id;
-            $rootScope.totalPrice += 1;
+            $rootScope.totalPrice += obj.product.price1;
             if ($rootScope.totalPrice > 0) {
                 $scope.maimaimai = false;
             } else {
                 $scope.maimaimai = true;
 
             }
+            var tmpinfo = CartData.cartData;
+            CartData.cartData = {
+                "userid": $rootScope.userid,
+                "categoryid,": categoryId,
+                "addressid": 1,
+                "totalPrice": $rootScope.totalPrice
+            }
             $scope.showtotalPrice = $rootScope.totalPrice;
             $scope.changeClass = 'yuyue1';
-
-
-
-            //            $scope.maimaimai = false;
-            //连后台购物车数据库
-
-            //            $scope.bg = [];
-            //            $scope.bg[index] = 'current';
-            //            index += 1;
-            //            var data = {
-            //                "category_id": index
-            //            };
-            //            var serviceRet = httpServicePost.posthttp(data, '/products/8/getByCategory.json').then(function (resp) {
-            //                if (resp.data != null) {
-            //                    $scope.products = resp.data.data;
-            //                    //                $rootScope.userid = resp.data.data[0].id;
-            //                }
-            //                //响应成功时调用，resp是一个响应对象
-            //            });
         }
     })
     .controller('ZhuCtrl', function ($scope) {
         var sss = $scope.myVar;
         $scope.myVar = true;
-        //    alert('www');
-        //    $scope.username = 'wangaxing';
         //  $scope.settings = {
         //    enableFriends: true
         //  };
@@ -424,7 +484,7 @@ angular.module('starter.controllers', [])
             jingweidu.push(data.position.getLng());
             jingweidu.push(data.position.getLat());
             var dom = document.getElementById("locationno");
-                dom.innerHTML= jingweidu;
+            dom.innerHTML = jingweidu;
 
             regeocoder(jingweidu);
         }
@@ -453,7 +513,7 @@ angular.module('starter.controllers', [])
         var address = data.regeocode.formattedAddress; //返回地址描述
         $scope.realLocation1 = address;
         var dom = document.getElementById("locationText");
-                dom.innerHTML= address;
+        dom.innerHTML = address;
     }
 })
 
