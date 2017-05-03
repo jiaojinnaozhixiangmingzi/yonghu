@@ -38,7 +38,7 @@ angular.module('starter.controllers', [])
         var serviceRet = httpServicePost.posthttp(info, '/users/8/login.json').then(function (resp) {
             if (resp.data.data == "Login succ") {
                 alert("登录成功");
-                $rootScope.userid = $scope.info.mobile;
+                $rootScope.userid = resp.data.msg.id;
                 window.location = "#/tab/dash";
             } else {
                 alert("账号密码不匹配！");
@@ -227,7 +227,7 @@ angular.module('starter.controllers', [])
 
 
         $scope.submitForm = function () {
-            var serviceRet = httpServicePost.posthttp(CartData.cartData, 'http://localhost:3001/orders/createOrder').then(function (resp) {
+            var serviceRet = httpServicePost.posthttp(CartData.cartData, 'http://localhost:3001/orders/createOrder.json').then(function (resp) {
                 if (resp.data != null) {
                     alert("下单成功！");
                 }
