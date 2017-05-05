@@ -4,29 +4,17 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{chat.name}}">
+<ion-view view-title="订单详情">
     <ion-content class="padding">
-        <img ng-src="{{chat.face}}" style="width: 64px; height: 64px">
-        <p>
-            {{chat.lastText}}
-        </p>
-        <ul class="list">
-            <li class="item">
-                消费总金额
-            </li>
-            <li class="item">
-                消费总金额
-            </li>
-            <li class="item">
-                消费总金额
-            </li>
-            <li class="item">
-                消费总金额
-            </li>
-            <li class="item">
-                消费总金额
-            </li>
+        <div class="item" style="height: 154px;background: #fafafa;color: black;text-align: -webkit-left;min-height: 124px;">
+            订单id：{{chat.id}}
+            <p style="margin-top: 15px;margin-bottom: 15px;white-space: normal;height: 20px;text-align:-webkit-auto;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单总价格：{{chat.total_price}}</p>
+            <p style="margin-top: 15px;margin-bottom: 15px;white-space: normal;height: 20px;text-align:-webkit-auto;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单地址：{{chat.address_id}}</p>
+            <p style="margin-top: 15px;margin-bottom: 15px;white-space: normal;height: 60px;text-align:-webkit-auto;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下单时间：{{chat.updated_at}}</p>
+        </div>
+        
+<!--        <input type="button" style='margin-top: 30%;width: 30%;margin-left: 35%;' class=" button button-outline button-calm" ng-click="qiangdan()" value="我要抢单">-->
 
-        </ul>
+
     </ion-content>
 </ion-view>

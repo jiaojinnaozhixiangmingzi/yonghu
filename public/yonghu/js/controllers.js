@@ -453,7 +453,7 @@ angular.module('starter.controllers', [])
         };
     })
 
-.controller('ChatsCtrl', function ($scope, Chats) {
+.controller('ChatsCtrl', function ($scope, Chats, httpServicePost, $rootScope) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -467,12 +467,25 @@ angular.module('starter.controllers', [])
         Chats.remove(chat);
     };
     $scope.doRefresh = function () {
-        $scope.chatss = Chats.all();
-        $scope.remove = function (chat) {
-            Chats.remove(chat);
+        var info = {
+            "userId": $rootScope.userid
         };
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/orders/getOrderByUser.json').then(function (resp) {
+            var tmpinfo = resp;
+            Chats.chats = resp.data.data;
+            $scope.chatss = Chats.chats;
+        });
         $scope.$broadcast('scroll.refreshComplete');
     };
+    $scope.chatss = [];
+    var info = {
+        "userId": $rootScope.userid
+    };
+    var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/orders/getOrderByUser.json').then(function (resp) {
+        var tmpinfo = resp;
+        Chats.chats = resp.data.data;
+        $scope.chatss = Chats.chats;
+    });
 })
 
 .controller('GetLocationCtrl', function ($scope, $stateParams, Chats) {
