@@ -274,4 +274,10 @@ angular.module('starter.services', [])
     return {
         cartData
     }
+})
+.factory('ItemsData', function() {
+    var itemsData = [];
+    return {
+        itemsData
+    }
 });

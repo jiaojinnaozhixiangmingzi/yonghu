@@ -222,18 +222,36 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope, CartData) {
-        $scope.totalprice = CartData.cartData.total_price;
+.controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope, CartData, $ionicHistory) {
+    $scope.totalprice = CartData.cartData.total.total_price;
 
 
-        $scope.submitForm = function () {
-            var serviceRet = httpServicePost.posthttp(CartData.cartData, 'http://localhost:3001/orders/createOrder.json').then(function (resp) {
-                if (resp.data != null) {
-                    alert("下单成功！");
+    $scope.submitForm = function () {
+        var serviceRet = httpServicePost.posthttp(CartData.cartData.total, 'http://localhost:3001/orders/createOrder.json').then(function (resp) {
+            if (resp.data != null) {
+                var order_id = resp.data.data.id;
+                //                var tmpinfo = ItemsData.itemsData;
+                $scope.totalprice = CartData.cartData.total_price;
+                var successAmout = 0;
+                for (var i = 0; i < CartData.cartData.products.length; i++) {
+                    CartData.cartData.products[i]["order_id"] = order_id;
+                    var serviceRet = httpServicePost.posthttp(CartData.cartData.products[i], 'http://localhost:3001/items/createItem.json').then(function (resp) {
+                        if (resp.data != null) {
+                            successAmout += 1;
+                            if (successAmout == CartData.cartData.products.length) {
+                                alert("下单成功！");
+                                $ionicHistory.clearCache(["showProduct"]);
+                                CartData.cartData = [];
+                                $rootScope.totalPrice = 0;
+                                window.location = "#/tab/chatse";
+                            }
+                        }
+                    });
                 }
-            });
-        }
-    })
+            }
+        });
+    }
+})
 
 .controller('ShowProductCtrl', function ($scope, httpServicePost, $rootScope, CartData) {
         $scope.jump = function (url) {
@@ -366,7 +384,7 @@ angular.module('starter.controllers', [])
                 window.location = "#/inputYuyueForm";
             }
         };
-
+        var productInfos = [];
         $scope.selectProduct = function (obj) { //选择商品
             var productInfo = 'd';
             var categoryId = obj.product.category_id;
@@ -378,8 +396,33 @@ angular.module('starter.controllers', [])
                 $scope.maimaimai = true;
 
             }
+            var isfound = false;
+            if (productInfos.length > 0) {
+                for (var j = 0; j < productInfos.length; j++) {
+                    if (productId == productInfos[j].product_id) {
+                        productInfos[j].amount += 1;
+                        isfound = true;
+                        break;
+                    }
+                }
+                if (isfound == false) {
+                    productInfos.push({
+                        "product_id": productId,
+                        "price": obj.product.price1,
+                        "amount": 1
+                    });
+                }
+            } else {
+                productInfos.push({
+                    "product_id": productId,
+                    "price": obj.product.price1,
+                    "amount": 1
+                });
+            }
+
+
             var tmpinfo = CartData.cartData;
-            CartData.cartData = {
+            CartData.cartData.total = {
                 "user_id": $rootScope.userid,
                 "category_id": categoryId,
                 "address_id": 1,
@@ -388,8 +431,10 @@ angular.module('starter.controllers', [])
                 "courier_status": 0,
                 "voucher_status": 0,
                 "cleanning_status": 0
-            }
-            $scope.showtotalPrice = $rootScope.totalPrice;
+            };
+            CartData.cartData.products = productInfos;
+            //            ItemsData.itemsData.push(productInfos);
+            $scope.showtotalPrice = CartData.cartData.total.total_price;
             $scope.changeClass = 'yuyue1';
         }
     })
