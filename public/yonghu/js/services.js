@@ -195,6 +195,12 @@ angular.module('starter.services', [])
         cartData
     }
 })
+.factory('SelectAddr', function() {
+    var selectAddr = [];
+    return {
+        selectAddr
+    }
+})
 .factory('ItemsData', function() {
     var itemsData = [];
     return {

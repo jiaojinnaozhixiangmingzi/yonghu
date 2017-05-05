@@ -222,11 +222,17 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope, CartData, $ionicHistory) {
+.controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope, CartData, $ionicHistory, SelectAddr) {
     $scope.totalprice = CartData.cartData.total.total_price;
-
+    $scope.location = {
+        name: "",
+        id:""
+    };
+    $scope.location.name = SelectAddr.selectAddr.name;
+    $scope.location.id = SelectAddr.selectAddr.id;
 
     $scope.submitForm = function () {
+        CartData.cartData.total.address_id = $scope.location.id;
         var serviceRet = httpServicePost.posthttp(CartData.cartData.total, 'http://localhost:3001/orders/createOrder.json').then(function (resp) {
             if (resp.data != null) {
                 var order_id = resp.data.data.id;
@@ -445,12 +451,26 @@ angular.module('starter.controllers', [])
         //    enableFriends: true
         //  };
     })
-    .controller('LocationMgtCtrl', function ($scope) {
+.controller('LocationMgtCtrl', function ($scope, $rootScope, httpServicePost, $ionicHistory, SelectAddr) {
         var sss = $scope.myVar;
         $scope.myVar = true;
         $scope.jump = function (url) {
             window.location = url;
         };
+        $scope.locations = [];
+        var info = {
+            "userId": $rootScope.userid
+        };
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/addresses/getAddressByUser.json').then(function (resp) {
+            var tmpinfo = resp;
+//            Chats.chats = resp.data.data;
+            $scope.locations = resp.data.data;
+        });
+        $scope.selectAdd = function(id,name){
+//            window.location = "#/inputYuyueForm";
+            SelectAddr.selectAddr = {"id":id,"name":name};
+            $ionicHistory.goBack();
+        }
     })
 
 .controller('ChatsCtrl', function ($scope, Chats, httpServicePost, $rootScope) {
@@ -488,11 +508,30 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('GetLocationCtrl', function ($scope, $stateParams, Chats) {
+.controller('GetLocationCtrl', function ($scope, $stateParams, Chats, $rootScope, httpServicePost) {
     $scope.realLocation = '定位中，请稍后……';
     $scope.realLocation1 = '';
 
     $scope.chat = Chats.get($stateParams.chatId);
+    $scope.goyuyue = function () {
+        var jingweidu = document.getElementById("locationno").innerHTML;
+        var strs=jingweidu.split(",");
+        var info = {
+            "address": $scope.realLocation1,
+            "lat": strs[0],
+            "lng": strs[1],
+            "addressable_type": 'User',
+            "addressable_id": $rootScope.userid,
+        };
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/addresses/createAddress.json').then(function (resp) {
+            var tmpinfo = resp;
+            if (resp.data != null) {
+                alert('添加地址成功！');
+                window.location = '#/locationMgt';
+            }
+            
+        });
+    }
     var jingweidu = new Array();
     var map, geolocation;
     //加载地图，调用浏览器定位服务
