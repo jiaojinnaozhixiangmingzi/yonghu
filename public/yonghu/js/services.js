@@ -195,6 +195,38 @@ angular.module('starter.services', [])
         cartData
     }
 })
+.factory('City', function() {
+    var cities = [{id:1,name:"北京"},{id:2,name:"上海"}];
+    return {
+            all: function () {
+                return cities;
+            },
+            getIdByName:function (name) {
+                for (var i = 0; i < cities.length; i++) {
+                    if (cities[i].name == name) {
+                        return cities[i].id;
+                    }
+                }
+            },
+            remove: function (chat) {
+                cities.splice(cities.indexOf(chat), 1);
+            },
+            get: function (chatId) {
+                for (var i = 0; i < cities.length; i++) {
+                    if (cities[i].id === parseInt(chatId)) {
+                        return cities[i];
+                    }
+                }
+                return null;
+            }
+        };
+})
+.factory('SelectCity', function() {
+    var selectCity = "北京";
+    return {
+           selectCity 
+        };
+})
 .factory('SelectAddr', function() {
     var selectAddr = [];
     return {

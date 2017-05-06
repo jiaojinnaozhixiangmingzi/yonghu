@@ -98,15 +98,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         views: {
             'tab-dash': {
                 templateUrl: 'templates/tab-dash.html',
-                controller: 'DashCtrl'
+                controller: 'DashCtrl',
+                cache: false
             }
-        }
+        },
+        cache: false
     })
 
     .state('showProduct', {
         url: '/showProduct',
         templateUrl: 'templates/showProduct.html',
         controller: 'ShowProductCtrl'
+    })
+    .state('city', {
+        url: '/city',
+        templateUrl: 'templates/city.html',
+        controller: 'CityCtrl'
     })
 
     .state('tab.chatsssss', {

@@ -1,18 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function ($scope, httpServicePost) {
+.controller('DashCtrl', function ($scope, httpServicePost, SelectCity) {
+    $scope.my = {"currentCity": SelectCity.selectCity};
     $scope.jump = function (url) {
         window.location = url;
     };
-    var serviceRet = httpServicePost.gethttp('/products.json').then(function (resp) {
-        if (resp.data.data == "Login succ") {
-            alert("登录成功");
-            //        $rootScope.userid = resp.data.data[0].id;
-            window.location = "#/tab/dash";
-        }
-        //响应成功时调用，resp是一个响应对象
-    });
-
 })
 
 //用户登录控制
@@ -44,9 +36,7 @@ angular.module('starter.controllers', [])
                 alert("账号密码不匹配！");
                 window.location = "#/login";
             }
-            //响应成功时调用，resp是一个响应对象
         });
-
     }
 
     $scope.settings = {
@@ -226,7 +216,7 @@ angular.module('starter.controllers', [])
     $scope.totalprice = CartData.cartData.total.total_price;
     $scope.location = {
         name: "",
-        id:""
+        id: ""
     };
     $scope.location.name = SelectAddr.selectAddr.name;
     $scope.location.id = SelectAddr.selectAddr.id;
@@ -259,7 +249,7 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('ShowProductCtrl', function ($scope, httpServicePost, $rootScope, CartData) {
+.controller('ShowProductCtrl', function ($scope, httpServicePost, $rootScope, CartData, SelectCity, City) {
         $scope.jump = function (url) {
             window.location = url;
         };
@@ -269,9 +259,10 @@ angular.module('starter.controllers', [])
         var data = {
             "categoryId": 1
         };
+        
         var jsonpData = {
             "categoryId": 1,
-            "cityId": "1"
+            "cityId": City.getIdByName(SelectCity.selectCity)
         }
         var priceLevel;
         var serviceRet = httpServicePost.posthttp(jsonpData, 'http://localhost:3001/price_rules/getPriceRules.json').then(function (resp) {
@@ -315,7 +306,7 @@ angular.module('starter.controllers', [])
             //响应成功时调用，resp是一个响应对象
         });
         var cityinfo = {
-            "cityId": "2"
+            "cityId": City.getIdByName(SelectCity.selectCity)
         };
         var serviceRet = httpServicePost.posthttp(cityinfo, '/categories/getByCity.json').then(function (resp) {
             if (resp.data != null) {
@@ -451,7 +442,7 @@ angular.module('starter.controllers', [])
         //    enableFriends: true
         //  };
     })
-.controller('LocationMgtCtrl', function ($scope, $rootScope, httpServicePost, $ionicHistory, SelectAddr) {
+    .controller('LocationMgtCtrl', function ($scope, $rootScope, httpServicePost, $ionicHistory, SelectAddr) {
         var sss = $scope.myVar;
         $scope.myVar = true;
         $scope.jump = function (url) {
@@ -463,12 +454,15 @@ angular.module('starter.controllers', [])
         };
         var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/addresses/getAddressByUser.json').then(function (resp) {
             var tmpinfo = resp;
-//            Chats.chats = resp.data.data;
+            //            Chats.chats = resp.data.data;
             $scope.locations = resp.data.data;
         });
-        $scope.selectAdd = function(id,name){
-//            window.location = "#/inputYuyueForm";
-            SelectAddr.selectAddr = {"id":id,"name":name};
+        $scope.selectAdd = function (id, name) {
+            //            window.location = "#/inputYuyueForm";
+            SelectAddr.selectAddr = {
+                "id": id,
+                "name": name
+            };
             $ionicHistory.goBack();
         }
     })
@@ -515,7 +509,7 @@ angular.module('starter.controllers', [])
     $scope.chat = Chats.get($stateParams.chatId);
     $scope.goyuyue = function () {
         var jingweidu = document.getElementById("locationno").innerHTML;
-        var strs=jingweidu.split(",");
+        var strs = jingweidu.split(",");
         var info = {
             "address": $scope.realLocation1,
             "lat": strs[0],
@@ -529,7 +523,7 @@ angular.module('starter.controllers', [])
                 alert('添加地址成功！');
                 window.location = '#/locationMgt';
             }
-            
+
         });
     }
     var jingweidu = new Array();
@@ -623,8 +617,32 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
-    $scope.chat = Chats.get($stateParams.chatId);
-})
+        $scope.chat = Chats.get($stateParams.chatId);
+    })
+.controller('CityCtrl', function ($scope, $stateParams, Chats, City, SelectCity, $ionicHistory, CartData, $rootScope) {
+        $scope.cities = City.all();
+        //    var sss = $scope.myVar;
+        //        $scope.myVar = true;
+        //        $scope.jump = function (url) {
+        //            window.location = url;
+        //        };
+        //        $scope.locations = [];
+        //        var info = {
+        //            "userId": $rootScope.userid
+        //        };
+        //        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/addresses/getAddressByUser.json').then(function (resp) {
+        //            var tmpinfo = resp;
+        //            $scope.locations = resp.data.data;
+        //        });
+        $scope.selectAdd = function (name) {
+            //            window.location = "#/inputYuyueForm";
+            SelectCity.selectCity = name;
+            $ionicHistory.goBack();
+            $ionicHistory.clearCache(["showProduct"]);
+            CartData.cartData = [];
+            $rootScope.totalPrice = 0;
+        }
+    })
 
 .controller('AccountCtrl', function ($scope) {
 
