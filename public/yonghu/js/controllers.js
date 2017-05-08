@@ -1,18 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function ($scope, httpServicePost) {
+.controller('DashCtrl', function ($scope, httpServicePost, SelectCity) {
+    $scope.my = {"currentCity": SelectCity.selectCity};
     $scope.jump = function (url) {
         window.location = url;
     };
-    var serviceRet = httpServicePost.gethttp('/products.json').then(function (resp) {
-        if (resp.data.data == "Login succ") {
-            alert("登录成功");
-            //        $rootScope.userid = resp.data.data[0].id;
-            window.location = "#/tab/dash";
-        }
-        //响应成功时调用，resp是一个响应对象
-    });
-
 })
 
 //用户登录控制
@@ -44,9 +36,7 @@ angular.module('starter.controllers', [])
                 alert("账号密码不匹配！");
                 window.location = "#/login";
             }
-            //响应成功时调用，resp是一个响应对象
         });
-
     }
 
     $scope.settings = {
@@ -222,20 +212,44 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope, CartData) {
-        $scope.totalprice = CartData.cartData.total_price;
+.controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope, CartData, $ionicHistory, SelectAddr) {
+    $scope.totalprice = CartData.cartData.total.total_price;
+    $scope.location = {
+        name: "",
+        id: ""
+    };
+    $scope.location.name = SelectAddr.selectAddr.name;
+    $scope.location.id = SelectAddr.selectAddr.id;
 
-
-        $scope.submitForm = function () {
-            var serviceRet = httpServicePost.posthttp(CartData.cartData, 'http://localhost:3001/orders/createOrder.json').then(function (resp) {
-                if (resp.data != null) {
-                    alert("下单成功！");
+    $scope.submitForm = function () {
+        CartData.cartData.total.address_id = $scope.location.id;
+        var serviceRet = httpServicePost.posthttp(CartData.cartData.total, 'http://localhost:3001/orders/createOrder.json').then(function (resp) {
+            if (resp.data != null) {
+                var order_id = resp.data.data.id;
+                //                var tmpinfo = ItemsData.itemsData;
+                $scope.totalprice = CartData.cartData.total_price;
+                var successAmout = 0;
+                for (var i = 0; i < CartData.cartData.products.length; i++) {
+                    CartData.cartData.products[i]["order_id"] = order_id;
+                    var serviceRet = httpServicePost.posthttp(CartData.cartData.products[i], 'http://localhost:3001/items/createItem.json').then(function (resp) {
+                        if (resp.data != null) {
+                            successAmout += 1;
+                            if (successAmout == CartData.cartData.products.length) {
+                                alert("下单成功！");
+                                $ionicHistory.clearCache(["showProduct"]);
+                                CartData.cartData = [];
+                                $rootScope.totalPrice = 0;
+                                window.location = "#/tab/chatse";
+                            }
+                        }
+                    });
                 }
-            });
-        }
-    })
+            }
+        });
+    }
+})
 
-.controller('ShowProductCtrl', function ($scope, httpServicePost, $rootScope, CartData) {
+.controller('ShowProductCtrl', function ($scope, httpServicePost, $rootScope, CartData, SelectCity, City) {
         $scope.jump = function (url) {
             window.location = url;
         };
@@ -245,9 +259,10 @@ angular.module('starter.controllers', [])
         var data = {
             "categoryId": 1
         };
+        
         var jsonpData = {
             "categoryId": 1,
-            "cityId": "1"
+            "cityId": City.getIdByName(SelectCity.selectCity)
         }
         var priceLevel;
         var serviceRet = httpServicePost.posthttp(jsonpData, 'http://localhost:3001/price_rules/getPriceRules.json').then(function (resp) {
@@ -291,7 +306,7 @@ angular.module('starter.controllers', [])
             //响应成功时调用，resp是一个响应对象
         });
         var cityinfo = {
-            "cityId": "2"
+            "cityId": City.getIdByName(SelectCity.selectCity)
         };
         var serviceRet = httpServicePost.posthttp(cityinfo, '/categories/getByCity.json').then(function (resp) {
             if (resp.data != null) {
@@ -366,7 +381,7 @@ angular.module('starter.controllers', [])
                 window.location = "#/inputYuyueForm";
             }
         };
-
+        var productInfos = [];
         $scope.selectProduct = function (obj) { //选择商品
             var productInfo = 'd';
             var categoryId = obj.product.category_id;
@@ -378,8 +393,33 @@ angular.module('starter.controllers', [])
                 $scope.maimaimai = true;
 
             }
+            var isfound = false;
+            if (productInfos.length > 0) {
+                for (var j = 0; j < productInfos.length; j++) {
+                    if (productId == productInfos[j].product_id) {
+                        productInfos[j].amount += 1;
+                        isfound = true;
+                        break;
+                    }
+                }
+                if (isfound == false) {
+                    productInfos.push({
+                        "product_id": productId,
+                        "price": obj.product.price1,
+                        "amount": 1
+                    });
+                }
+            } else {
+                productInfos.push({
+                    "product_id": productId,
+                    "price": obj.product.price1,
+                    "amount": 1
+                });
+            }
+
+
             var tmpinfo = CartData.cartData;
-            CartData.cartData = {
+            CartData.cartData.total = {
                 "user_id": $rootScope.userid,
                 "category_id": categoryId,
                 "address_id": 1,
@@ -388,8 +428,10 @@ angular.module('starter.controllers', [])
                 "courier_status": 0,
                 "voucher_status": 0,
                 "cleanning_status": 0
-            }
-            $scope.showtotalPrice = $rootScope.totalPrice;
+            };
+            CartData.cartData.products = productInfos;
+            //            ItemsData.itemsData.push(productInfos);
+            $scope.showtotalPrice = CartData.cartData.total.total_price;
             $scope.changeClass = 'yuyue1';
         }
     })
@@ -400,15 +442,32 @@ angular.module('starter.controllers', [])
         //    enableFriends: true
         //  };
     })
-    .controller('LocationMgtCtrl', function ($scope) {
+    .controller('LocationMgtCtrl', function ($scope, $rootScope, httpServicePost, $ionicHistory, SelectAddr) {
         var sss = $scope.myVar;
         $scope.myVar = true;
         $scope.jump = function (url) {
             window.location = url;
         };
+        $scope.locations = [];
+        var info = {
+            "userId": $rootScope.userid
+        };
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/addresses/getAddressByUser.json').then(function (resp) {
+            var tmpinfo = resp;
+            //            Chats.chats = resp.data.data;
+            $scope.locations = resp.data.data;
+        });
+        $scope.selectAdd = function (id, name) {
+            //            window.location = "#/inputYuyueForm";
+            SelectAddr.selectAddr = {
+                "id": id,
+                "name": name
+            };
+            $ionicHistory.goBack();
+        }
     })
 
-.controller('ChatsCtrl', function ($scope, Chats) {
+.controller('ChatsCtrl', function ($scope, Chats, httpServicePost, $rootScope) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -422,19 +481,51 @@ angular.module('starter.controllers', [])
         Chats.remove(chat);
     };
     $scope.doRefresh = function () {
-        $scope.chatss = Chats.all();
-        $scope.remove = function (chat) {
-            Chats.remove(chat);
+        var info = {
+            "userId": $rootScope.userid
         };
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/orders/getOrderByUser.json').then(function (resp) {
+            var tmpinfo = resp;
+            Chats.chats = resp.data.data;
+            $scope.chatss = Chats.chats;
+        });
         $scope.$broadcast('scroll.refreshComplete');
     };
+    $scope.chatss = [];
+    var info = {
+        "userId": $rootScope.userid
+    };
+    var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/orders/getOrderByUser.json').then(function (resp) {
+        var tmpinfo = resp;
+        Chats.chats = resp.data.data;
+        $scope.chatss = Chats.chats;
+    });
 })
 
-.controller('GetLocationCtrl', function ($scope, $stateParams, Chats) {
+.controller('GetLocationCtrl', function ($scope, $stateParams, Chats, $rootScope, httpServicePost) {
     $scope.realLocation = '定位中，请稍后……';
     $scope.realLocation1 = '';
 
     $scope.chat = Chats.get($stateParams.chatId);
+    $scope.goyuyue = function () {
+        var jingweidu = document.getElementById("locationno").innerHTML;
+        var strs = jingweidu.split(",");
+        var info = {
+            "address": $scope.realLocation1,
+            "lat": strs[0],
+            "lng": strs[1],
+            "addressable_type": 'User',
+            "addressable_id": $rootScope.userid,
+        };
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/addresses/createAddress.json').then(function (resp) {
+            var tmpinfo = resp;
+            if (resp.data != null) {
+                alert('添加地址成功！');
+                window.location = '#/locationMgt';
+            }
+
+        });
+    }
     var jingweidu = new Array();
     var map, geolocation;
     //加载地图，调用浏览器定位服务
@@ -526,8 +617,32 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
-    $scope.chat = Chats.get($stateParams.chatId);
-})
+        $scope.chat = Chats.get($stateParams.chatId);
+    })
+.controller('CityCtrl', function ($scope, $stateParams, Chats, City, SelectCity, $ionicHistory, CartData, $rootScope) {
+        $scope.cities = City.all();
+        //    var sss = $scope.myVar;
+        //        $scope.myVar = true;
+        //        $scope.jump = function (url) {
+        //            window.location = url;
+        //        };
+        //        $scope.locations = [];
+        //        var info = {
+        //            "userId": $rootScope.userid
+        //        };
+        //        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/addresses/getAddressByUser.json').then(function (resp) {
+        //            var tmpinfo = resp;
+        //            $scope.locations = resp.data.data;
+        //        });
+        $scope.selectAdd = function (name) {
+            //            window.location = "#/inputYuyueForm";
+            SelectCity.selectCity = name;
+            $ionicHistory.goBack();
+            $ionicHistory.clearCache(["showProduct"]);
+            CartData.cartData = [];
+            $rootScope.totalPrice = 0;
+        }
+    })
 
 .controller('AccountCtrl', function ($scope) {
 

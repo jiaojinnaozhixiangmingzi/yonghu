@@ -3,87 +3,7 @@ angular.module('starter.services', [])
 .factory('Chats', function () {
         // Might use a resource here that returns a JSON array
 
-        // Some fake testing data
-        var chats = [{
-            id: 0,
-            name: '2017年-3月-20日',
-            lastText: '共计120元',
-            status: '配送中',
-            face: 'img/ben.png'
-  }, {
-            id: 1,
-            name: '2017年-3月-10日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/max.png'
-  }, {
-            id: 2,
-            name: '2017年-3月-4日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/adam.jpg'
-  }, {
-            id: 3,
-            name: '2017年-2月-20日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/perry.png'
-  }, {
-            id: 4,
-            name: '2017年-1月-31日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/mike.png'
-  }, {
-            id: 5,
-            name: '2017年-1月-31日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/mike.png'
-  }, {
-            id: 6,
-            name: '2017年-1月-31日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/mike.png'
-  }, {
-            id: 7,
-            name: '2017年-1月-31日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/mike.png'
-  }, {
-            id: 8,
-            name: '2017年-1月-31日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/mike.png'
-  }, {
-            id: 9,
-            name: '2017年-1月-31日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/mike.png'
-  }, {
-            id: 10,
-            name: '2017年-1月-31日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/mike.png'
-  }, {
-            id: 11,
-            name: '2017年-1月-31日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/mike.png'
-  }, {
-            id: 12,
-            name: '2017年-1月-31日',
-            lastText: '共计120元',
-            status: '已完成',
-            face: 'img/mike.png'
-  }];
-
+        var chats = [];
         return {
             all: function () {
                 return chats;
@@ -273,5 +193,49 @@ angular.module('starter.services', [])
     var cartData = [];
     return {
         cartData
+    }
+})
+.factory('City', function() {
+    var cities = [{id:1,name:"北京"},{id:2,name:"上海"}];
+    return {
+            all: function () {
+                return cities;
+            },
+            getIdByName:function (name) {
+                for (var i = 0; i < cities.length; i++) {
+                    if (cities[i].name == name) {
+                        return cities[i].id;
+                    }
+                }
+            },
+            remove: function (chat) {
+                cities.splice(cities.indexOf(chat), 1);
+            },
+            get: function (chatId) {
+                for (var i = 0; i < cities.length; i++) {
+                    if (cities[i].id === parseInt(chatId)) {
+                        return cities[i];
+                    }
+                }
+                return null;
+            }
+        };
+})
+.factory('SelectCity', function() {
+    var selectCity = "北京";
+    return {
+           selectCity 
+        };
+})
+.factory('SelectAddr', function() {
+    var selectAddr = [];
+    return {
+        selectAddr
+    }
+})
+.factory('ItemsData', function() {
+    var itemsData = [];
+    return {
+        itemsData
     }
 });
