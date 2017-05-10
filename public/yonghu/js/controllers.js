@@ -37,13 +37,9 @@ angular.module('starter.controllers', [])
                 var info = {
                     "userId": $rootScope.userid
                 };
-                var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/orders/pay.json').then(function (resp) {
-                    var tmpinfo = resp;
-                    if (resp.data.data == "Pay succ") {
-                        alert("支付成功！");
-                    }
+                var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_cards/getUserCard.json').then(function (resp) {
+                    $rootScope.currentMoney = resp.data.data.real_money + resp.data.data.fake_money;
                 });
-                $rootScope.currentMoney
 
                 window.location = "#/tab/dash";
             } else {
@@ -659,7 +655,7 @@ angular.module('starter.controllers', [])
         }
     })
 
-.controller('AccountCtrl', function ($scope) {
+.controller('AccountCtrl', function ($scope, $rootScope) {
 
         $scope.settings = {
             enableFriends: true
@@ -667,8 +663,9 @@ angular.module('starter.controllers', [])
         $scope.jump = function (url) {
             window.location = url;
         };
+        $scope.currentMoney = $rootScope.currentMoney;
     })
-    .controller('CashCtrl', function ($scope, $rootScope, httpServicePost) {
+.controller('CashCtrl', function ($scope, $rootScope, httpServicePost) {
 
         $scope.settings = {
             enableFriends: true
@@ -676,6 +673,8 @@ angular.module('starter.controllers', [])
         $scope.jump = function (url) {
             window.location = url;
         };
+        $scope.currentMoney = $rootScope.currentMoney;
+
         var info = {
             "userId": $rootScope.userid
         };
@@ -684,46 +683,55 @@ angular.module('starter.controllers', [])
             $scope.chongzhiRecords = resp.data.data;
         });
     })
-    .controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City, $ionicHistory) {
+.controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City, $ionicHistory) {
 
-        $scope.settings = {
-            enableFriends: true
-        };
-        $scope.firstChongzhi = {
-            "money": 0,
-            "money_give": 0
-        };
-        $scope.chongzhi = {
-            "money": ""
-        };
-        $scope.jump = function (url) {
-            window.location = url;
-        };
+    $scope.currentMoney = $rootScope.currentMoney;
+    $scope.settings = {
+        enableFriends: true
+    };
+    $scope.firstChongzhi = {
+        "money": 0,
+        "money_give": 0
+    };
+    $scope.chongzhi = {
+        "money": ""
+    };
+    $scope.jump = function (url) {
+        window.location = url;
+    };
+    var info = {
+        "cityId": City.getIdByName(SelectCity.selectCity)
+    };
+    var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/getList.json').then(function (resp) {
+        var tmpinfo = resp;
+        $scope.firstChongzhi = resp.data.data.slice(1, resp.data.data.len).shift();
+        $scope.chongzhis = resp.data.data.slice(2, resp.data.data.len);
+    });
+
+    $scope.chongzhiBtn = function (name) {
         var info = {
-            "cityId": City.getIdByName(SelectCity.selectCity)
+            "cityId": City.getIdByName(SelectCity.selectCity),
+            "money": $scope.chongzhi.money,
+            "userId": $rootScope.userid
         };
-        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/getList.json').then(function (resp) {
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/pay.json').then(function (resp) {
             var tmpinfo = resp;
-            $scope.firstChongzhi = resp.data.data.slice(1, resp.data.data.len).shift();
-            $scope.chongzhis = resp.data.data.slice(2, resp.data.data.len);
-        });
-
-        $scope.chongzhiBtn = function (name) {
-            var info = {
-                "cityId": City.getIdByName(SelectCity.selectCity),
-                "money": $scope.chongzhi.money,
-                "userId": $rootScope.userid
-            };
-            var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/pay.json').then(function (resp) {
-                var tmpinfo = resp;
-                if (resp.data.data == "Pay succ") {
-                    alert("充值成功！");
-//                    $ionicHistory.clearCache(["cash"]);
+            if (resp.data.data == "Pay succ") {
+                alert("充值成功！");
+                //todo支付成功后需要重置余额信息
+                var info = {
+                    "userId": $rootScope.userid
+                };
+                var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_cards/getUserCard.json').then(function (resp) {
+                    $rootScope.currentMoney = resp.data.data.real_money + resp.data.data.fake_money;
+                    $ionicHistory.clearCache(["tab.account","inputcash"]);
                     window.location = "#/cash";
-                }
-            });
-        }
-    })
+                });
+               
+            }
+        });
+    }
+})
     .controller('CardCtrl', function ($scope) {
 
         $scope.settings = {
@@ -734,7 +742,7 @@ angular.module('starter.controllers', [])
         };
     })
     
-    .controller('PayCtrl', function ($scope, httpServicePost, ShouldPay) {
+    .controller('PayCtrl', function ($scope, httpServicePost, ShouldPay, $rootScope) {
 
         $scope.settings = {
             enableFriends: true
@@ -742,6 +750,7 @@ angular.module('starter.controllers', [])
         $scope.jump = function (url) {
             window.location = url;
         };
+        $scope.currentMoney = $rootScope.currentMoney;
         $scope.shouldPay =  ShouldPay.shouldPay;
         $scope.zhifuBtn = function (name) {
             var info = {
@@ -751,6 +760,7 @@ angular.module('starter.controllers', [])
                 var tmpinfo = resp;
                 if (resp.data.data == "Pay succ") {
                     alert("支付成功！");
+                    $rootScope.currentMoney = "";
                 }
             });
         }

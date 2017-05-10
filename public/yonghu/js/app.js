@@ -126,7 +126,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('pay', {
         url: '/pay',
         templateUrl: 'templates/pay.html',
-        controller: 'PayCtrl'
+        controller: 'PayCtrl',
+        cache: false
     })
     .state('card', {
         url: '/card',
@@ -145,16 +146,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'CityCtrl'
     })
 
-    .state('tab.chatsssss', {
-            url: '/chatse',
-            views: {
-                'tab-chats': {
-                    templateUrl: 'templates/tab-chats.html',
-                    controller: 'ChatsCtrl',
-                    cache: false
-                }
-            }
-        })
+.state('tab.chatsssss', {
+    url: '/chatse',
+    views: {
+        'tab-chats': {
+            templateUrl: 'templates/tab-chats.html',
+            controller: 'ChatsCtrl'
+
+        }
+    },
+    cache: false
+})
   .state('tab.chat-detail', {
             url: '/chats/:chatId',
             views: {
