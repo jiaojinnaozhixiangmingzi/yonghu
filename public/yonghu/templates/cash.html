@@ -1,0 +1,47 @@
+<ion-view view-title="重设密码" hide-nav-bar="true">
+    <div class="bar bar-header">
+        <button class="button button-small button-icon icon ion-chevron-left" ng-click="$ionicGoBack()"></button>
+        <div class="h1 title">余额中心</div>
+    </div>
+    <ion-content>
+        <div class="list list-inset" style="margin-top: 10%;text-align: -webkit-center;" ng-init="hide=false">
+            <lable class="item" id="jiumima" style="margin-top: 20%;border-radius: 50%;width: 80px;height: 80px;background: rgba(251, 207, 150, 0.81);">
+                <p class="ng-pristine ng-untouched ng-valid ng-empty" style="padding-right: 0px;">余额</p>
+                <p class="ng-pristine ng-untouched ng-valid ng-empty" style="padding-right: 0px;">0.00元</p>
+            </lable>
+            <input type="button" style='margin-top: 10%;display: block;height: 42px;min-height: 5px;' ng-click="jump('#/inputcash')" class=" button button-outline button-calm" value="去充值">
+
+            <div class="list card" style="box-shadow: 0 1px 3px pink;">
+                <h4>充值记录</h4>
+                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
+                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
+                </a> 
+                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
+                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
+                </a> 
+                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
+                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
+                </a> 
+                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
+                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
+                </a> 
+                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
+                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
+                </a> 
+                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
+                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
+                </a>
+
+            </div>
+           
+            <div>
+                <button class="button button-clear button-calm" style="float: left;">
+
+                </button>
+            </div>
+            
+
+        </div>
+
+    </ion-content>
+</ion-view>

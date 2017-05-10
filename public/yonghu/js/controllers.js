@@ -652,4 +652,40 @@ angular.module('starter.controllers', [])
     $scope.jump = function (url) {
         window.location = url;
     };
+})
+.controller('CashCtrl', function ($scope) {
+
+    $scope.settings = {
+        enableFriends: true
+    };
+    $scope.jump = function (url) {
+        window.location = url;
+    };
+})
+.controller('InputcashCtrl', function ($scope) {
+
+    $scope.settings = {
+        enableFriends: true
+    };
+    $scope.jump = function (url) {
+        window.location = url;
+    };
+})
+.controller('CardCtrl', function ($scope) {
+
+    $scope.settings = {
+        enableFriends: true
+    };
+    $scope.jump = function (url) {
+        window.location = url;
+    };
+})
+.controller('GetcardCtrl', function ($scope) {
+
+    $scope.settings = {
+        enableFriends: true
+    };
+    $scope.jump = function (url) {
+        window.location = url;
+    };
 });

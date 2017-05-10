@@ -110,6 +110,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         templateUrl: 'templates/showProduct.html',
         controller: 'ShowProductCtrl'
     })
+    .state('cash', {
+        url: '/cash',
+        templateUrl: 'templates/cash.html',
+        controller: 'CashCtrl'
+    })
+    .state('inputcash', {
+        url: '/inputcash',
+        templateUrl: 'templates/input-cash.html',
+        controller: 'InputcashCtrl'
+    })
+    .state('card', {
+        url: '/card',
+        templateUrl: 'templates/card.html',
+        controller: 'CardCtrl'
+    })
+    .state('getcard', {
+        url: '/getcard',
+        templateUrl: 'templates/get-card.html',
+        controller: 'GetcardCtrl'
+    })
+    
     .state('city', {
         url: '/city',
         templateUrl: 'templates/city.html',
