@@ -33,6 +33,18 @@ angular.module('starter.controllers', [])
             if (resp.data.data == "Login succ") {
                 alert("登录成功");
                 $rootScope.userid = resp.data.msg.id;
+
+                var info = {
+                    "userId": $rootScope.userid
+                };
+                var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/orders/pay.json').then(function (resp) {
+                    var tmpinfo = resp;
+                    if (resp.data.data == "Pay succ") {
+                        alert("支付成功！");
+                    }
+                });
+                $rootScope.currentMoney
+
                 window.location = "#/tab/dash";
             } else {
                 alert("账号密码不匹配！");
@@ -45,7 +57,6 @@ angular.module('starter.controllers', [])
         enableFriends: true
     };
 })
-
 .controller('SigninCtrl', function ($scope, Signin, httpServicePost) {
     $scope.info = {
         mobile: "",
@@ -668,12 +679,12 @@ angular.module('starter.controllers', [])
         var info = {
             "userId": $rootScope.userid
         };
-        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/getList.json').then(function (resp) {
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_logs/getList.json').then(function (resp) {
             var tmpinfo = resp;
-            $scope.firstChongzhi = resp.data.data.slice(1, resp.data.data.len).shift();
+            $scope.chongzhiRecords = resp.data.data;
         });
     })
-    .controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City) {
+    .controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City, $ionicHistory) {
 
         $scope.settings = {
             enableFriends: true
@@ -694,7 +705,7 @@ angular.module('starter.controllers', [])
         var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/getList.json').then(function (resp) {
             var tmpinfo = resp;
             $scope.firstChongzhi = resp.data.data.slice(1, resp.data.data.len).shift();
-            $scope.chongzhis = resp.data.data.slice(1, resp.data.data.len);
+            $scope.chongzhis = resp.data.data.slice(2, resp.data.data.len);
         });
 
         $scope.chongzhiBtn = function (name) {
@@ -707,6 +718,8 @@ angular.module('starter.controllers', [])
                 var tmpinfo = resp;
                 if (resp.data.data == "Pay succ") {
                     alert("充值成功！");
+//                    $ionicHistory.clearCache(["cash"]);
+                    window.location = "#/cash";
                 }
             });
         }

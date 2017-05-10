@@ -14,23 +14,8 @@
             <div class="list card" style="box-shadow: 0 1px 3px pink;">
                 <h4>充值记录</h4>
                 <a href="#" class="item item-icon-left" ng-repeat="chongzhiRecord in chongzhiRecords" style="padding-left: 16px;">
-                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
+                    <span style="float:left;">{{chongzhiRecord.created_at}}</span>  <span style="float:right;">充值{{chongzhiRecord.real_money}}元</span> <span style="float:right;">赠送{{chongzhiRecord.fake_money}}元</span>
                 </a> 
-                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
-                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
-                </a> 
-                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
-                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
-                </a> 
-                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
-                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
-                </a> 
-                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
-                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
-                </a> 
-                <a href="#" class="item item-icon-left" style="padding-left: 16px;">
-                    <span style="float:left;">2016/05/08 14:40</span>  <span style="float:right;">充值100元</span>
-                </a>
 
             </div>
            
