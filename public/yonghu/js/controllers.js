@@ -657,7 +657,7 @@ angular.module('starter.controllers', [])
             window.location = url;
         };
     })
-    .controller('CashCtrl', function ($scope) {
+    .controller('CashCtrl', function ($scope, $rootScope, httpServicePost) {
 
         $scope.settings = {
             enableFriends: true
@@ -665,6 +665,13 @@ angular.module('starter.controllers', [])
         $scope.jump = function (url) {
             window.location = url;
         };
+        var info = {
+            "userId": $rootScope.userid
+        };
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/getList.json').then(function (resp) {
+            var tmpinfo = resp;
+            $scope.firstChongzhi = resp.data.data.slice(1, resp.data.data.len).shift();
+        });
     })
     .controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City) {
 
