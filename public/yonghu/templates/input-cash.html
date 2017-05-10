@@ -1,4 +1,4 @@
-<ion-view view-title="重设密码" hide-nav-bar="true">
+<ion-view view-title="充值中心" hide-nav-bar="true">
     <div class="bar bar-header">
         <button class="button button-small button-icon icon ion-chevron-left" ng-click="$ionicGoBack()"></button>
         <div class="h1 title">充值中心</div>
@@ -7,7 +7,7 @@
         <div class="list list-inset" style="margin-top: 10%;text-align: -webkit-center;" ng-init="hide=false">
             <lable class="item" id="jiumima" style="margin-top: 20%;border-radius: 50%;width: 80px;height: 80px;background: rgba(251, 207, 150, 0.81);">
                 <p class="ng-pristine ng-untouched ng-valid ng-empty" style="padding-right: 0px;">余额</p>
-                <p class="ng-pristine ng-untouched ng-valid ng-empty" style="padding-right: 0px;">0.00元</p>
+                <p class="ng-pristine ng-untouched ng-valid ng-empty" style="padding-right: 0px;">{{currentMoney}}元</p>
             </lable>
             <div class="card" style="border: dashed;border-color: gainsboro;border-width: 2px;">
                 <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">

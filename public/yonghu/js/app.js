@@ -10,6 +10,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 .run(function ($ionicPlatform, $rootScope) {
     $rootScope.userid = '';
     $rootScope.totalPrice = 0;
+    $rootScope.currentMoney = 0;
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -113,17 +114,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('cash', {
         url: '/cash',
         templateUrl: 'templates/cash.html',
-        controller: 'CashCtrl'
+        controller: 'CashCtrl',
+        cache: false
     })
     .state('inputcash', {
         url: '/inputcash',
         templateUrl: 'templates/input-cash.html',
-        controller: 'InputcashCtrl'
+        controller: 'InputcashCtrl',
+        cache: false
     })
     .state('pay', {
         url: '/pay',
         templateUrl: 'templates/pay.html',
-        controller: 'PayCtrl'
+        controller: 'PayCtrl',
+        cache: false
     })
     .state('card', {
         url: '/card',
@@ -142,16 +146,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'CityCtrl'
     })
 
-    .state('tab.chatsssss', {
-            url: '/chatse',
-            views: {
-                'tab-chats': {
-                    templateUrl: 'templates/tab-chats.html',
-                    controller: 'ChatsCtrl',
-                    cache: false
-                }
-            }
-        })
+.state('tab.chatsssss', {
+    url: '/chatse',
+    views: {
+        'tab-chats': {
+            templateUrl: 'templates/tab-chats.html',
+            controller: 'ChatsCtrl'
+
+        }
+    },
+    cache: false
+})
   .state('tab.chat-detail', {
             url: '/chats/:chatId',
             views: {
