@@ -1,7 +1,9 @@
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function ($scope, httpServicePost, SelectCity) {
-    $scope.my = {"currentCity": SelectCity.selectCity};
+    $scope.my = {
+        "currentCity": SelectCity.selectCity
+    };
     $scope.jump = function (url) {
         window.location = url;
     };
@@ -259,7 +261,7 @@ angular.module('starter.controllers', [])
         var data = {
             "categoryId": 1
         };
-        
+
         var jsonpData = {
             "categoryId": 1,
             "cityId": City.getIdByName(SelectCity.selectCity)
@@ -619,7 +621,7 @@ angular.module('starter.controllers', [])
 .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
         $scope.chat = Chats.get($stateParams.chatId);
     })
-.controller('CityCtrl', function ($scope, $stateParams, Chats, City, SelectCity, $ionicHistory, CartData, $rootScope) {
+    .controller('CityCtrl', function ($scope, $stateParams, Chats, City, SelectCity, $ionicHistory, CartData, $rootScope) {
         $scope.cities = City.all();
         //    var sss = $scope.myVar;
         //        $scope.myVar = true;
@@ -646,46 +648,74 @@ angular.module('starter.controllers', [])
 
 .controller('AccountCtrl', function ($scope) {
 
-    $scope.settings = {
-        enableFriends: true
-    };
-    $scope.jump = function (url) {
-        window.location = url;
-    };
-})
-.controller('CashCtrl', function ($scope) {
+        $scope.settings = {
+            enableFriends: true
+        };
+        $scope.jump = function (url) {
+            window.location = url;
+        };
+    })
+    .controller('CashCtrl', function ($scope) {
 
-    $scope.settings = {
-        enableFriends: true
-    };
-    $scope.jump = function (url) {
-        window.location = url;
-    };
-})
-.controller('InputcashCtrl', function ($scope) {
+        $scope.settings = {
+            enableFriends: true
+        };
+        $scope.jump = function (url) {
+            window.location = url;
+        };
+    })
+    .controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City) {
 
-    $scope.settings = {
-        enableFriends: true
-    };
-    $scope.jump = function (url) {
-        window.location = url;
-    };
-})
-.controller('CardCtrl', function ($scope) {
+        $scope.settings = {
+            enableFriends: true
+        };
+        $scope.firstChongzhi = {
+            "money": 0,
+            "money_give": 0
+        };
+        $scope.chongzhi = {
+            "money": 0
+        };
+        $scope.jump = function (url) {
+            window.location = url;
+        };
+        var info = {
+            "cityId": City.getIdByName(SelectCity.selectCity)
+        };
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/getList.json').then(function (resp) {
+            var tmpinfo = resp;
+            $scope.firstChongzhi = resp.data.data.slice(1, resp.data.data.len).shift();
+            $scope.chongzhis = resp.data.data.slice(1, resp.data.data.len);
+        });
 
-    $scope.settings = {
-        enableFriends: true
-    };
-    $scope.jump = function (url) {
-        window.location = url;
-    };
-})
-.controller('GetcardCtrl', function ($scope) {
+        $scope.chongzhiBtn = function (name) {
+            var info = {
+                "cityId": City.getIdByName(SelectCity.selectCity),
+                "money": ,
+                "userId": $rootScope.userid
+            };
+            var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/getList.json').then(function (resp) {
+                var tmpinfo = resp;
+                $scope.firstChongzhi = resp.data.data.slice(1, resp.data.data.len).shift();
+                $scope.chongzhis = resp.data.data.slice(1, resp.data.data.len);
+            });
+        }
+    })
+    .controller('CardCtrl', function ($scope) {
 
-    $scope.settings = {
-        enableFriends: true
-    };
-    $scope.jump = function (url) {
-        window.location = url;
-    };
-});
+        $scope.settings = {
+            enableFriends: true
+        };
+        $scope.jump = function (url) {
+            window.location = url;
+        };
+    })
+    .controller('GetcardCtrl', function ($scope) {
+
+        $scope.settings = {
+            enableFriends: true
+        };
+        $scope.jump = function (url) {
+            window.location = url;
+        };
+    });
