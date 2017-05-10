@@ -9,28 +9,15 @@
                 <p class="ng-pristine ng-untouched ng-valid ng-empty" style="padding-right: 0px;">余额</p>
                 <p class="ng-pristine ng-untouched ng-valid ng-empty" style="padding-right: 0px;">0.00元</p>
             </lable>
-            <div class="card" style="border: dashed;border-color: gainsboro;border-width: 2px;">
-                <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">
-                    <div style="display:inline-block;width:80%;">
-                        <span>充{{firstChongzhi.min}}送{{firstChongzhi.money_give}}元</span>
-                        <div ng-repeat="chongzhi in chongzhis">
-                            <hr size=100 width="1" style="border:dotted;width: 95%;color: #f8f8f8;border-top-width: 0;opacity: 0.6;" color="#999999">
-                            <span>充{{chongzhi.min}}送{{chongzhi.money_give}}元</span>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
 
             <div class="list list-inset" style="margin-top: 2%;text-align: center;">
-                <label class="item item-input" style="margin-top: 5%;text-align: center;">
-                    <input type="text" ng-model='chongzhi.money' name="money" placeholder="充值金额">
+                <label class="item" style="margin-top: 5%;text-align: center;">
+               应付{{shouldPay}}元
                 </label>
                 <h5 class="" style='margin-top: 20%;color:red;' id="showerror" ng-show="showerror">
                 您输入的账号密码不匹配，请重新输入
             </h5>
-                <input type="button" style='margin-top: 15%;width: 30%;' class=" button button-outline button-calm" ng-click="chongzhiBtn()" value="充值">
+                <input type="button" style='margin-top: 15%;width: 30%;' class=" button button-outline button-calm" ng-click="zhifuBtn()" value="结算">
                 <!-- SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED -->
 
             </div>
