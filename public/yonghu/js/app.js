@@ -120,6 +120,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         templateUrl: 'templates/input-cash.html',
         controller: 'InputcashCtrl'
     })
+    .state('pay', {
+        url: '/pay',
+        templateUrl: 'templates/pay.html',
+        controller: 'PayCtrl'
+    })
     .state('card', {
         url: '/card',
         templateUrl: 'templates/card.html',

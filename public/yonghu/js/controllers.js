@@ -214,7 +214,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope, CartData, $ionicHistory, SelectAddr) {
+.controller('InputYuyueCtrl', function ($scope, httpServicePost, $rootScope, CartData, $ionicHistory, SelectAddr, ShouldPay) {
     $scope.totalprice = CartData.cartData.total.total_price;
     $scope.location = {
         name: "",
@@ -237,11 +237,13 @@ angular.module('starter.controllers', [])
                         if (resp.data != null) {
                             successAmout += 1;
                             if (successAmout == CartData.cartData.products.length) {
-                                alert("下单成功！");
+                                alert("下单成功，为您跳转至支付页面！");
                                 $ionicHistory.clearCache(["showProduct"]);
-                                CartData.cartData = [];
+                                ShouldPay.shouldPay = CartData.cartData.total.total_price;
+                                CartData.cartData = [];//清空购物车
                                 $rootScope.totalPrice = 0;
-                                window.location = "#/tab/chatse";
+                                
+                                window.location = "#/pay";
                             }
                         }
                     });
@@ -674,7 +676,7 @@ angular.module('starter.controllers', [])
             "money_give": 0
         };
         $scope.chongzhi = {
-            "money": 0
+            "money": ""
         };
         $scope.jump = function (url) {
             window.location = url;
@@ -691,13 +693,14 @@ angular.module('starter.controllers', [])
         $scope.chongzhiBtn = function (name) {
             var info = {
                 "cityId": City.getIdByName(SelectCity.selectCity),
-                "money": ,
+                "money": $scope.chongzhi.money,
                 "userId": $rootScope.userid
             };
-            var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/getList.json').then(function (resp) {
+            var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/pay.json').then(function (resp) {
                 var tmpinfo = resp;
-                $scope.firstChongzhi = resp.data.data.slice(1, resp.data.data.len).shift();
-                $scope.chongzhis = resp.data.data.slice(1, resp.data.data.len);
+                if (resp.data.data == "Pay succ") {
+                    alert("充值成功！");
+                }
             });
         }
     })
@@ -709,6 +712,28 @@ angular.module('starter.controllers', [])
         $scope.jump = function (url) {
             window.location = url;
         };
+    })
+    
+    .controller('PayCtrl', function ($scope, httpServicePost, ShouldPay) {
+
+        $scope.settings = {
+            enableFriends: true
+        };
+        $scope.jump = function (url) {
+            window.location = url;
+        };
+        $scope.shouldPay =  ShouldPay.shouldPay;
+        $scope.zhifuBtn = function (name) {
+            var info = {
+                "money": ShouldPay.shouldPay,
+            };
+            var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/orders/pay.json').then(function (resp) {
+                var tmpinfo = resp;
+                if (resp.data.data == "Pay succ") {
+                    alert("支付成功！");
+                }
+            });
+        }
     })
     .controller('GetcardCtrl', function ($scope) {
 
