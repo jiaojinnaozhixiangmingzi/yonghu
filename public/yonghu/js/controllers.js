@@ -467,7 +467,7 @@ angular.module('starter.controllers', [])
                             if (successAmout == CartData.cartData.products.length) {
                                 alert("下单成功，为您跳转至支付页面！");
                                 $ionicHistory.clearCache(["showProduct"]);
-                                ShouldPay.shouldPay = CartData.cartData.total.total_price;
+                                ShouldPay.shouldPay = $scope.coupon.rakemoney;
                                 CartData.cartData = []; //清空购物车
                                 $rootScope.totalPrice = 0;
 
@@ -479,7 +479,6 @@ angular.module('starter.controllers', [])
             }
         });
     }
-
 
 })
 
