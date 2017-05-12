@@ -3,54 +3,74 @@
         <button class="button button-small button-icon icon ion-chevron-left" ng-click="$ionicGoBack()"></button>
         <div class="h1 title">卡券中心</div>
     </div>
+    <style>
+        ul {
+            margin: 100px auto;
+            width: 1120px;
+            list-style: none
+        }
+        
+        ul li {
+            display: block;
+            width: 200px;
+            height: 200px;
+            background: #efefef;
+            border: solid 1px #000;
+            float: left;
+            margin: 10px;
+            cursor: pointer
+        }
+        
+        .current {
+            background: gray
+        }
+        
+        .gouwuche {
+            width: 60%;
+            background-color: lightcoral;
+            line-height: 44px;
+            font-size: 17px;
+        }
+        .yuyue0 {
+            width: 100%;
+            background-color: rgba(17, 193, 243, 0.43);
+            text-align: center;
+            line-height:44px;
+            font-size:17px;
+        }
+        .yuyue1 {
+            width: 40%;
+            background-color: rgba(17, 193, 243, 0.43);
+            text-align: center;
+            line-height:44px;
+            font-size:17px;
+        }
+        
+/*
+        .gouwuche {
+            display: none;
+        }
+*/
+    </style>
     <ion-content>
+        <div class="button-bar" style="margin-top: 15%;width: 90%;margin-left: 5%;" id="firstView">
+            <a class="button button-small" ng-class="one" ng-click="isCurrent('one')">可使用</a>
+            <a class="button button-small" ng-class="two" ng-click="isCurrent('two')">已使用</a>
+            <a class="button button-small" ng-class="three" ng-click="isCurrent('three')">已失效</a>
+        </div>
         <div class="list list-inset" style="margin-top: 10%;text-align: -webkit-center;" ng-init="hide=false">
 
-            <div class="card" style="border: dashed;">
+            <div class="card" style="border: dashed;" ng-repeat="card in cards">
                 <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">
-                    <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>8折</span></div>
+                    <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>{{card.title}}</span></div>
                     <div style="display:inline-block;width:70%;">
-                        <span>全部商品均可使用</span>
+                        <span>{{card.desc}}</span>
                         <hr size=100 width="1" style="border:dotted;width:70%;color:white;border-top-width:thin;" color="#999999"> 
-                        <span>2016/8/1日前可用</span>
+                        <span>{{card.time}}</span>
                     </div>
 
                 </div>
             </div>
-            <div class="card" style="border: dashed;">
-                <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">
-                    <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>8折</span></div>
-                    <div style="display:inline-block;width:70%;">
-                        <span>全部商品均可使用</span>
-                        <hr size=100 width="1" style="border:dotted;width:70%;color:white;border-top-width:thin;" color="#999999"> 
-                        <span>2016/8/1日前可用</span>
-                    </div>
-
-                </div>
-            </div>
-            <div class="card" style="border: dashed;">
-                <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">
-                    <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>8折</span></div>
-                    <div style="display:inline-block;width:70%;">
-                        <span>全部商品均可使用</span>
-                        <hr size=100 width="1" style="border:dotted;width:70%;color:white;border-top-width:thin;" color="#999999"> 
-                        <span>2016/8/1日前可用</span>
-                    </div>
-
-                </div>
-            </div>
-            <div class="card" style="border: dashed;">
-                <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">
-                    <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>8折</span></div>
-                    <div style="display:inline-block;width:70%;">
-                        <span>全部商品均可使用</span>
-                        <hr size=100 width="1" style="border:dotted;width:70%;color:white;border-top-width:thin;" color="#999999"> 
-                        <span>2016/8/1日前可用</span>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
 
     </ion-content>

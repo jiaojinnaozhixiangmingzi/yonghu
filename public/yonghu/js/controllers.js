@@ -11,109 +11,171 @@ angular.module('starter.controllers', [])
 
 //用户登录控制
 .controller('LoginCtrl', function ($scope, $http, Login, httpServicePost, $rootScope) {
-    $scope.info = {
-        mobile: "",
-        encrypted_password: ""
-    };
-    $scope.jump = function (url) {
-        window.location = url;
-    };
-    $scope.showerror = false;
-    $scope.submit = function () {
-        $rootScope.userid = '186';
-        var info = $scope.info;
-        var checkRet = Login.checkFiled(info);
-        if (checkRet != null) {
-            var tipsDom = document.getElementById("showerror");
-            tipsDom.innerHTML = checkRet;
-            $scope.showerror = true;
-            return;
-        }
-        var serviceRet = httpServicePost.posthttp(info, '/users/8/login.json').then(function (resp) {
-            if (resp.data.data == "Login succ") {
-                alert("登录成功");
-                $rootScope.userid = resp.data.msg.id;
-
-                var info = {
-                    "userId": $rootScope.userid
-                };
-                var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_cards/getUserCard.json').then(function (resp) {
-                    $rootScope.currentMoney = resp.data.data.real_money + resp.data.data.fake_money;
-                });
-
-                window.location = "#/tab/dash";
-            } else {
-                alert("账号密码不匹配！");
-                window.location = "#/login";
-            }
-        });
-    }
-
-    $scope.settings = {
-        enableFriends: true
-    };
-})
-.controller('SigninCtrl', function ($scope, Signin, httpServicePost) {
-    $scope.info = {
-        mobile: "",
-        encrypted_password: "",
-        reencrypted_password: "",
-        password_token: "",
-    };
-
-    $scope.showerror = false;
-
-    $scope.sendMa = function () {
-
-        var info = $scope.info;
-        var userinfo = {
-            "mobile": info.mobile,
+        $scope.info = {
+            mobile: "",
+            encrypted_password: ""
         };
-        var checkRet = Signin.checkFiled(info);
-        if (userinfo.mobile == null) { //==null验证不通过
-            var tipsDom = document.getElementById("showerror");
-            tipsDom.innerHTML = "您还未输入邮箱账号！";
-            $scope.showerror = true;
-            return;
-        }
-        var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/registerEmail.json').then(function (resp) {
-            if (resp.data.data == "Send succ") {
-                alert("验证码发送成功，请在有效期内激活，否则验证码失效！");
-                //                window.location = "#/login";
-            } else {
-                alert("您输入的邮箱账号已被使用，请使用其他账号注册！");
-            }
-        });
-    }
-    $scope.submit = function () {
-        var info = $scope.info;
-        var userinfo = {
-            "mobile": info.mobile,
-            "encrypted_password": info.encrypted_password,
-            "password_token": info.password_token
+        $scope.jump = function (url) {
+            window.location = url;
         };
-        var checkRet = Signin.checkFiled(info);
-        if (checkRet != null) { //==null验证通过
-            var tipsDom = document.getElementById("showerror");
-            tipsDom.innerHTML = checkRet;
-            $scope.showerror = true;
-            return;
-        }
-        var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/setPassword.json').then(function (resp) {
-            if (resp.data.data == "Set succ ") {
-                alert("注册成功，为您跳转至登录页面！");
-                window.location = "#/login";
-            } else {
-                alert("注册失败，检查您的token是否在有效期内！");
+        $scope.showerror = false;
+        $scope.submit = function () {
+            $rootScope.userid = '186';
+            var info = $scope.info;
+            var checkRet = Login.checkFiled(info);
+            if (checkRet != null) {
+                var tipsDom = document.getElementById("showerror");
+                tipsDom.innerHTML = checkRet;
+                $scope.showerror = true;
+                return;
             }
-        });
+            var serviceRet = httpServicePost.posthttp(info, '/users/8/login.json').then(function (resp) {
+                if (resp.data.data == "Login succ") {
+                    alert("登录成功");
+                    $rootScope.userid = resp.data.msg.id;
+
+                    var info = {
+                        "userId": $rootScope.userid
+                    };
+                    var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_cards/getUserCard.json').then(function (resp) {
+                        $rootScope.currentMoney = resp.data.data.real_money + resp.data.data.fake_money;
+                    });
+
+                    var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/coupons/getUnusedCoupon.json').then(function (resp) {
+                        var tmpinfo = resp.data;
+                        var promotionList = new Array();
+                        if (tmpinfo.orderPromotion != undefined) { //订单优惠
+                            for (var i = 0; i < tmpinfo.orderPromotion.length; i++) {
+                                if (tmpinfo.orderPromotion[i].kind == 0) { //直减
+                                    promotionList.push({
+                                        "title": "直减优惠",
+                                        "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                        "time": tmpinfo.orderPromotion[i].created_at,
+                                        "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                    });
+                                }
+                                if (tmpinfo.orderPromotion[i].kind == 1) { //满减
+                                    promotionList.push({
+                                        "title": "满减优惠",
+                                        "desc": "满" + tmpinfo.orderPromotion[i].premise + "减" + tmpinfo.orderPromotion[i].discount + "元",
+                                        "time": tmpinfo.orderPromotion[i].created_at,
+                                        "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                    });
+                                }
+                                if (tmpinfo.orderPromotion[i].kind == 2) { //打折
+                                    promotionList.push({
+                                        "title": "折扣",
+                                        "desc": "打" + tmpinfo.orderPromotion[i].discount + "折",
+                                        "time": tmpinfo.orderPromotion[i].created_at,
+                                        "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                    });
+                                }
+                                if (tmpinfo.orderPromotion[i].kind == 3) { //特价
+                                    promotionList.push({
+                                        "title": "特价",
+                                        "desc": "特价" + tmpinfo.orderPromotion[i].discount + "元",
+                                        "time": tmpinfo.orderPromotion[i].created_at,
+                                        "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                    });
+                                }
+                            }
+                        }
+                        if (tmpinfo.categoryPromotion != undefined) { //品类优惠
+                            for (var i = 0; i < tmpinfo.categoryPromotion.length; i++) { //
+                                if (tmpinfo.categoryPromotion[i].kind == 0) { //衬衫优惠
+                                    promotionList.push({
+                                        "title": "衬衫优惠",
+                                        "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                                        "time": tmpinfo.categoryPromotion[i].created_at,
+                                        "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id
+                                    });
+                                }
+                                if (tmpinfo.categoryPromotion[i].kind == 1) { //夹克优惠
+                                    promotionList.push({
+                                        "title": "夹克优惠",
+                                        "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                                        "time": tmpinfo.categoryPromotion[i].created_at,
+                                        "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id
+                                    });
+                                }
+                            }
+                        }
+                        $rootScope.currentCard = promotionList.length;
+
+                    });
+                    window.location = "#/tab/dash";
+                } else {
+                    alert("账号密码不匹配！");
+                    window.location = "#/login";
+                }
+            });
+        }
+
+        $scope.settings = {
+            enableFriends: true
+        };
+    })
+    .controller('SigninCtrl', function ($scope, Signin, httpServicePost) {
+        $scope.info = {
+            mobile: "",
+            encrypted_password: "",
+            reencrypted_password: "",
+            password_token: "",
+        };
+
+        $scope.showerror = false;
+
+        $scope.sendMa = function () {
+
+            var info = $scope.info;
+            var userinfo = {
+                "mobile": info.mobile,
+            };
+            var checkRet = Signin.checkFiled(info);
+            if (userinfo.mobile == null) { //==null验证不通过
+                var tipsDom = document.getElementById("showerror");
+                tipsDom.innerHTML = "您还未输入邮箱账号！";
+                $scope.showerror = true;
+                return;
+            }
+            var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/registerEmail.json').then(function (resp) {
+                if (resp.data.data == "Send succ") {
+                    alert("验证码发送成功，请在有效期内激活，否则验证码失效！");
+                    //                window.location = "#/login";
+                } else {
+                    alert("您输入的邮箱账号已被使用，请使用其他账号注册！");
+                }
+            });
+        }
+        $scope.submit = function () {
+            var info = $scope.info;
+            var userinfo = {
+                "mobile": info.mobile,
+                "encrypted_password": info.encrypted_password,
+                "password_token": info.password_token
+            };
+            var checkRet = Signin.checkFiled(info);
+            if (checkRet != null) { //==null验证通过
+                var tipsDom = document.getElementById("showerror");
+                tipsDom.innerHTML = checkRet;
+                $scope.showerror = true;
+                return;
+            }
+            var serviceRet = httpServicePost.posthttp(userinfo, '/users/8/setPassword.json').then(function (resp) {
+                if (resp.data.data == "Set succ ") {
+                    alert("注册成功，为您跳转至登录页面！");
+                    window.location = "#/login";
+                } else {
+                    alert("注册失败，检查您的token是否在有效期内！");
+                }
+            });
 
 
-    }
-    $scope.jump = function (url) {
-        window.location = url;
-    };
-})
+        }
+        $scope.jump = function (url) {
+            window.location = url;
+        };
+    })
 
 .controller('FindPasswdCtrl', function ($scope, FindpwdCtrl, httpServicePost) {
     $scope.info = {
@@ -247,9 +309,9 @@ angular.module('starter.controllers', [])
                                 alert("下单成功，为您跳转至支付页面！");
                                 $ionicHistory.clearCache(["showProduct"]);
                                 ShouldPay.shouldPay = CartData.cartData.total.total_price;
-                                CartData.cartData = [];//清空购物车
+                                CartData.cartData = []; //清空购物车
                                 $rootScope.totalPrice = 0;
-                                
+
                                 window.location = "#/pay";
                             }
                         }
@@ -664,8 +726,10 @@ angular.module('starter.controllers', [])
             window.location = url;
         };
         $scope.currentMoney = $rootScope.currentMoney;
+        $scope.currentCard = $rootScope.currentCard;
+
     })
-.controller('CashCtrl', function ($scope, $rootScope, httpServicePost) {
+    .controller('CashCtrl', function ($scope, $rootScope, httpServicePost) {
 
         $scope.settings = {
             enableFriends: true
@@ -683,56 +747,56 @@ angular.module('starter.controllers', [])
             $scope.chongzhiRecords = resp.data.data;
         });
     })
-.controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City, $ionicHistory) {
+    .controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City, $ionicHistory) {
 
-    $scope.currentMoney = $rootScope.currentMoney;
-    $scope.settings = {
-        enableFriends: true
-    };
-    $scope.firstChongzhi = {
-        "money": 0,
-        "money_give": 0
-    };
-    $scope.chongzhi = {
-        "money": ""
-    };
-    $scope.jump = function (url) {
-        window.location = url;
-    };
-    var info = {
-        "cityId": City.getIdByName(SelectCity.selectCity)
-    };
-    var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/getList.json').then(function (resp) {
-        var tmpinfo = resp;
-        $scope.firstChongzhi = resp.data.data.slice(1, resp.data.data.len).shift();
-        $scope.chongzhis = resp.data.data.slice(2, resp.data.data.len);
-    });
-
-    $scope.chongzhiBtn = function (name) {
-        var info = {
-            "cityId": City.getIdByName(SelectCity.selectCity),
-            "money": $scope.chongzhi.money,
-            "userId": $rootScope.userid
+        $scope.currentMoney = $rootScope.currentMoney;
+        $scope.settings = {
+            enableFriends: true
         };
-        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/pay.json').then(function (resp) {
+        $scope.firstChongzhi = {
+            "money": 0,
+            "money_give": 0
+        };
+        $scope.chongzhi = {
+            "money": ""
+        };
+        $scope.jump = function (url) {
+            window.location = url;
+        };
+        var info = {
+            "cityId": City.getIdByName(SelectCity.selectCity)
+        };
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/getList.json').then(function (resp) {
             var tmpinfo = resp;
-            if (resp.data.data == "Pay succ") {
-                alert("充值成功！");
-                //todo支付成功后需要重置余额信息
-                var info = {
-                    "userId": $rootScope.userid
-                };
-                var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_cards/getUserCard.json').then(function (resp) {
-                    $rootScope.currentMoney = resp.data.data.real_money + resp.data.data.fake_money;
-                    $ionicHistory.clearCache(["tab.account","inputcash"]);
-                    window.location = "#/cash";
-                });
-               
-            }
+            $scope.firstChongzhi = resp.data.data.slice(1, resp.data.data.len).shift();
+            $scope.chongzhis = resp.data.data.slice(2, resp.data.data.len);
         });
-    }
-})
-    .controller('CardCtrl', function ($scope) {
+
+        $scope.chongzhiBtn = function (name) {
+            var info = {
+                "cityId": City.getIdByName(SelectCity.selectCity),
+                "money": $scope.chongzhi.money,
+                "userId": $rootScope.userid
+            };
+            var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_card_charge_settings/pay.json').then(function (resp) {
+                var tmpinfo = resp;
+                if (resp.data.data == "Pay succ") {
+                    alert("充值成功！");
+                    //todo支付成功后需要重置余额信息
+                    var info = {
+                        "userId": $rootScope.userid
+                    };
+                    var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_cards/getUserCard.json').then(function (resp) {
+                        $rootScope.currentMoney = resp.data.data.real_money + resp.data.data.fake_money;
+                        $ionicHistory.clearCache(["tab.account", "inputcash"]);
+                        window.location = "#/cash";
+                    });
+
+                }
+            });
+        }
+    })
+    .controller('CardCtrl', function ($scope, $rootScope, httpServicePost) {
 
         $scope.settings = {
             enableFriends: true
@@ -740,9 +804,280 @@ angular.module('starter.controllers', [])
         $scope.jump = function (url) {
             window.location = url;
         };
+        $scope.one = 'current';
+        $scope.two = '';
+        $scope.three = '';
+        var tmpinfo;
+        var promotionList = new Array();
+        var info = {
+            "userId": $rootScope.userid
+        };
+        $scope.one = 'current';
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/coupons/getUnusedCoupon.json').then(function (resp) {
+            tmpinfo = resp.data;
+            if (tmpinfo.orderPromotion != undefined) { //订单优惠
+                for (var i = 0; i < tmpinfo.orderPromotion.length; i++) {
+                    if (tmpinfo.orderPromotion[i].kind == 0) { //直减
+                        promotionList.push({
+                            "title": "直减优惠",
+                            "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                            "time": tmpinfo.orderPromotion[i].created_at,
+                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        });
+                    }
+                    if (tmpinfo.orderPromotion[i].kind == 1) { //满减
+                        promotionList.push({
+                            "title": "满减优惠",
+                            "desc": "满" + tmpinfo.orderPromotion[i].premise + "减" + tmpinfo.orderPromotion[i].discount + "元",
+                            "time": tmpinfo.orderPromotion[i].created_at,
+                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        });
+                    }
+                    if (tmpinfo.orderPromotion[i].kind == 2) { //打折
+                        promotionList.push({
+                            "title": "折扣",
+                            "desc": "打" + tmpinfo.orderPromotion[i].discount + "折",
+                            "time": tmpinfo.orderPromotion[i].created_at,
+                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        });
+                    }
+                    if (tmpinfo.orderPromotion[i].kind == 3) { //特价
+                        promotionList.push({
+                            "title": "特价",
+                            "desc": "特价" + tmpinfo.orderPromotion[i].discount + "元",
+                            "time": tmpinfo.orderPromotion[i].created_at,
+                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        });
+                    }
+                }
+            }
+            if (tmpinfo.categoryPromotion != undefined) { //品类优惠
+                for (var i = 0; i < tmpinfo.categoryPromotion.length; i++) { //
+                    if (tmpinfo.categoryPromotion[i].kind == 0) { //衬衫优惠
+                        promotionList.push({
+                            "title": "衬衫优惠",
+                            "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                            "time": tmpinfo.categoryPromotion[i].created_at,
+                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        });
+                    }
+                    if (tmpinfo.categoryPromotion[i].kind == 1) { //夹克优惠
+                        promotionList.push({
+                            "title": "夹克优惠",
+                            "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                            "time": tmpinfo.categoryPromotion[i].created_at,
+                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        });
+                    }
+                }
+            }
+            $scope.cards = promotionList;
+        });
+        $scope.isCurrent = function (index) {
+            $scope.one = '';
+            $scope.two = '';
+            $scope.three = '';
+            var tmpinfo;
+            var promotionList = new Array();
+            var info = {
+                "userId": $rootScope.userid
+            };
+            switch (index) {
+            case "one":
+                $scope.one = 'current';
+                var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/coupons/getUnusedCoupon.json').then(function (resp) {
+                    tmpinfo = resp.data;
+                    if (tmpinfo.orderPromotion != undefined) { //订单优惠
+                        for (var i = 0; i < tmpinfo.orderPromotion.length; i++) {
+                            if (tmpinfo.orderPromotion[i].kind == 0) { //直减
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.orderPromotion[i].kind == 1) { //满减
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.orderPromotion[i].kind == 2) { //打折
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.orderPromotion[i].kind == 3) { //特价
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                        }
+                    }
+                    if (tmpinfo.categoryPromotion != undefined) { //品类优惠
+                        for (var i = 0; i < tmpinfo.categoryPromotion.length; i++) { //
+                            if (tmpinfo.categoryPromotion[i].kind == 0) { //衬衫优惠
+                                promotionList.push({
+                                    "title": "衬衫优惠",
+                                    "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                                    "time": tmpinfo.categoryPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.categoryPromotion[i].kind == 1) { //夹克优惠
+                                promotionList.push({
+                                    "title": "夹克优惠",
+                                    "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                                    "time": tmpinfo.categoryPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                        }
+                    }
+                    $scope.cards = promotionList;
+                });
+                break;
+            case "two":
+                $scope.two = 'current';
+                var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/coupons/getUsedCoupon.json').then(function (resp) {
+                    tmpinfo = resp.data;
+                    if (tmpinfo.orderPromotion != undefined) { //订单优惠
+                        for (var i = 0; i < tmpinfo.orderPromotion.length; i++) {
+                            if (tmpinfo.orderPromotion[i].kind == 0) { //直减
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.orderPromotion[i].kind == 1) { //满减
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.orderPromotion[i].kind == 2) { //打折
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.orderPromotion[i].kind == 3) { //特价
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                        }
+                    }
+                    if (tmpinfo.categoryPromotion != undefined) { //品类优惠
+                        for (var i = 0; i < tmpinfo.categoryPromotion.length; i++) { //
+                            if (tmpinfo.categoryPromotion[i].kind == 0) { //衬衫优惠
+                                promotionList.push({
+                                    "title": "衬衫优惠",
+                                    "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                                    "time": tmpinfo.categoryPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.categoryPromotion[i].kind == 1) { //夹克优惠
+                                promotionList.push({
+                                    "title": "夹克优惠",
+                                    "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                                    "time": tmpinfo.categoryPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                        }
+                    }
+                    $scope.cards = promotionList;
+                });
+                break;
+            case "three":
+                $scope.three = 'current';
+                var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/coupons/getInvalidCoupon.json').then(function (resp) {
+                    tmpinfo = resp.data;
+                    if (tmpinfo.orderPromotion != undefined) { //订单优惠
+                        for (var i = 0; i < tmpinfo.orderPromotion.length; i++) {
+                            if (tmpinfo.orderPromotion[i].kind == 0) { //直减
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.orderPromotion[i].kind == 1) { //满减
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.orderPromotion[i].kind == 2) { //打折
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.orderPromotion[i].kind == 3) { //特价
+                                promotionList.push({
+                                    "title": "直减优惠",
+                                    "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                                    "time": tmpinfo.orderPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                        }
+                    }
+                    if (tmpinfo.categoryPromotion != undefined) { //品类优惠
+                        for (var i = 0; i < tmpinfo.categoryPromotion.length; i++) { //
+                            if (tmpinfo.categoryPromotion[i].kind == 0) { //衬衫优惠
+                                promotionList.push({
+                                    "title": "衬衫优惠",
+                                    "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                                    "time": tmpinfo.categoryPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                            if (tmpinfo.categoryPromotion[i].kind == 1) { //夹克优惠
+                                promotionList.push({
+                                    "title": "夹克优惠",
+                                    "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                                    "time": tmpinfo.categoryPromotion[i].created_at,
+                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                });
+                            }
+                        }
+                    }
+                    $scope.cards = promotionList;
+                });
+                break;
+            }
+
+        }
     })
-    
-    .controller('PayCtrl', function ($scope, httpServicePost, ShouldPay, $rootScope) {
+
+.controller('PayCtrl', function ($scope, httpServicePost, ShouldPay, $rootScope) {
 
         $scope.settings = {
             enableFriends: true
@@ -751,7 +1086,7 @@ angular.module('starter.controllers', [])
             window.location = url;
         };
         $scope.currentMoney = $rootScope.currentMoney;
-        $scope.shouldPay =  ShouldPay.shouldPay;
+        $scope.shouldPay = ShouldPay.shouldPay;
         $scope.zhifuBtn = function (name) {
             var info = {
                 "money": ShouldPay.shouldPay,
@@ -765,7 +1100,7 @@ angular.module('starter.controllers', [])
             });
         }
     })
-    .controller('GetcardCtrl', function ($scope) {
+    .controller('GetcardCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City, $ionicHistory) {
 
         $scope.settings = {
             enableFriends: true
@@ -773,4 +1108,82 @@ angular.module('starter.controllers', [])
         $scope.jump = function (url) {
             window.location = url;
         };
+        var info = {
+            "cityId": City.getIdByName(SelectCity.selectCity)
+        };
+        var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/coupon_lists/getList.json').then(function (resp) {
+            var tmpinfo = resp.data;
+            var promotionList = new Array();
+            if (tmpinfo.orderPromotion != undefined) { //订单优惠
+                for (var i = 0; i < tmpinfo.orderPromotion.length; i++) {
+                    if (tmpinfo.orderPromotion[i].kind == 0) { //直减
+                        promotionList.push({
+                            "title": "直减优惠",
+                            "desc": "直减" + tmpinfo.orderPromotion[i].discount + "元",
+                            "time": tmpinfo.orderPromotion[i].created_at,
+                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        });
+                    }
+                    if (tmpinfo.orderPromotion[i].kind == 1) { //满减
+                        promotionList.push({
+                            "title": "满减优惠",
+                            "desc": "满" + tmpinfo.orderPromotion[i].premise + "减" + tmpinfo.orderPromotion[i].discount + "元",
+                            "time": tmpinfo.orderPromotion[i].created_at,
+                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        });
+                    }
+                    if (tmpinfo.orderPromotion[i].kind == 2) { //打折
+                        promotionList.push({
+                            "title": "折扣",
+                            "desc": "打" + tmpinfo.orderPromotion[i].discount + "折",
+                            "time": tmpinfo.orderPromotion[i].created_at,
+                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        });
+                    }
+                    if (tmpinfo.orderPromotion[i].kind == 3) { //特价
+                        promotionList.push({
+                            "title": "特价",
+                            "desc": "特价" + tmpinfo.orderPromotion[i].discount + "元",
+                            "time": tmpinfo.orderPromotion[i].created_at,
+                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        });
+                    }
+                }
+            }
+            if (tmpinfo.categoryPromotion != undefined) { //品类优惠
+                for (var i = 0; i < tmpinfo.categoryPromotion.length; i++) { //
+                    if (tmpinfo.categoryPromotion[i].kind == 0) { //衬衫优惠
+                        promotionList.push({
+                            "title": "衬衫优惠",
+                            "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                            "time": tmpinfo.categoryPromotion[i].created_at,
+                            "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id
+                        });
+                    }
+                    if (tmpinfo.categoryPromotion[i].kind == 1) { //夹克优惠
+                        promotionList.push({
+                            "title": "夹克优惠",
+                            "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
+                            "time": tmpinfo.categoryPromotion[i].created_at,
+                            "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id
+                        });
+                    }
+                }
+            }
+            $scope.cards = promotionList;
+        });
+
+        $scope.lingquan = function (couponid) {
+            var info = {
+                "userId": $rootScope.userid,
+                "couponListId": couponid
+            };
+            var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/coupons/createCoupon.json').then(function (resp) {
+                var tmpinfo = resp;
+                if (resp.data.data != null) {
+                    $ionicHistory.clearCache(["card"]);
+                    alert("领券成功，请到卡券中心查看自己的领取结果！");
+                }
+            });
+        }
     });

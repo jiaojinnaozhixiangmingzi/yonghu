@@ -6,46 +6,13 @@
     <ion-content>
         <div class="list list-inset" style="margin-top: 10%;text-align: -webkit-center;" ng-init="hide=false">
         <h5 style="font-weight: 400;">-点击即可领取-</h5>
-            <div class="card" style="border: dashed;" onclick="alert('wangaxing')">
+            <div class="card" style="border: dashed;" ng-click="lingquan({{card.couponListId}})" ng-repeat="card in cards">
                 <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">
-                    <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>周二8折</span></div>
+                    <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>{{card.title}}</span></div>
                     <div style="display:inline-block;width:70%;">
-                        <span>全部商品均可使用</span>
+                        <span>{{card.desc}}</span>
                         <hr size=100 width="1" style="border:dotted;width:70%;color:white;border-top-width:thin;" color="#999999"> 
-                        <span>2016/8/1日前可用</span>
-                    </div>
-
-                </div>
-            </div>
-            <div class="card" style="border: dashed;">
-                <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">
-                    <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>周末9折</span></div>
-                    <div style="display:inline-block;width:70%;">
-                        <span>全部商品均可使用</span>
-                        <hr size=100 width="1" style="border:dotted;width:70%;color:white;border-top-width:thin;" color="#999999"> 
-                        <span>2016/9/1日前可用</span>
-                    </div>
-
-                </div>
-            </div>
-            <div class="card" style="border: dashed;">
-                <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">
-                    <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>首单6折</span></div>
-                    <div style="display:inline-block;width:70%;">
-                        <span>全部商品均可使用</span>
-                        <hr size=100 width="1" style="border:dotted;width:70%;color:white;border-top-width:thin;" color="#999999"> 
-                        <span>2016/10/1日前可用</span>
-                    </div>
-
-                </div>
-            </div>
-            <div class="card" style="border: dashed;">
-                <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">
-                    <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>8折</span></div>
-                    <div style="display:inline-block;width:70%;">
-                        <span>全部商品均可使用</span>
-                        <hr size=100 width="1" style="border:dotted;width:70%;color:white;border-top-width:thin;" color="#999999"> 
-                        <span>2016/8/1日前可用</span>
+                        <span>{{card.time}}</span>
                     </div>
 
                 </div>
