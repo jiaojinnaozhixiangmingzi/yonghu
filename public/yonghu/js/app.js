@@ -133,7 +133,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('card', {
         url: '/card',
         templateUrl: 'templates/card.html',
-        controller: 'CardCtrl'
+        controller: 'CardCtrl',
+        cache: false
     })
     .state('getcard', {
         url: '/getcard',
