@@ -60,7 +60,7 @@
         </div>
         <div class="list list-inset" style="margin-top: 10%;text-align: -webkit-center;" ng-init="hide=false">
 
-            <div class="card" style="border: dashed;" ng-repeat="card in cards">
+            <div class="card" style="border: dashed;" ng-repeat="card in cards" ng-click="selectCard('{{card.type}}','{{card.desc}}','{{card.title}}','{{card.couponListId}}','{{card.kind}}')">
                 <div class="item item-text-wrap" style="background: rgba(0, 191, 255, 0.65);opacity: 0.6;">
                     <div style="display:inline-block;width:30%;float:left;line-height:3.5;border: dashed;"><span>{{card.title}}</span></div>
                     <div style="display:inline-block;width:70%;">

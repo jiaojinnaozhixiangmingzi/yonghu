@@ -233,6 +233,12 @@ angular.module('starter.services', [])
         selectAddr
     }
 })
+.factory('SelectCard', function() {
+    var selectCard = [];
+    return {
+        selectCard
+    }
+})
 .factory('ShouldPay', function() {
     var shouldPay = 0;
     return {
