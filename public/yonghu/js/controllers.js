@@ -356,8 +356,8 @@ angular.module('starter.controllers', [])
                 if (tmp_price < min_price) {
                     pricesObj = {
                         "desc": promotionList[promotionList.length - 1].title + "-" + promotionList[promotionList.length - 1].desc,
-                        "couponlist": promotionList[promotionList.length - 1].couponListId,
-                        "rakemoney": min_price
+                        "couponListId": promotionList[promotionList.length - 1].couponListId,
+                        "rakemoney": tmp_price
                     };
                 }
             }
@@ -370,7 +370,7 @@ angular.module('starter.controllers', [])
                         "title": "衬衫优惠",
                         "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
                         "time": tmpinfo.categoryPromotion[i].created_at,
-                        "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id
                     });
                     if (CartData.cartData.total.category_id == 1) {
                         tmp_price = ($scope.totalprice * tmpinfo.categoryPromotion[i].discount) / 10;
@@ -381,7 +381,7 @@ angular.module('starter.controllers', [])
                         "title": "夹克优惠",
                         "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
                         "time": tmpinfo.categoryPromotion[i].created_at,
-                        "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                        "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id
                     });
                     if (CartData.cartData.total.category_id == 3) {
                         tmp_price = ($scope.totalprice * tmpinfo.categoryPromotion[i].discount) / 10;
@@ -391,8 +391,8 @@ angular.module('starter.controllers', [])
                     min_price = tmp_price;
                     pricesObj = {
                         "desc": promotionList[promotionList.length - 1].title + "-" + promotionList[promotionList.length - 1].desc,
-                        "couponlist": promotionList[promotionList.length - 1].couponListId,
-                        "rakemoney": min_price
+                        "couponListId": promotionList[promotionList.length - 1].couponListId,
+                        "rakemoney": tmp_price
                     };
                 }
             }
@@ -453,6 +453,8 @@ angular.module('starter.controllers', [])
 
     $scope.submitForm = function () {
         CartData.cartData.total.address_id = $scope.location.id;
+        CartData.cartData.total.total_price = $scope.coupon.rakemoney;
+        
         var serviceRet = httpServicePost.posthttp(CartData.cartData.total, 'http://localhost:3001/orders/createOrder.json').then(function (resp) {
             if (resp.data != null) {
                 var order_id = resp.data.data.id;
@@ -461,16 +463,20 @@ angular.module('starter.controllers', [])
                 var successAmout = 0;
                 for (var i = 0; i < CartData.cartData.products.length; i++) {
                     CartData.cartData.products[i]["order_id"] = order_id;
+                    
                     var serviceRet = httpServicePost.posthttp(CartData.cartData.products[i], 'http://localhost:3001/items/createItem.json').then(function (resp) {
                         if (resp.data != null) {
                             successAmout += 1;
                             if (successAmout == CartData.cartData.products.length) {
                                 alert("下单成功，为您跳转至支付页面！");
-                                $ionicHistory.clearCache(["showProduct"]);
-                                ShouldPay.shouldPay = $scope.coupon.rakemoney;
+                                $ionicHistory.clearCache(["showProduct","tab.account"]);
+                                ShouldPay.shouldPay["money"] = $scope.coupon.rakemoney;
+                                ShouldPay.shouldPay["couponid"] = $scope.coupon.couponListId;
+                                ShouldPay.shouldPay["id"] = order_id;
                                 CartData.cartData = []; //清空购物车
                                 $rootScope.totalPrice = 0;
-
+                                
+                                
                                 window.location = "#/pay";
                             }
                         }
@@ -852,7 +858,7 @@ angular.module('starter.controllers', [])
 .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
         $scope.chat = Chats.get($stateParams.chatId);
     })
-    .controller('CityCtrl', function ($scope, $stateParams, Chats, City, SelectCity, $ionicHistory, CartData, $rootScope) {
+.controller('CityCtrl', function ($scope, $stateParams, Chats, City, SelectCity, $ionicHistory, CartData, $rootScope) {
         $scope.cities = City.all();
         //    var sss = $scope.myVar;
         //        $scope.myVar = true;
@@ -889,7 +895,7 @@ angular.module('starter.controllers', [])
         $scope.currentCard = $rootScope.currentCard;
 
     })
-    .controller('CashCtrl', function ($scope, $rootScope, httpServicePost) {
+.controller('CashCtrl', function ($scope, $rootScope, httpServicePost) {
 
         $scope.settings = {
             enableFriends: true
@@ -907,7 +913,7 @@ angular.module('starter.controllers', [])
             $scope.chongzhiRecords = resp.data.data;
         });
     })
-    .controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City, $ionicHistory) {
+.controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City, $ionicHistory) {
 
         $scope.currentMoney = $rootScope.currentMoney;
         $scope.settings = {
@@ -956,7 +962,7 @@ angular.module('starter.controllers', [])
             });
         }
     })
-    .controller('CardCtrl', function ($scope, $rootScope, httpServicePost, $ionicHistory, SelectCard) {
+.controller('CardCtrl', function ($scope, $rootScope, httpServicePost, $ionicHistory, SelectCard) {
 
         $scope.settings = {
             enableFriends: true
@@ -1026,8 +1032,8 @@ angular.module('starter.controllers', [])
                             "title": "衬衫优惠",
                             "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
                             "time": tmpinfo.categoryPromotion[i].created_at,
-                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id,
-                            "type": "orderPromotion",
+                            "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id,
+                            "type": "categoryPromotion",
                             "kind": 0
                         });
                     }
@@ -1036,8 +1042,8 @@ angular.module('starter.controllers', [])
                             "title": "夹克优惠",
                             "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
                             "time": tmpinfo.categoryPromotion[i].created_at,
-                            "couponListId": tmpinfo.orderPromotion[i].coupon_list_id,
-                            "type": "orderPromotion",
+                            "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id,
+                            "type": "categoryPromotion",
                             "kind": 1
                         });
                     }
@@ -1110,7 +1116,7 @@ angular.module('starter.controllers', [])
                                     "title": "衬衫优惠",
                                     "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
                                     "time": tmpinfo.categoryPromotion[i].created_at,
-                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id,
+                                    "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id,
                                     "type": "orderPromotion",
                                     "kind": 0
                                 });
@@ -1120,7 +1126,7 @@ angular.module('starter.controllers', [])
                                     "title": "夹克优惠",
                                     "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
                                     "time": tmpinfo.categoryPromotion[i].created_at,
-                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id,
+                                    "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id,
                                     "type": "orderPromotion",
                                     "kind": 1
                                 });
@@ -1177,7 +1183,7 @@ angular.module('starter.controllers', [])
                                     "title": "衬衫优惠",
                                     "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
                                     "time": tmpinfo.categoryPromotion[i].created_at,
-                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                    "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id
                                 });
                             }
                             if (tmpinfo.categoryPromotion[i].kind == 1) { //夹克优惠
@@ -1185,7 +1191,7 @@ angular.module('starter.controllers', [])
                                     "title": "夹克优惠",
                                     "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
                                     "time": tmpinfo.categoryPromotion[i].created_at,
-                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                    "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id
                                 });
                             }
                         }
@@ -1240,7 +1246,7 @@ angular.module('starter.controllers', [])
                                     "title": "衬衫优惠",
                                     "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
                                     "time": tmpinfo.categoryPromotion[i].created_at,
-                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                    "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id
                                 });
                             }
                             if (tmpinfo.categoryPromotion[i].kind == 1) { //夹克优惠
@@ -1248,7 +1254,7 @@ angular.module('starter.controllers', [])
                                     "title": "夹克优惠",
                                     "desc": "打" + tmpinfo.categoryPromotion[i].discount + "折",
                                     "time": tmpinfo.categoryPromotion[i].created_at,
-                                    "couponListId": tmpinfo.orderPromotion[i].coupon_list_id
+                                    "couponListId": tmpinfo.categoryPromotion[i].coupon_list_id
                                 });
                             }
                         }
@@ -1275,7 +1281,7 @@ angular.module('starter.controllers', [])
         }
     })
 
-.controller('PayCtrl', function ($scope, httpServicePost, ShouldPay, $rootScope) {
+.controller('PayCtrl', function ($scope, httpServicePost, ShouldPay, $rootScope, $ionicHistory) {
 
         $scope.settings = {
             enableFriends: true
@@ -1283,17 +1289,22 @@ angular.module('starter.controllers', [])
         $scope.jump = function (url) {
             window.location = url;
         };
+    
         $scope.currentMoney = $rootScope.currentMoney;
-        $scope.shouldPay = ShouldPay.shouldPay;
+        $scope.shouldPay = ShouldPay.shouldPay.money;
         $scope.zhifuBtn = function (name) {
             var info = {
-                "money": ShouldPay.shouldPay,
+                "id": ShouldPay.shouldPay.id,
+                "couponListId": ShouldPay.shouldPay.couponid,
+                "userId": $rootScope.userid
             };
             var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/orders/pay.json').then(function (resp) {
                 var tmpinfo = resp;
                 if (resp.data.data == "Pay succ") {
                     alert("支付成功！");
-                    $rootScope.currentMoney = "";
+                    $rootScope.currentMoney = $scope.currentMoney - ShouldPay.shouldPay.money;
+                    $rootScope.currentCard -= 1;
+                    $ionicHistory.clearCache(["showProduct","tab.account"]);
                 }
             });
         }
@@ -1387,6 +1398,8 @@ angular.module('starter.controllers', [])
                 if (resp.data.data != null) {
                     $ionicHistory.clearCache(["card"]);
                     alert("领券成功，请到卡券中心查看自己的领取结果！");
+                    $rootScope.currentCard += 1;
+                    $ionicHistory.clearCache(["showProduct","tab.account"]);
                 }
             });
         }
