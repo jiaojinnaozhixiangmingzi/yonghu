@@ -183,7 +183,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             'tab-account': {
                 templateUrl: 'templates/tab-account.html',
                 controller: 'AccountCtrl'
-            }
+            },
+        cache: false
         }
     });
 

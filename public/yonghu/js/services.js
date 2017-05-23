@@ -240,7 +240,7 @@ angular.module('starter.services', [])
     }
 })
 .factory('ShouldPay', function() {
-    var shouldPay = 0;
+    var shouldPay = [];
     return {
         shouldPay
     }
