@@ -856,7 +856,8 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
-        $scope.chat = Chats.get($stateParams.chatId);
+        $scope.chat = Chats.get($stateParams.chatId, Chats.chats);
+        console.log("快活吧");
     })
 .controller('CityCtrl', function ($scope, $stateParams, Chats, City, SelectCity, $ionicHistory, CartData, $rootScope) {
         $scope.cities = City.all();
