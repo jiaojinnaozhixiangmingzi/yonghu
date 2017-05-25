@@ -405,7 +405,7 @@ angular.module('starter.controllers', [])
 
         var test = SelectCard.selectCard;
         var selectPrice;
-        if (test.length != 0 ) {
+        if (test.length != 0) {
             if (test.type == "orderPromotion") { //订单优惠
                 if (test.kind == 0) { //直减
                     var value = test.desc.replace(/[^0-9]/ig, "");
@@ -454,7 +454,7 @@ angular.module('starter.controllers', [])
     $scope.submitForm = function () {
         CartData.cartData.total.address_id = $scope.location.id;
         CartData.cartData.total.total_price = $scope.coupon.rakemoney;
-        
+
         var serviceRet = httpServicePost.posthttp(CartData.cartData.total, 'http://localhost:3001/orders/createOrder.json').then(function (resp) {
             if (resp.data != null) {
                 var order_id = resp.data.data.id;
@@ -463,20 +463,20 @@ angular.module('starter.controllers', [])
                 var successAmout = 0;
                 for (var i = 0; i < CartData.cartData.products.length; i++) {
                     CartData.cartData.products[i]["order_id"] = order_id;
-                    
+
                     var serviceRet = httpServicePost.posthttp(CartData.cartData.products[i], 'http://localhost:3001/items/createItem.json').then(function (resp) {
                         if (resp.data != null) {
                             successAmout += 1;
                             if (successAmout == CartData.cartData.products.length) {
                                 alert("下单成功，为您跳转至支付页面！");
-                                $ionicHistory.clearCache(["showProduct","tab.account"]);
+                                $ionicHistory.clearCache(["showProduct", "tab.account"]);
                                 ShouldPay.shouldPay["money"] = $scope.coupon.rakemoney;
                                 ShouldPay.shouldPay["couponid"] = $scope.coupon.couponListId;
                                 ShouldPay.shouldPay["id"] = order_id;
                                 CartData.cartData = []; //清空购物车
                                 $rootScope.totalPrice = 0;
-                                
-                                
+
+
                                 window.location = "#/pay";
                             }
                         }
@@ -858,8 +858,29 @@ angular.module('starter.controllers', [])
 .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
         $scope.chat = Chats.get($stateParams.chatId, Chats.chats);
         console.log("快活吧");
+        var status = Chats.get($stateParams.chatId, Chats.chats).status;
+        if (status == 0) {
+            var process = document.getElementById("0");
+
+            process.style.color = "red";
+        } else if (status == 1) {
+            var process = document.getElementById("1");
+
+                       process.style.color = "red";
+
+        } else if (status == 2) {
+            var process = document.getElementById("2");
+
+                        process.style.color = "red";
+
+        } else if (status == 3) {
+            var process = document.getElementById("3");
+
+                        process.style.color = "red";
+
+        }
     })
-.controller('CityCtrl', function ($scope, $stateParams, Chats, City, SelectCity, $ionicHistory, CartData, $rootScope) {
+    .controller('CityCtrl', function ($scope, $stateParams, Chats, City, SelectCity, $ionicHistory, CartData, $rootScope) {
         $scope.cities = City.all();
         //    var sss = $scope.myVar;
         //        $scope.myVar = true;
@@ -896,7 +917,7 @@ angular.module('starter.controllers', [])
         $scope.currentCard = $rootScope.currentCard;
 
     })
-.controller('CashCtrl', function ($scope, $rootScope, httpServicePost) {
+    .controller('CashCtrl', function ($scope, $rootScope, httpServicePost) {
 
         $scope.settings = {
             enableFriends: true
@@ -914,7 +935,7 @@ angular.module('starter.controllers', [])
             $scope.chongzhiRecords = resp.data.data;
         });
     })
-.controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City, $ionicHistory) {
+    .controller('InputcashCtrl', function ($scope, $rootScope, httpServicePost, SelectCity, City, $ionicHistory) {
 
         $scope.currentMoney = $rootScope.currentMoney;
         $scope.settings = {
@@ -963,7 +984,7 @@ angular.module('starter.controllers', [])
             });
         }
     })
-.controller('CardCtrl', function ($scope, $rootScope, httpServicePost, $ionicHistory, SelectCard) {
+    .controller('CardCtrl', function ($scope, $rootScope, httpServicePost, $ionicHistory, SelectCard) {
 
         $scope.settings = {
             enableFriends: true
@@ -1290,7 +1311,7 @@ angular.module('starter.controllers', [])
         $scope.jump = function (url) {
             window.location = url;
         };
-    
+
         $scope.currentMoney = $rootScope.currentMoney;
         $scope.shouldPay = ShouldPay.shouldPay.money;
         $scope.zhifuBtn = function (name) {
@@ -1305,7 +1326,7 @@ angular.module('starter.controllers', [])
                     alert("支付成功！");
                     $rootScope.currentMoney = $scope.currentMoney - ShouldPay.shouldPay.money;
                     $rootScope.currentCard -= 1;
-                    $ionicHistory.clearCache(["showProduct","tab.account"]);
+                    $ionicHistory.clearCache(["showProduct", "tab.account"]);
                 }
             });
         }
@@ -1400,8 +1421,8 @@ angular.module('starter.controllers', [])
                     $ionicHistory.clearCache(["card"]);
                     alert("领券成功，请到卡券中心查看自己的领取结果！");
                     $rootScope.currentCard += 1;
-                    $ionicHistory.clearCache(["showProduct","tab.account"]);
+                    $ionicHistory.clearCache(["showProduct", "tab.account"]);
                 }
             });
         }
-    });
+    });f
