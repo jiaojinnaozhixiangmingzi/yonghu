@@ -38,7 +38,11 @@ angular.module('starter.controllers', [])
                         "userId": $rootScope.userid
                     };
                     var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/user_cards/getUserCard.json').then(function (resp) {
-                        $rootScope.currentMoney = resp.data.data.real_money + resp.data.data.fake_money;
+                        if (resp.data.data == undefined) {
+                            $rootScope.currentMoney = 0;
+                        }else {
+                            $rootScope.currentMoney = resp.data.data.real_money + resp.data.data.fake_money;
+                        }
                     });
 
                     var serviceRet = httpServicePost.posthttp(info, 'http://localhost:3001/coupons/getUnusedCoupon.json').then(function (resp) {
@@ -745,7 +749,7 @@ angular.module('starter.controllers', [])
     $scope.realLocation = '定位中，请稍后……';
     $scope.realLocation1 = '';
 
-    $scope.chat = Chats.get($stateParams.chatId);
+//    $scope.chat = Chats.get($stateParams.chatId, );
     $scope.goyuyue = function () {
         var jingweidu = document.getElementById("locationno").innerHTML;
         var strs = jingweidu.split(",");
